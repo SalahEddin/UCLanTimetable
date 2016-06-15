@@ -13,6 +13,8 @@
 		4ED004371D114D60007AAD57 /* UCLanTimetable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4ED004351D114D60007AAD57 /* UCLanTimetable.xcdatamodeld */; };
 		4ED004391D114D60007AAD57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4ED004381D114D60007AAD57 /* Assets.xcassets */; };
 		4ED0043C1D114D60007AAD57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ED0043A1D114D60007AAD57 /* LaunchScreen.storyboard */; };
+		4ED004461D115110007AAD57 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED004451D115110007AAD57 /* logo.png */; };
+		4ED004491D11871C007AAD57 /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED004481D11871C007AAD57 /* IndexViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		4ED004381D114D60007AAD57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4ED0043B1D114D60007AAD57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4ED0043D1D114D60007AAD57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4ED004451D115110007AAD57 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		4ED004481D11871C007AAD57 /* IndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		4ED0042D1D114D60007AAD57 /* UCLanTimetable */ = {
 			isa = PBXGroup;
 			children = (
+				4ED004471D115115007AAD57 /* res */,
 				4ED0042E1D114D60007AAD57 /* AppDelegate.swift */,
 				4ED004301D114D60007AAD57 /* ViewController.swift */,
 				4ED004321D114D60007AAD57 /* Main.storyboard */,
@@ -63,8 +68,17 @@
 				4ED0043A1D114D60007AAD57 /* LaunchScreen.storyboard */,
 				4ED0043D1D114D60007AAD57 /* Info.plist */,
 				4ED004351D114D60007AAD57 /* UCLanTimetable.xcdatamodeld */,
+				4ED004481D11871C007AAD57 /* IndexViewController.swift */,
 			);
 			path = UCLanTimetable;
+			sourceTree = "<group>";
+		};
+		4ED004471D115115007AAD57 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				4ED004451D115110007AAD57 /* logo.png */,
+			);
+			name = res;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +140,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ED004461D115110007AAD57 /* logo.png in Resources */,
 				4ED0043C1D114D60007AAD57 /* LaunchScreen.storyboard in Resources */,
 				4ED004391D114D60007AAD57 /* Assets.xcassets in Resources */,
 				4ED004341D114D60007AAD57 /* Main.storyboard in Resources */,
@@ -142,6 +157,7 @@
 				4ED004311D114D60007AAD57 /* ViewController.swift in Sources */,
 				4ED0042F1D114D60007AAD57 /* AppDelegate.swift in Sources */,
 				4ED004371D114D60007AAD57 /* UCLanTimetable.xcdatamodeld in Sources */,
+				4ED004491D11871C007AAD57 /* IndexViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
