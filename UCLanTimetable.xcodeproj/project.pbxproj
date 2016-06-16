@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4ECED13C1D12C9D300A88F1E /* CalenderEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECED13B1D12C9D300A88F1E /* CalenderEventTableViewCell.swift */; };
+		4ECED13E1D12D58600A88F1E /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECED13D1D12D58600A88F1E /* CalendarEvent.swift */; };
 		4ED0042F1D114D60007AAD57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED0042E1D114D60007AAD57 /* AppDelegate.swift */; };
 		4ED004311D114D60007AAD57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED004301D114D60007AAD57 /* ViewController.swift */; };
 		4ED004341D114D60007AAD57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ED004321D114D60007AAD57 /* Main.storyboard */; };
@@ -15,9 +17,14 @@
 		4ED0043C1D114D60007AAD57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ED0043A1D114D60007AAD57 /* LaunchScreen.storyboard */; };
 		4ED004461D115110007AAD57 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED004451D115110007AAD57 /* logo.png */; };
 		4ED004491D11871C007AAD57 /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED004481D11871C007AAD57 /* IndexViewController.swift */; };
+		7C989DC21C322B168BFB2DB5 /* Pods_UCLanTimetable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C7C02EBDF2563D53ED5993 /* Pods_UCLanTimetable.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15E1932ED85CC7F21902E9FD /* Pods-UCLanTimetable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UCLanTimetable.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UCLanTimetable/Pods-UCLanTimetable.debug.xcconfig"; sourceTree = "<group>"; };
+		4ECED13A1D12AA0B00A88F1E /* UCLanTimetable-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UCLanTimetable-Bridging-Header.h"; sourceTree = "<group>"; };
+		4ECED13B1D12C9D300A88F1E /* CalenderEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderEventTableViewCell.swift; sourceTree = "<group>"; };
+		4ECED13D1D12D58600A88F1E /* CalendarEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
 		4ED0042B1D114D60007AAD57 /* UCLanTimetable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UCLanTimetable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ED0042E1D114D60007AAD57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4ED004301D114D60007AAD57 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -28,6 +35,8 @@
 		4ED0043D1D114D60007AAD57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4ED004451D115110007AAD57 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		4ED004481D11871C007AAD57 /* IndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
+		5DB178B9217185C1375DA5BD /* Pods-UCLanTimetable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UCLanTimetable.release.xcconfig"; path = "Pods/Target Support Files/Pods-UCLanTimetable/Pods-UCLanTimetable.release.xcconfig"; sourceTree = "<group>"; };
+		D6C7C02EBDF2563D53ED5993 /* Pods_UCLanTimetable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UCLanTimetable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +44,47 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C989DC21C322B168BFB2DB5 /* Pods_UCLanTimetable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4ECED13F1D12DB0300A88F1E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4ED004301D114D60007AAD57 /* ViewController.swift */,
+				4ECED13B1D12C9D300A88F1E /* CalenderEventTableViewCell.swift */,
+				4ED004481D11871C007AAD57 /* IndexViewController.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		4ECED1401D12DB0B00A88F1E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4ECED13D1D12D58600A88F1E /* CalendarEvent.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		4ECED1411D12DB2200A88F1E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4ED004321D114D60007AAD57 /* Main.storyboard */,
+				4ED0043A1D114D60007AAD57 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		4ED004221D114D60007AAD57 = {
 			isa = PBXGroup;
 			children = (
 				4ED0042D1D114D60007AAD57 /* UCLanTimetable */,
 				4ED0042C1D114D60007AAD57 /* Products */,
+				9492018F1359F3D1C48B6446 /* Pods */,
+				5FA8DF778B33E98C2E535E89 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,13 +101,13 @@
 			children = (
 				4ED004471D115115007AAD57 /* res */,
 				4ED0042E1D114D60007AAD57 /* AppDelegate.swift */,
-				4ED004301D114D60007AAD57 /* ViewController.swift */,
-				4ED004321D114D60007AAD57 /* Main.storyboard */,
+				4ECED1401D12DB0B00A88F1E /* Classes */,
+				4ECED13F1D12DB0300A88F1E /* Views */,
+				4ECED1411D12DB2200A88F1E /* Storyboards */,
 				4ED004381D114D60007AAD57 /* Assets.xcassets */,
-				4ED0043A1D114D60007AAD57 /* LaunchScreen.storyboard */,
 				4ED0043D1D114D60007AAD57 /* Info.plist */,
 				4ED004351D114D60007AAD57 /* UCLanTimetable.xcdatamodeld */,
-				4ED004481D11871C007AAD57 /* IndexViewController.swift */,
+				4ECED13A1D12AA0B00A88F1E /* UCLanTimetable-Bridging-Header.h */,
 			);
 			path = UCLanTimetable;
 			sourceTree = "<group>";
@@ -81,6 +120,23 @@
 			name = res;
 			sourceTree = "<group>";
 		};
+		5FA8DF778B33E98C2E535E89 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D6C7C02EBDF2563D53ED5993 /* Pods_UCLanTimetable.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9492018F1359F3D1C48B6446 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				15E1932ED85CC7F21902E9FD /* Pods-UCLanTimetable.debug.xcconfig */,
+				5DB178B9217185C1375DA5BD /* Pods-UCLanTimetable.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -88,9 +144,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4ED004401D114D60007AAD57 /* Build configuration list for PBXNativeTarget "UCLanTimetable" */;
 			buildPhases = (
+				BA5A32F045671492BB028E59 /* [CP] Check Pods Manifest.lock */,
 				4ED004271D114D60007AAD57 /* Sources */,
 				4ED004281D114D60007AAD57 /* Frameworks */,
 				4ED004291D114D60007AAD57 /* Resources */,
+				C60C5A38E777A51AF6E5319D /* [CP] Embed Pods Frameworks */,
+				8AC482DDFFB36BBD9625FAE6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,14 +208,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8AC482DDFFB36BBD9625FAE6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UCLanTimetable/Pods-UCLanTimetable-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA5A32F045671492BB028E59 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C60C5A38E777A51AF6E5319D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UCLanTimetable/Pods-UCLanTimetable-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4ED004271D114D60007AAD57 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ECED13C1D12C9D300A88F1E /* CalenderEventTableViewCell.swift in Sources */,
 				4ED004311D114D60007AAD57 /* ViewController.swift in Sources */,
 				4ED0042F1D114D60007AAD57 /* AppDelegate.swift in Sources */,
 				4ED004371D114D60007AAD57 /* UCLanTimetable.xcdatamodeld in Sources */,
+				4ECED13E1D12D58600A88F1E /* CalendarEvent.swift in Sources */,
 				4ED004491D11871C007AAD57 /* IndexViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,23 +377,30 @@
 		};
 		4ED004411D114D60007AAD57 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15E1932ED85CC7F21902E9FD /* Pods-UCLanTimetable.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = UCLanTimetable/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uni.salah.UCLanTimetable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "UCLanTimetable/UCLanTimetable-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		4ED004421D114D60007AAD57 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5DB178B9217185C1375DA5BD /* Pods-UCLanTimetable.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = UCLanTimetable/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uni.salah.UCLanTimetable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "UCLanTimetable/UCLanTimetable-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -307,6 +423,7 @@
 				4ED004421D114D60007AAD57 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

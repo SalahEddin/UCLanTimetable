@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Lge-sZ-uro">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -105,15 +105,16 @@
             </objects>
             <point key="canvasLocation" x="324" y="384.75"/>
         </scene>
-        <!--View Controller-->
+        <!--Calendar Appearance Delegate-->
         <scene sceneID="MQM-cM-cgP">
             <objects>
-                <viewController id="Lge-sZ-uro" sceneMemberID="viewController">
+                <viewController id="Lge-sZ-uro" customClass="IndexViewController" customModule="UCLanTimetable" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vzQ-3L-3XK"/>
                         <viewControllerLayoutGuide type="bottom" id="i8R-ch-auR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="RhA-sp-3Wj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You logged in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4wu-Xn-GKB">
@@ -122,22 +123,156 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="148" y="133" width="104" height="21"/>
+                                    <rect key="frame" x="86" y="154" width="104" height="21"/>
                                 </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAV-Rr-9uA">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="150" width="46" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="ck:" destination="Lge-sZ-uro" eventType="touchUpInside" id="Rrx-yM-EfJ"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNp-hR-cpo" customClass="CVCalendarMenuView" customModule="CVCalendar">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="20" width="330" height="30"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="menuViewDelegate" destination="Lge-sZ-uro" id="PhB-Tg-Smi"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a4p-ry-Srj" customClass="CVCalendarView" customModule="CVCalendar">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="65" width="330" height="70"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="calendarAppearanceDelegate" destination="Lge-sZ-uro" id="Ewp-sb-pmK"/>
+                                    <outlet property="calendarDelegate" destination="Lge-sZ-uro" id="jpQ-gB-p3e"/>
+                                </connections>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PpM-v0-Tp6">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="145" id="7q8-LA-mkd" customClass="CalenderEventTableViewCell" customModule="UCLanTimetable" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7q8-LA-mkd" id="1hl-M7-77n">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="144.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ModuleNamesss" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlg-l6-a7d">
+                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="8" y="8" width="215" height="44"/>
+                                                    </variation>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:00 - 12:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngE-eN-zSJ">
+                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="8" y="60" width="179" height="36"/>
+                                                    </variation>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CY007" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZz-9i-4bu">
+                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.82745098039999998" green="0.1843137255" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="8" y="105" width="52" height="21"/>
+                                                    </variation>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lecturer Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSj-Ur-3ih">
+                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="73" y="104" width="114" height="21"/>
+                                                    </variation>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CO2302" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMm-uk-7lD">
+                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.82745098039999998" green="0.1843137255" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="195" y="68" width="98" height="21"/>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="qlg-l6-a7d"/>
+                                                    <exclude reference="ngE-eN-zSJ"/>
+                                                    <exclude reference="yZz-9i-4bu"/>
+                                                    <exclude reference="hSj-Ur-3ih"/>
+                                                    <exclude reference="lMm-uk-7lD"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="qlg-l6-a7d"/>
+                                                    <include reference="ngE-eN-zSJ"/>
+                                                    <include reference="yZz-9i-4bu"/>
+                                                    <include reference="hSj-Ur-3ih"/>
+                                                    <include reference="lMm-uk-7lD"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="eventRoomLabel" destination="yZz-9i-4bu" id="PgX-8C-R9l"/>
+                                            <outlet property="eventTimeLabel" destination="ngE-eN-zSJ" id="y6C-8c-HXy"/>
+                                            <outlet property="lecturerNameLabel" destination="hSj-Ur-3ih" id="kyp-OG-Fuh"/>
+                                            <outlet property="moduleCodeLabel" destination="lMm-uk-7lD" id="Xi2-sG-H1h"/>
+                                            <outlet property="moduleNameLabel" destination="qlg-l6-a7d" id="MJX-Pp-GmL"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="195" width="320" height="444"/>
+                                </variation>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="4wu-Xn-GKB"/>
+                                <exclude reference="TAV-Rr-9uA"/>
+                                <exclude reference="YNp-hR-cpo"/>
+                                <exclude reference="a4p-ry-Srj"/>
+                                <exclude reference="PpM-v0-Tp6"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="4wu-Xn-GKB"/>
+                                <include reference="TAV-Rr-9uA"/>
+                                <include reference="YNp-hR-cpo"/>
+                                <include reference="a4p-ry-Srj"/>
+                                <include reference="PpM-v0-Tp6"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="calView" destination="a4p-ry-Srj" id="A4R-Li-mow"/>
+                        <outlet property="eventTimeLabel" destination="PpM-v0-Tp6" id="nZf-wP-SMj"/>
+                        <outlet property="eventsTableView" destination="PpM-v0-Tp6" id="PM3-ox-JB6"/>
+                        <outlet property="menuView" destination="YNp-hR-cpo" id="1eW-MB-dSb"/>
+                        <outlet property="moduleCodeLabel" destination="PpM-v0-Tp6" id="nTJ-DY-yaf"/>
+                        <outlet property="moduleNameLabel" destination="PpM-v0-Tp6" id="hx0-x9-irH"/>
+                        <outlet property="msgLabel" destination="4wu-Xn-GKB" id="Q8h-oh-H4H"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RYp-Ir-Z9t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
