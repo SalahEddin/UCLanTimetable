@@ -13,9 +13,10 @@ class CalenderEventTableViewCell: UITableViewCell {
     // MARK: cell components outlets
     @IBOutlet weak var moduleNameLabel: UILabel!
     @IBOutlet weak var moduleCodeLabel: UILabel!
-    @IBOutlet weak var eventTimeLabel: UILabel!
     @IBOutlet weak var eventRoomLabel: UILabel!
     @IBOutlet weak var lecturerNameLabel: UILabel!
+    @IBOutlet weak var eventTimeLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

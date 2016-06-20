@@ -14,7 +14,11 @@ class IndexViewController: UIViewController {
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calView: CVCalendarView!
     @IBOutlet weak var msgLabel: UILabel!
+    
     @IBOutlet weak var eventsTableView: UITableView!
+    
+    var names = ["z","y","x"]
+    
     
     var CalendarEvents:[CalendarEvent] = []
     
@@ -23,15 +27,15 @@ class IndexViewController: UIViewController {
         // Do view setup here.
         //self.view.layoutIfNeeded()
         
-        self.eventsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "CalenderEventTableViewCell")
+        //self.eventsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "CalenderEventTableViewCell")
         
-        eventsTableView.delegate = self
-        eventsTableView.dataSource = self
-        
-        var CalendarEvents = [CalendarEvent]()
-        let ev1 = CalendarEvent(mName: "Computing", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "10:00 - 11:00")
-        let ev2 = CalendarEvent(mName: "Computings", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "13:00 - 17:00")
-        CalendarEvents += [ev1,ev2]
+//        eventsTableView.delegate = self
+//        eventsTableView.dataSource = self
+//        
+//        CalendarEvents = [CalendarEvent]()
+//        let ev1 = CalendarEvent(mName: "Computing", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "10:00 - 11:00")
+//        let ev2 = CalendarEvent(mName: "Computings", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "13:00 - 17:00")
+//        CalendarEvents += [ev1,ev2]
     }
     
     @IBAction func ck(sender: AnyObject) {
@@ -80,23 +84,34 @@ extension IndexViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2//CalendarEvents.count
-    }
-    
+            }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellIdentifier = "CalenderEventTableViewCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CalenderEventTableViewCell
-        let event = CalendarEvents[indexPath.row]
-        // Configure the cell...
-        cell.moduleNameLabel.text = event.ModuleName
-        cell.moduleCodeLabel.text = event.ModuleCode
-        cell.eventRoomLabel.text = event.Room
-        cell.eventTimeLabel.text = event.Time
-        cell.lecturerNameLabel.text = event.Lecturer
+        let cellIdentifier = "cell"
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CalEventTableViewCell
+        cell.ModuleName.text = names[indexPath.row]
         
         return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // cell selected code here
+        
     }
 }
+// MARK:- UITableViewDelegate & UITableViewDataSource
+//extension IndexViewController: UITableViewDelegate, UITableViewDataSource {
+//    
+//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return CalendarEvents.count
+//    }
+//    
+//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        let cellIdentifier = "CalenderEventTableViewCell"
+//        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CalenderEventTableViewCell
+//        let event = CalendarEvents[indexPath.row]
+//        // Configure the cell...
+//        cell.moduleNameLabel.text = event.ModuleName
+//        cell.moduleCodeLabel.text = event.ModuleCode
+//        cell.eventRoomLabel.text = event.Room
+//        cell.eventTimeLabel.text = event.Time
+//        cell.lecturerNameLabel.text = event.Lecturer
+//        
+//        return cell
+//    }
+//}

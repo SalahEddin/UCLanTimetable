@@ -155,93 +155,49 @@
                                     <outlet property="calendarDelegate" destination="Lge-sZ-uro" id="jpQ-gB-p3e"/>
                                 </connections>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PpM-v0-Tp6">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hXG-Wk-LVu">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="145" id="7q8-LA-mkd" customClass="CalenderEventTableViewCell" customModule="UCLanTimetable" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="80" id="0el-YF-80k" customClass="CalEventTableViewCell" customModule="UCLanTimetable" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7q8-LA-mkd" id="1hl-M7-77n">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="144.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0el-YF-80k" id="brR-YZ-EPT">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ModuleNamesss" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlg-l6-a7d">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dp6-Ef-owo">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="8" y="8" width="215" height="44"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:00 - 12:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngE-eN-zSJ">
-                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="8" y="60" width="179" height="36"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CY007" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZz-9i-4bu">
-                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.82745098039999998" green="0.1843137255" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="8" y="105" width="52" height="21"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lecturer Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSj-Ur-3ih">
-                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="73" y="104" width="114" height="21"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CO2302" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMm-uk-7lD">
-                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.82745098039999998" green="0.1843137255" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                                        <rect key="frame" x="195" y="68" width="98" height="21"/>
+                                                        <rect key="frame" x="8" y="29" width="42" height="21"/>
                                                     </variation>
                                                 </label>
                                             </subviews>
                                             <variation key="default">
                                                 <mask key="subviews">
-                                                    <exclude reference="qlg-l6-a7d"/>
-                                                    <exclude reference="ngE-eN-zSJ"/>
-                                                    <exclude reference="yZz-9i-4bu"/>
-                                                    <exclude reference="hSj-Ur-3ih"/>
-                                                    <exclude reference="lMm-uk-7lD"/>
+                                                    <exclude reference="Dp6-Ef-owo"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="subviews">
-                                                    <include reference="qlg-l6-a7d"/>
-                                                    <include reference="ngE-eN-zSJ"/>
-                                                    <include reference="yZz-9i-4bu"/>
-                                                    <include reference="hSj-Ur-3ih"/>
-                                                    <include reference="lMm-uk-7lD"/>
+                                                    <include reference="Dp6-Ef-owo"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="eventRoomLabel" destination="yZz-9i-4bu" id="PgX-8C-R9l"/>
-                                            <outlet property="eventTimeLabel" destination="ngE-eN-zSJ" id="y6C-8c-HXy"/>
-                                            <outlet property="lecturerNameLabel" destination="hSj-Ur-3ih" id="kyp-OG-Fuh"/>
-                                            <outlet property="moduleCodeLabel" destination="lMm-uk-7lD" id="Xi2-sG-H1h"/>
-                                            <outlet property="moduleNameLabel" destination="qlg-l6-a7d" id="MJX-Pp-GmL"/>
+                                            <outlet property="ModuleName" destination="Dp6-Ef-owo" id="7GO-Hy-3KM"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="195" width="320" height="444"/>
+                                    <rect key="frame" x="10" y="198" width="352" height="326"/>
                                 </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="Lge-sZ-uro" id="ejz-rH-V4l"/>
+                                    <outlet property="delegate" destination="Lge-sZ-uro" id="8js-yz-qSK"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -251,7 +207,7 @@
                                 <exclude reference="TAV-Rr-9uA"/>
                                 <exclude reference="YNp-hR-cpo"/>
                                 <exclude reference="a4p-ry-Srj"/>
-                                <exclude reference="PpM-v0-Tp6"/>
+                                <exclude reference="hXG-Wk-LVu"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -260,17 +216,14 @@
                                 <include reference="TAV-Rr-9uA"/>
                                 <include reference="YNp-hR-cpo"/>
                                 <include reference="a4p-ry-Srj"/>
-                                <include reference="PpM-v0-Tp6"/>
+                                <include reference="hXG-Wk-LVu"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="calView" destination="a4p-ry-Srj" id="A4R-Li-mow"/>
-                        <outlet property="eventTimeLabel" destination="PpM-v0-Tp6" id="nZf-wP-SMj"/>
-                        <outlet property="eventsTableView" destination="PpM-v0-Tp6" id="PM3-ox-JB6"/>
+                        <outlet property="eventsTableView" destination="hXG-Wk-LVu" id="Jwi-SP-Ytn"/>
                         <outlet property="menuView" destination="YNp-hR-cpo" id="1eW-MB-dSb"/>
-                        <outlet property="moduleCodeLabel" destination="PpM-v0-Tp6" id="nTJ-DY-yaf"/>
-                        <outlet property="moduleNameLabel" destination="PpM-v0-Tp6" id="hx0-x9-irH"/>
                         <outlet property="msgLabel" destination="4wu-Xn-GKB" id="Q8h-oh-H4H"/>
                     </connections>
                 </viewController>
