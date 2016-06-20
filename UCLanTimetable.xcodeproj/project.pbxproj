@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4EAC2EFE1D17F6E300CC9A8D /* CalEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC2EFD1D17F6E300CC9A8D /* CalEventTableViewCell.swift */; };
-		4ECED13C1D12C9D300A88F1E /* CalenderEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECED13B1D12C9D300A88F1E /* CalenderEventTableViewCell.swift */; };
 		4ECED13E1D12D58600A88F1E /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECED13D1D12D58600A88F1E /* CalendarEvent.swift */; };
 		4ED0042F1D114D60007AAD57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED0042E1D114D60007AAD57 /* AppDelegate.swift */; };
 		4ED004311D114D60007AAD57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED004301D114D60007AAD57 /* ViewController.swift */; };
@@ -25,7 +24,6 @@
 		15E1932ED85CC7F21902E9FD /* Pods-UCLanTimetable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UCLanTimetable.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UCLanTimetable/Pods-UCLanTimetable.debug.xcconfig"; sourceTree = "<group>"; };
 		4EAC2EFD1D17F6E300CC9A8D /* CalEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalEventTableViewCell.swift; sourceTree = "<group>"; };
 		4ECED13A1D12AA0B00A88F1E /* UCLanTimetable-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UCLanTimetable-Bridging-Header.h"; sourceTree = "<group>"; };
-		4ECED13B1D12C9D300A88F1E /* CalenderEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderEventTableViewCell.swift; sourceTree = "<group>"; };
 		4ECED13D1D12D58600A88F1E /* CalendarEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
 		4ED0042B1D114D60007AAD57 /* UCLanTimetable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UCLanTimetable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ED0042E1D114D60007AAD57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,7 +56,6 @@
 			children = (
 				4EAC2EFD1D17F6E300CC9A8D /* CalEventTableViewCell.swift */,
 				4ED004301D114D60007AAD57 /* ViewController.swift */,
-				4ECED13B1D12C9D300A88F1E /* CalenderEventTableViewCell.swift */,
 				4ED004481D11871C007AAD57 /* IndexViewController.swift */,
 			);
 			name = Views;
@@ -264,7 +261,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4ECED13C1D12C9D300A88F1E /* CalenderEventTableViewCell.swift in Sources */,
 				4ED004311D114D60007AAD57 /* ViewController.swift in Sources */,
 				4ED0042F1D114D60007AAD57 /* AppDelegate.swift in Sources */,
 				4ED004371D114D60007AAD57 /* UCLanTimetable.xcdatamodeld in Sources */,

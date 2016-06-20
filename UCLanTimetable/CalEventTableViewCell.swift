@@ -11,6 +11,8 @@ import UIKit
 class CalEventTableViewCell: UITableViewCell {
 
     @IBOutlet weak var ModuleName: UILabel!
+    @IBOutlet weak var EventTime: UILabel!
+    @IBOutlet weak var EventDetails: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
