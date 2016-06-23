@@ -22,16 +22,11 @@ class IndexViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        //self.view.layoutIfNeeded()
         
-        //self.eventsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "CalenderEventTableViewCell")
-        
-//        eventsTableView.delegate = self
-//        eventsTableView.dataSource = self
-//        
         CalendarEvents = [CalendarEvent]()
+        // todo dynamically load calendar data
         let ev1 = CalendarEvent(mName: "Computing", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "10:00 - 11:00")
-        let ev2 = CalendarEvent(mName: "Computings", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "13:00 - 17:00")
+        let ev2 = CalendarEvent(mName: "Software Development", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "13:00 - 17:00")
         CalendarEvents += [ev1,ev2]
     }
     
@@ -88,7 +83,7 @@ extension IndexViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "cell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CalEventTableViewCell
-        cell.ModuleName.text = CalendarEvents[indexPath.row].ModuleCode
+        cell.ModuleName.text = "\(CalendarEvents[indexPath.row].ModuleCode) - \(CalendarEvents[indexPath.row].ModuleName)"
         cell.EventTime.text = CalendarEvents[indexPath.row].Time
         cell.EventDetails.text = "\(CalendarEvents[indexPath.row].Room) - \(CalendarEvents[indexPath.row].Lecturer)"
         
