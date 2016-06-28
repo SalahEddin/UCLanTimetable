@@ -18,7 +18,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        emailTextBox.keyboardType = UIKeyboardType.EmailAddress
+        self.emailTextBox.delegate = self
+        self.passTextBox.delegate = self
         //todo: check if internet is available
         //todo: check if user is already logged in
         
@@ -69,4 +70,16 @@ class ViewController: UIViewController {
         return emailTest.evaluateWithObject(testStr)
     }
     
+}
+
+extension ViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method
+        if textField == self.emailTextBox {
+            passTextBox.becomeFirstResponder()
+        }
+        else{
+            textField.resignFirstResponder()
+        }
+        return true
+    }
 }
