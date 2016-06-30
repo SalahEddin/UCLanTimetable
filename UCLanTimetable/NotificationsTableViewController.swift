@@ -11,6 +11,7 @@ import UIKit
 class NotificationsTableViewController: UITableViewController {
 
     var notifications:[CalendarEvent] = []
+    var pullToRefreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,10 @@ class NotificationsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        pullToRefreshControl = UIRefreshControl()
+        pullToRefreshControl.addTarget(self, action: #selector(self.refresh(_:)), forControlEvents: .ValueChanged)
+        self.tableView.addSubview(pullToRefreshControl)
         
         let ev1 = CalendarEvent(mName: "Computing", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "Jun 6th 10:00 - 11:00", details: "wwww", notificationType: "Room Change", link: NSURL(string: "http://reddit.com")! )
         let ev2 = CalendarEvent(mName: "Software Development", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "Sep 5th 13:00 - 17:00",
@@ -63,7 +68,13 @@ class NotificationsTableViewController: UITableViewController {
         return cell
     }
     
-
+    func refresh(sender:AnyObject) {
+        // Code to refresh table view
+        notifications += [CalendarEvent(mName: "Computing", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "Jun 6th 10:00 - 11:00", details: "wwww", notificationType: "Room Change", link: NSURL(string: "http://reddit.com")! )]
+        self.tableView.reloadData()
+        pullToRefreshControl.endRefreshing()
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
