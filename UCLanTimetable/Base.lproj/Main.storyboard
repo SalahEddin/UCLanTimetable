@@ -16,12 +16,75 @@
                     <view key="view" contentMode="scaleToFill" id="abC-Jk-DZc">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="user@mail.com" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OJt-OV-4qy">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="148" width="340" height="30"/>
+                                </variation>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your e-mail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHt-NG-NmB">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="102" width="186" height="21"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="An email with instructions on how to reset your password will be sent to your inbox" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qm-4r-geV">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="277" width="330" height="100"/>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JiH-0U-ZEC">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Submit"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="166" y="216" width="49" height="30"/>
+                                </variation>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNl-wO-tVz">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Back to Login Menu"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="117" y="411" width="136" height="30"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="T2o-tz-drR"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="OJt-OV-4qy"/>
+                                <exclude reference="UHt-NG-NmB"/>
+                                <exclude reference="2qm-4r-geV"/>
+                                <exclude reference="JiH-0U-ZEC"/>
+                                <exclude reference="VNl-wO-tVz"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="OJt-OV-4qy"/>
+                                <include reference="UHt-NG-NmB"/>
+                                <include reference="2qm-4r-geV"/>
+                                <include reference="JiH-0U-ZEC"/>
+                                <include reference="VNl-wO-tVz"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qxE-of-Zv7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1590" y="1092.75"/>
+            <point key="canvasLocation" x="630" y="-609.75"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -55,7 +118,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="75" y="280" width="250" height="30"/>
+                                    <rect key="frame" x="40" y="280" width="300" height="30"/>
                                 </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VDw-FA-kAN">
@@ -66,20 +129,9 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="secureTextEntry" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="75" y="336" width="250" height="30"/>
+                                    <rect key="frame" x="40" y="336" width="300" height="30"/>
                                 </variation>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLh-Wn-G5e">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <state key="normal" title="Login"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="175" y="511" width="50" height="30"/>
-                                </variation>
-                                <connections>
-                                    <action selector="loginButton_Clicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X16-Xv-oLJ"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CuP-N2-lUM">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Forgot Password?"/>
@@ -87,7 +139,7 @@
                                     <rect key="frame" x="139" y="579" width="123" height="30"/>
                                 </variation>
                                 <connections>
-                                    <segue destination="1nx-f1-Lhs" kind="show" id="Biq-xL-KVr"/>
+                                    <segue destination="1nx-f1-Lhs" kind="show" id="CkR-EL-hfy"/>
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aWh-fe-qXO">
@@ -106,6 +158,17 @@
                                     <rect key="frame" x="158" y="419" width="142" height="21"/>
                                 </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLh-Wn-G5e">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <state key="normal" title="Login"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="175" y="491" width="50" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="loginButton_Clicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X16-Xv-oLJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <variation key="default">
@@ -114,10 +177,10 @@
                                 <exclude reference="7x2-by-2CC"/>
                                 <exclude reference="XUE-dD-fY4"/>
                                 <exclude reference="VDw-FA-kAN"/>
-                                <exclude reference="dLh-Wn-G5e"/>
                                 <exclude reference="CuP-N2-lUM"/>
                                 <exclude reference="aWh-fe-qXO"/>
                                 <exclude reference="Brg-O1-zTK"/>
+                                <exclude reference="dLh-Wn-G5e"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -126,10 +189,10 @@
                                 <include reference="7x2-by-2CC"/>
                                 <include reference="XUE-dD-fY4"/>
                                 <include reference="VDw-FA-kAN"/>
-                                <include reference="dLh-Wn-G5e"/>
                                 <include reference="CuP-N2-lUM"/>
                                 <include reference="aWh-fe-qXO"/>
                                 <include reference="Brg-O1-zTK"/>
+                                <include reference="dLh-Wn-G5e"/>
                             </mask>
                         </variation>
                     </view>
@@ -352,7 +415,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jhu-tE-Gi3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3003" y="482.25"/>
+            <point key="canvasLocation" x="2880" y="1353"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="wMh-ZE-0R0">
@@ -394,7 +457,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uBG-pK-kG0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="102" y="1821.75"/>
+            <point key="canvasLocation" x="-27" y="1058.25"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="eeC-o5-k7v">
@@ -487,7 +550,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ryj-pR-PNm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3003" y="1152"/>
+            <point key="canvasLocation" x="2088" y="1353"/>
         </scene>
         <!--Dashboard-->
         <scene sceneID="FBr-Lu-Trj">
@@ -589,7 +652,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iqI-EL-ZQh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="234" y="2466"/>
+            <point key="canvasLocation" x="-27" y="1839"/>
         </scene>
         <!--Attendance-->
         <scene sceneID="AGa-WQ-DUf">
@@ -657,7 +720,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Umf-Yc-VCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1098" y="2442"/>
+            <point key="canvasLocation" x="-951" y="1839"/>
         </scene>
     </scenes>
     <resources>
@@ -667,5 +730,8 @@
         <image name="notificationIcon-32.png" width="32" height="32"/>
         <image name="timetableIcon30.png" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="T2o-tz-drR"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.82745098039215681" green="0.18431372549019609" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
 </document>
