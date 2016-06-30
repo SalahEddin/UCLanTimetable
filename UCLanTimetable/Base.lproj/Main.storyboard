@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Y2S-Kv-LcX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -14,13 +14,14 @@
                         <viewControllerLayoutGuide type="bottom" id="zHM-6X-ZX1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="abC-Jk-DZc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qxE-of-Zv7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-918" y="414.75"/>
+            <point key="canvasLocation" x="-1590" y="1092.75"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -54,7 +55,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="75" y="356" width="250" height="30"/>
+                                    <rect key="frame" x="75" y="280" width="250" height="30"/>
                                 </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VDw-FA-kAN">
@@ -65,34 +66,9 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="secureTextEntry" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="75" y="428" width="250" height="30"/>
+                                    <rect key="frame" x="75" y="336" width="250" height="30"/>
                                 </variation>
                             </textField>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zI-q7-qkx">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
-                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="100" y="250" width="200" height="21"/>
-                                </variation>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aWh-fe-qXO">
-                                <rect key="frame" x="-25" y="-15" width="51" height="31"/>
-                                <color key="onTintColor" red="0.82745098039999998" green="0.1843137255" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="100" y="299" width="51" height="31"/>
-                                </variation>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep me logged in" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Brg-O1-zTK">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="158" y="304" width="142" height="21"/>
-                                </variation>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLh-Wn-G5e">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
@@ -114,6 +90,22 @@
                                     <segue destination="1nx-f1-Lhs" kind="show" id="Biq-xL-KVr"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aWh-fe-qXO">
+                                <rect key="frame" x="-25" y="-15" width="51" height="31"/>
+                                <color key="onTintColor" red="0.82745098039999998" green="0.1843137255" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="100" y="414" width="51" height="31"/>
+                                </variation>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep me logged in" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Brg-O1-zTK">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="158" y="419" width="142" height="21"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <variation key="default">
@@ -122,11 +114,10 @@
                                 <exclude reference="7x2-by-2CC"/>
                                 <exclude reference="XUE-dD-fY4"/>
                                 <exclude reference="VDw-FA-kAN"/>
-                                <exclude reference="4zI-q7-qkx"/>
-                                <exclude reference="aWh-fe-qXO"/>
-                                <exclude reference="Brg-O1-zTK"/>
                                 <exclude reference="dLh-Wn-G5e"/>
                                 <exclude reference="CuP-N2-lUM"/>
+                                <exclude reference="aWh-fe-qXO"/>
+                                <exclude reference="Brg-O1-zTK"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -135,25 +126,24 @@
                                 <include reference="7x2-by-2CC"/>
                                 <include reference="XUE-dD-fY4"/>
                                 <include reference="VDw-FA-kAN"/>
-                                <include reference="4zI-q7-qkx"/>
-                                <include reference="aWh-fe-qXO"/>
-                                <include reference="Brg-O1-zTK"/>
                                 <include reference="dLh-Wn-G5e"/>
                                 <include reference="CuP-N2-lUM"/>
+                                <include reference="aWh-fe-qXO"/>
+                                <include reference="Brg-O1-zTK"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="emailTextBox" destination="XUE-dD-fY4" id="FQQ-qN-lrd"/>
-                        <outlet property="errorLabel" destination="4zI-q7-qkx" id="xBS-Xu-sFQ"/>
                         <outlet property="loginButton" destination="dLh-Wn-G5e" id="nKJ-qp-8Q6"/>
                         <outlet property="passTextBox" destination="VDw-FA-kAN" id="Z7w-4C-6JE"/>
-                        <segue destination="Y2S-Kv-LcX" kind="show" identifier="loginSegue" id="894-uY-jZi"/>
+                        <outlet property="rememberUserSwitch" destination="aWh-fe-qXO" id="nOh-2i-506"/>
+                        <segue destination="Y2S-Kv-LcX" kind="show" identifier="login" id="shp-qg-cNs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="234" y="414.75"/>
+            <point key="canvasLocation" x="-186" y="126.75"/>
         </scene>
         <!--Calendar Appearance Delegate-->
         <scene sceneID="MQM-cM-cgP">
@@ -296,7 +286,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="examCell" id="7ou-yJ-tri" customClass="ExamTableViewCell" customModule="UCLanTimetable" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="110"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7ou-yJ-tri" id="79M-Yv-gGT">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="109.5"/>
@@ -362,12 +352,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jhu-tE-Gi3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3549" y="1058.25"/>
+            <point key="canvasLocation" x="3003" y="482.25"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="wMh-ZE-0R0">
             <objects>
-                <tabBarController id="Y2S-Kv-LcX" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarController" id="Y2S-Kv-LcX" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="TNF-ld-Ucc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -387,20 +377,24 @@
         <!--Logout-->
         <scene sceneID="IMz-1l-E5o">
             <objects>
-                <viewController id="efV-jc-TDF" sceneMemberID="viewController">
+                <viewController id="efV-jc-TDF" customClass="LogoutViewController" customModule="UCLanTimetable" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zrt-4j-AqU"/>
                         <viewControllerLayoutGuide type="bottom" id="cPl-3L-Gcj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="siR-2m-WMB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Logout" image="exit_sign-32.png" id="M9B-kd-Rf9"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="logout" id="Fih-5T-LYg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uBG-pK-kG0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2649" y="2232.75"/>
+            <point key="canvasLocation" x="102" y="1821.75"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="eeC-o5-k7v">
@@ -412,10 +406,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="notificationCell" id="WET-X4-jFK" customClass="NotificationTableViewCell" customModule="UCLanTimetable" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="350"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="264"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WET-X4-jFK" id="jxl-jh-hmf">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="349.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="263.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GOm-8q-xtb">
@@ -493,7 +487,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ryj-pR-PNm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2641.5" y="1491"/>
+            <point key="canvasLocation" x="3003" y="1152"/>
         </scene>
         <!--Dashboard-->
         <scene sceneID="FBr-Lu-Trj">
@@ -663,7 +657,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Umf-Yc-VCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="234" y="1674"/>
+            <point key="canvasLocation" x="-1098" y="2442"/>
         </scene>
     </scenes>
     <resources>

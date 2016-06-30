@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import Keychain
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var emailTextBox: UITextField!
     @IBOutlet weak var passTextBox: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var rememberUserSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,21 @@ class ViewController: UIViewController {
         self.emailTextBox.delegate = self
         self.passTextBox.delegate = self
         //todo: check if internet is available
-        //todo: check if user is already logged in
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        // check if user is already logged in
+        if Keychain.load("pass") != nil && Keychain.load("username") != nil {
+            // todo verify before proceeding
+            self.performSegueWithIdentifier("login", sender: nil)
+            return
+        }
+        else{
+            // delete
+            Keychain.delete("pass")
+            Keychain.delete("username")
+        }
         
     }
     
@@ -31,35 +46,59 @@ class ViewController: UIViewController {
     }
     
     //MARK: Actions
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if "login" == segue.identifier {
+            // Nothing really to do here, since it won't be fired unless
+            // shouldPerformSegueWithIdentifier() says it's ok. In a real app,
+            // this is where you'd pass data to the success view controller.
+        }
+    }
     
     @IBAction func loginButton_Clicked(sender: AnyObject) {
         
-        var errorMsg: String? = nil
-        
-        if emailTextBox.text == "user@mail.com" && passTextBox.text == "pass" {
-            //success, move to main
-            self.performSegueWithIdentifier("loginSegue", sender: nil)
+        let hasLoginKey = NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey")
+        if hasLoginKey == false {
+            NSUserDefaults.standardUserDefaults().setValue(self.emailTextBox.text, forKey: "username")
         }
-        else if emailTextBox.text == ""{
-            errorMsg = "please enter an email"
+
+        let data = Keychain.load("pass")
+        print(data)
+        
+        let alertView = UIAlertController(title: "Login Problem",
+                                          message: "" as String, preferredStyle:.Alert)
+        let okAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        
+        alertView.addAction(okAction)
+        //self.presentViewController(alertView, animated: true, completion: nil)
+        
+        
+        if let _ = emailTextBox.text where emailTextBox.text!.isEmpty {
+            alertView.title = "please enter an email"
+            alertView.message = "email field cannot be empty"
         }
         else if !isValidEmail(emailTextBox.text!){
-            errorMsg = "please enter a valid email"
+            alertView.title = "Invalid e-mail"
+            alertView.message = "Please enter a valid email"
         }
-        else if passTextBox.text == ""{
-            errorMsg = "please enter a password"
+        else if let _ = passTextBox.text where passTextBox.text!.isEmpty {
+            alertView.title = "please enter a password"
+            alertView.message = "Password field cannot be empty"
+        }else if(!checkLogin(emailTextBox.text!, pass: passTextBox.text!)){
+            alertView.title = "Login failed"
+            alertView.message = "Either Username or Password are incorrect"
         }
         else{
-            errorMsg = "user name or password is not valid"
+            // successful login
+            if(rememberUserSwitch.on){
+                Keychain.save(emailTextBox.text!, forKey: "username")
+                Keychain.save(passTextBox.text!, forKey: "pass")
+            }
+            self.performSegueWithIdentifier("login", sender: nil)
         }
         
-        if (errorMsg != nil) {
-            errorLabel.hidden = false
-            errorLabel.text = errorMsg!
-        }
-        else{
-            errorLabel.hidden = true
-        }
+        
+        self.presentViewController(alertView, animated: true, completion: nil)
+        
     }
     
     func isValidEmail(testStr:String) -> Bool {
@@ -70,6 +109,12 @@ class ViewController: UIViewController {
         return emailTest.evaluateWithObject(testStr)
     }
     
+    func checkLogin(user: String, pass: String)-> Bool{
+        if user == "user@mail.com" && pass == "pass" {
+            return true
+        }
+        return false
+    }
 }
 
 extension ViewController: UITextFieldDelegate {

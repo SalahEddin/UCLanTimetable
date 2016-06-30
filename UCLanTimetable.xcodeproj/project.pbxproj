@@ -21,6 +21,7 @@
 		4EBB4FD61D252BD800BF5699 /* exit_sign-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBB4FD31D252BD800BF5699 /* exit_sign-32.png */; };
 		4EBB4FD71D252BD800BF5699 /* exit-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBB4FD41D252BD800BF5699 /* exit-32.png */; };
 		4EBB4FD81D252BD800BF5699 /* notificationIcon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBB4FD51D252BD800BF5699 /* notificationIcon-32.png */; };
+		4EBB4FDB1D2545F300BF5699 /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBB4FDA1D2545F300BF5699 /* LogoutViewController.swift */; };
 		4ECED13E1D12D58600A88F1E /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECED13D1D12D58600A88F1E /* CalendarEvent.swift */; };
 		4ED0042F1D114D60007AAD57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED0042E1D114D60007AAD57 /* AppDelegate.swift */; };
 		4ED004311D114D60007AAD57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED004301D114D60007AAD57 /* ViewController.swift */; };
@@ -49,6 +50,7 @@
 		4EBB4FD31D252BD800BF5699 /* exit_sign-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "exit_sign-32.png"; path = "res/exit_sign-32.png"; sourceTree = SOURCE_ROOT; };
 		4EBB4FD41D252BD800BF5699 /* exit-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "exit-32.png"; path = "res/exit-32.png"; sourceTree = SOURCE_ROOT; };
 		4EBB4FD51D252BD800BF5699 /* notificationIcon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "notificationIcon-32.png"; path = "res/notificationIcon-32.png"; sourceTree = SOURCE_ROOT; };
+		4EBB4FDA1D2545F300BF5699 /* LogoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
 		4ECED13A1D12AA0B00A88F1E /* UCLanTimetable-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UCLanTimetable-Bridging-Header.h"; sourceTree = "<group>"; };
 		4ECED13D1D12D58600A88F1E /* CalendarEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
 		4ED0042B1D114D60007AAD57 /* UCLanTimetable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UCLanTimetable.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +92,7 @@
 		4ECED13F1D12DB0300A88F1E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4EBB4FDA1D2545F300BF5699 /* LogoutViewController.swift */,
 				4E22B8811D2504A200A9D5AB /* NotificationsTableViewController.swift */,
 				4E3696E61D1B9FAE0024197A /* AttendanceViewController.swift */,
 				4E3696E41D1B9DC80024197A /* DashboardViewController.swift */,
@@ -139,15 +142,15 @@
 		4ED0042D1D114D60007AAD57 /* UCLanTimetable */ = {
 			isa = PBXGroup;
 			children = (
-				4ED004471D115115007AAD57 /* res */,
 				4ED0042E1D114D60007AAD57 /* AppDelegate.swift */,
-				4ECED1401D12DB0B00A88F1E /* Classes */,
-				4ECED13F1D12DB0300A88F1E /* Views */,
-				4ECED1411D12DB2200A88F1E /* Storyboards */,
 				4ED004381D114D60007AAD57 /* Assets.xcassets */,
+				4ECED1401D12DB0B00A88F1E /* Classes */,
 				4ED0043D1D114D60007AAD57 /* Info.plist */,
-				4ED004351D114D60007AAD57 /* UCLanTimetable.xcdatamodeld */,
+				4ED004471D115115007AAD57 /* res */,
+				4ECED1411D12DB2200A88F1E /* Storyboards */,
 				4ECED13A1D12AA0B00A88F1E /* UCLanTimetable-Bridging-Header.h */,
+				4ED004351D114D60007AAD57 /* UCLanTimetable.xcdatamodeld */,
+				4ECED13F1D12DB0300A88F1E /* Views */,
 			);
 			path = UCLanTimetable;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				4ECED13E1D12D58600A88F1E /* CalendarEvent.swift in Sources */,
 				4EAC2EFE1D17F6E300CC9A8D /* CalEventTableViewCell.swift in Sources */,
 				4E22B87B1D24F36700A9D5AB /* ExamTableViewCell.swift in Sources */,
+				4EBB4FDB1D2545F300BF5699 /* LogoutViewController.swift in Sources */,
 				4ED004491D11871C007AAD57 /* IndexViewController.swift in Sources */,
 				4E3696E71D1B9FAE0024197A /* AttendanceViewController.swift in Sources */,
 				4E22B8801D24FDFF00A9D5AB /* NotificationTableViewCell.swift in Sources */,
