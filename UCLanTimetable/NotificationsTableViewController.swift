@@ -10,7 +10,7 @@ import UIKit
 
 class NotificationsTableViewController: UITableViewController {
 
-    var notifications:[CalendarEvent] = []
+    var notifications:[TimeTableSession] = []
     var pullToRefreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
@@ -26,11 +26,11 @@ class NotificationsTableViewController: UITableViewController {
         pullToRefreshControl.addTarget(self, action: #selector(self.refresh(_:)), forControlEvents: .ValueChanged)
         self.tableView.addSubview(pullToRefreshControl)
         
-        let ev1 = CalendarEvent(mName: "Computing", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "Jun 6th 10:00 - 11:00", details: "wwww", notificationType: "Room Change", link: NSURL(string: "http://reddit.com")! )
-        let ev2 = CalendarEvent(mName: "Software Development", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "Sep 5th 13:00 - 17:00",
-            details: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
-            notificationType: "Room Change", link: NSURL(string: "https://ultimatecode.wordpress.com/")!)
-        notifications += [ev1,ev2]
+//        let ev1 = CalendarEvent(mName: "Computing", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "Jun 6th 10:00 - 11:00", details: "wwww", notificationType: "Room Change", link: NSURL(string: "http://reddit.com")! )
+//        let ev2 = CalendarEvent(mName: "Software Development", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "Sep 5th 13:00 - 17:00",
+//            details: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
+//            notificationType: "Room Change", link: NSURL(string: "https://ultimatecode.wordpress.com/")!)
+//        notifications += [ev1,ev2]
         
         //tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -57,10 +57,10 @@ class NotificationsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("notificationCell", forIndexPath: indexPath) as! NotificationTableViewCell
 
         // Configure the cell...
-        cell.NotiDateLabel.text = "Time: \(notifications[indexPath.row].Time)"
-        cell.NotiTypeLabel.text = notifications[indexPath.row].NotificationType
-        cell.NotiDetailsLabel.text = notifications[indexPath.row].Details
-        cell.moreDetailsLink = notifications[indexPath.row].Link
+//        cell.NotiDateLabel.text = "Time: \(notifications[indexPath.row].sTART_TIME_FORMATTED)"
+//        cell.NotiTypeLabel.text = notifications[indexPath.row].NotificationType
+//        cell.NotiDetailsLabel.text = notifications[indexPath.row].Details
+//        cell.moreDetailsLink = notifications[indexPath.row].Link
         
         //tableView.estimatedRowHeight = 150.0
         //tableView.rowHeight = UITableViewAutomaticDimension
@@ -70,7 +70,7 @@ class NotificationsTableViewController: UITableViewController {
     
     func refresh(sender:AnyObject) {
         // Code to refresh table view
-        notifications += [CalendarEvent(mName: "Computing", mCode: "CO2303", room: "CY007", lec: "P. Andreou", time: "Jun 6th 10:00 - 11:00", details: "wwww", notificationType: "Room Change", link: NSURL(string: "http://reddit.com")! )]
+       
         self.tableView.reloadData()
         pullToRefreshControl.endRefreshing()
     }
