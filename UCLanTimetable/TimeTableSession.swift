@@ -1,6 +1,6 @@
 import Foundation
 
-public final class TimeTableSession {
+public final class TimeTableSession:  NSObject {
 	public var sESSION_DATE_TIME_START : String?
 	public var sESSION_DATE_TIME_END : String?
 	public var tIMETABLE_ID : Int?
@@ -124,5 +124,4 @@ public final class TimeTableSession {
 
 		return dictionary
 	}
-
 }

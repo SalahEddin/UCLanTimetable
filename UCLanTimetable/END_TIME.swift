@@ -12,7 +12,7 @@ import Foundation
  
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class END_TIME {
+public class END_TIME:  NSObject {
 	public var ticks : Int?
 	public var days : Int?
 	public var hours : Int?

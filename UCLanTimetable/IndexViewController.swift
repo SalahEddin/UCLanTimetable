@@ -12,13 +12,17 @@ import Alamofire
 
 class IndexViewController: UIViewController {
     
+    let offlineTimetableStorageKey = "timetable"
+    
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calView: CVCalendarView!
     @IBOutlet weak var eventsTableView: UITableView!
     
     var pullToRefreshControl: UIRefreshControl!
-    
+    var selectedDate = NSDate()
     var CalendarEvents:[TimeTableSession] = []
+    var OfflineCalendarEvents:[TimeTableSession]? = nil
+    var dataSavedAvailable = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,13 +39,85 @@ class IndexViewController: UIViewController {
         self.eventsTableView.addSubview(pullToRefreshControl)
         
         CalendarEvents = [TimeTableSession]()
-        loadDayTimetableSessions("2016-01-01")
+        
+        if(!Reachability.isConnectedToNetwork()){
+            //notify user to connect online
+            let alert = UIAlertController(title: "Offline Mode", message: "You're not connected to a network, connect to access latest updates and changes", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Continue in Offline Mode", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
+        
+        reloadDayViewSession()
     }
     
     func refresh(sender:AnyObject) {
+        reloadDayViewSession()
+    }
+    
+    func reloadDayViewSession(){
         // Code to refresh table view
-        // todo check internet is available
-        loadDayTimetableSessions("2016-01-01")
+        if(Reachability.isConnectedToNetwork()){
+            print("connected")
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let DateInFormat = dateFormatter.stringFromDate(selectedDate)
+            
+            Misc.loadTimetableSessions(DateInFormat, endDate: DateInFormat, type: Misc.SESSION_TYPE.ALL, callback: callback)
+        }
+        else{
+            // offline mode
+            print("disconnected")
+            
+            //clear dataset
+            CalendarEvents.removeAll()
+            
+            // load saved sessions once
+            if(OfflineCalendarEvents == nil){
+                let timetableDataDict = NSUserDefaults.standardUserDefaults().objectForKey(offlineTimetableStorageKey) as? NSData
+                
+                if timetableDataDict != nil{
+                    dataSavedAvailable = true
+                    let timetableDataDict = NSKeyedUnarchiver.unarchiveObjectWithData(timetableDataDict!) as? [NSDictionary]
+                    OfflineCalendarEvents = []
+                    for item in timetableDataDict! {
+                        OfflineCalendarEvents! += [TimeTableSession(dictionary: item)!]
+                    }
+                }
+            }
+            
+            if(dataSavedAvailable){
+                for item in OfflineCalendarEvents! {
+                    // add sessions that match selected calendar date
+                    if Misc.isDateSame(item,CVSelected: selectedDate)   {
+                        CalendarEvents += [item]
+                    }
+                }
+                
+                
+            }
+            else{
+                // No previous data found
+                
+                //notify user to connect online
+                let alert = UIAlertController(title: "Offline Mode", message: "couldn't load your timetable, please make sure you're connected to the Internet", preferredStyle: UIAlertControllerStyle.Alert)
+                let settingsAction = UIAlertAction(title: "Go to Network Settings", style: .Default) { (_) -> Void in
+                    UIApplication.sharedApplication().openURL(NSURL(string:"prefs:root=WIFI")!)
+                }
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                alert.addAction(settingsAction)
+                alert.addAction(cancelAction)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            
+            // stop refreshing if it is.
+            if(pullToRefreshControl.refreshing){
+                pullToRefreshControl.endRefreshing()
+            }
+            eventsTableView.reloadData()
+        }
     }
     
     @IBAction func ck(sender: AnyObject) {
@@ -53,6 +129,35 @@ class IndexViewController: UIViewController {
         
         menuView.commitMenuViewUpdate()
         calView.commitCalendarViewUpdate()
+    }
+    
+    func callback(sess: [TimeTableSession]) -> Void {
+        self.CalendarEvents = sess
+        self.pullToRefreshControl.endRefreshing()
+        self.eventsTableView.reloadData()
+        if sess.count <= 0 {
+            // self.eventsTableView.backgroundView = UIImageView(image: UIImage(named: "no_events-1.jpg"))
+        }
+        
+        // after loading the day, check if the data for this period is available offline
+        let timetableDataDict = NSUserDefaults.standardUserDefaults().objectForKey(offlineTimetableStorageKey) as? NSData
+        
+        if timetableDataDict == nil {
+            // dynamic date
+            Misc.loadTimetableSessions("2016-05-05", endDate: "2017-01-01", type: Misc.SESSION_TYPE.ALL, callback: offlineSaveCallback)
+        }
+    }
+    
+    func offlineSaveCallback(sess: [TimeTableSession]) -> Void {
+        var sessDict : [NSDictionary] = []
+        
+        for item in sess {
+            sessDict += [item.dictionaryRepresentation()]
+        }
+        
+        // store data for offline use
+        let examsData = NSKeyedArchiver.archivedDataWithRootObject(sessDict)
+        NSUserDefaults.standardUserDefaults().setObject(examsData, forKey: offlineTimetableStorageKey)
     }
 }
 
@@ -81,20 +186,11 @@ extension IndexViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegat
     
     func didSelectDayView(dayView: CVCalendarDayView, animationDidFinish: Bool) {
         print("\(dayView.date.commonDescription) is selected!")
-        let formattedDate = "\(dayView.date.year)-\(dayView.date.month)-\(dayView.date.day)"
-        print(formattedDate)
-        Misc.loadTimetableSessions(formattedDate, endDate: formattedDate, type: Misc.SESSION_TYPE.ALL, callback: callback)
-        // loadDayTimetableSessions(formattedDate)
+        // update local var selectedDate
+        selectedDate = dayView.date.convertedDate()!
+        reloadDayViewSession()
     }
     
-    func callback(sess: [TimeTableSession]) -> Void {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.CalendarEvents = sess
-            self.pullToRefreshControl.endRefreshing()
-            self.eventsTableView.reloadData()
-            print(self.CalendarEvents.count)
-        })
-    }
 }
 
 // MARK:- UITableViewDelegate & UITableViewDataSource
@@ -118,33 +214,5 @@ extension IndexViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return cell
-    }
-}
-
-// MARK:- UITableViewDelegate & UITableViewDataSource
-extension IndexViewController {
-    func loadDayTimetableSessions(date: String) -> Void {
-        //clear array
-        self.CalendarEvents.removeAll()
-        
-        let params = [
-            "securityToken": "e84e281d4c9b46f8a30e4a2fd9aa7058",
-            "STUDENT_ID": 622,
-            "START_DATE_TIME":date,
-            "END_DATE_TIME":date]
-        
-        Alamofire.request(.GET, "https://cyprustimetable.uclan.ac.uk/TimetableAPI/TimetableWebService.asmx/getTimetableByStudent", parameters: (params as! [String : AnyObject]))
-            .responseJSON { response in
-                
-                print(response.result)   // result of response serialization
-                
-                if let JSON = response.result.value as? [[String: AnyObject]] {
-                    for item in JSON{
-                        self.CalendarEvents += [TimeTableSession(dictionary: item)!]
-                    }
-                    self.eventsTableView.reloadData()
-                }
-                self.pullToRefreshControl.endRefreshing()
-        }
     }
 }

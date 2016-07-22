@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SystemConfiguration
 
 public class Misc {
     public enum SESSION_TYPE {  case EXAM
@@ -24,6 +25,19 @@ public class Misc {
         return today.compare(date!) == NSComparisonResult.OrderedDescending // today after date
     }
     
+    static func isDateSame(session: TimeTableSession, CVSelected: NSDate) -> Bool {
+        // current date time
+        //        let commonDateFormatter = NSDateFormatter()
+        //        commonDateFormatter.dateFormat = "yyyy-MM-dd"
+        //        let selected = commonDateFormatter.dateFromString(CVSelected)!
+        let selected = CVSelected
+        // session datetime
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let date = dateFormatter.dateFromString("\(session.sESSION_DATE_FORMATTED!)")
+        return selected.compare(date!) == NSComparisonResult.OrderedSame // today after date
+    }
+    
     static func loadTimetableSessions(startDate: String, endDate: String, type: SESSION_TYPE = .ALL, callback: ([TimeTableSession])->Void ){
         //clear array
         var sessions: [TimeTableSession] = []
@@ -33,8 +47,6 @@ public class Misc {
             "STUDENT_ID": 622,
             "START_DATE_TIME":startDate,
             "END_DATE_TIME":endDate]
-        
-        print("before \(sessions.count)")
         
         Alamofire.request(.GET, "https://cyprustimetable.uclan.ac.uk/TimetableAPI/TimetableWebService.asmx/getTimetableByStudent", parameters: (params as! [String : AnyObject]))
             .responseJSON { response in
@@ -49,10 +61,29 @@ public class Misc {
                             sessions += [TimeTableSession(dictionary: item)!]
                         }
                     }
-                    print("got \(sessions.count)")
-                    callback(sessions)
+                    //print("got \(sessions.count)")
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        callback(sessions)
+                    })
                 }
         }
-        print("after \(sessions.count)")
+    }
+}
+
+public class Reachability {
+    class func isConnectedToNetwork() -> Bool {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
+            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+        }
+        var flags = SCNetworkReachabilityFlags()
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
+            return false
+        }
+        let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
+        let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+        return (isReachable && !needsConnection)
     }
 }

@@ -18,6 +18,10 @@
 		4E4FE4461D3E6025004F6C97 /* TimeTableSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4FE4431D3E6025004F6C97 /* TimeTableSession.swift */; };
 		4E5920CC1D3F90C60029DDE6 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5920CB1D3F90C60029DDE6 /* Misc.swift */; };
 		4E9C8CE31D3F9B61003AAB70 /* no_events-1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E9C8CE21D3F9B61003AAB70 /* no_events-1.jpg */; };
+		4E9C8CE51D40A5A8003AAB70 /* BadgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9C8CE41D40A5A8003AAB70 /* BadgeCell.swift */; };
+		4E9C8CE71D40B0A5003AAB70 /* dummy_badge.svg in Resources */ = {isa = PBXBuildFile; fileRef = 4E9C8CE61D40B0A5003AAB70 /* dummy_badge.svg */; };
+		4E9C8CE91D40B652003AAB70 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9C8CE81D40B652003AAB70 /* Badge.swift */; };
+		4E9C8CEB1D410433003AAB70 /* pdf.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4E9C8CEA1D410433003AAB70 /* pdf.pdf */; };
 		4EAC2EFE1D17F6E300CC9A8D /* CalEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC2EFD1D17F6E300CC9A8D /* CalEventTableViewCell.swift */; };
 		4EBB4FCA1D25259E00BF5699 /* timetableIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBB4FC91D25259E00BF5699 /* timetableIcon.png */; };
 		4EBB4FCD1D25274A00BF5699 /* timetableIcon30.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBB4FCB1D25274A00BF5699 /* timetableIcon30.png */; };
@@ -51,6 +55,10 @@
 		4E4FE4431D3E6025004F6C97 /* TimeTableSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableSession.swift; sourceTree = "<group>"; };
 		4E5920CB1D3F90C60029DDE6 /* Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		4E9C8CE21D3F9B61003AAB70 /* no_events-1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "no_events-1.jpg"; sourceTree = "<group>"; };
+		4E9C8CE41D40A5A8003AAB70 /* BadgeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeCell.swift; sourceTree = "<group>"; };
+		4E9C8CE61D40B0A5003AAB70 /* dummy_badge.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dummy_badge.svg; sourceTree = "<group>"; };
+		4E9C8CE81D40B652003AAB70 /* Badge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
+		4E9C8CEA1D410433003AAB70 /* pdf.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pdf.pdf; sourceTree = "<group>"; };
 		4EAC2EFD1D17F6E300CC9A8D /* CalEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalEventTableViewCell.swift; sourceTree = "<group>"; };
 		4EBB4FC91D25259E00BF5699 /* timetableIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timetableIcon.png; path = res/timetableIcon.png; sourceTree = SOURCE_ROOT; };
 		4EBB4FCB1D25274A00BF5699 /* timetableIcon30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timetableIcon30.png; path = res/timetableIcon30.png; sourceTree = SOURCE_ROOT; };
@@ -93,6 +101,7 @@
 				4E22B87A1D24F36700A9D5AB /* ExamTableViewCell.swift */,
 				4EAC2EFD1D17F6E300CC9A8D /* CalEventTableViewCell.swift */,
 				4E22B87F1D24FDFF00A9D5AB /* NotificationTableViewCell.swift */,
+				4E9C8CE41D40A5A8003AAB70 /* BadgeCell.swift */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -103,6 +112,7 @@
 				4E4FE4411D3E6025004F6C97 /* END_TIME.swift */,
 				4E4FE4421D3E6025004F6C97 /* START_TIME.swift */,
 				4E4FE4431D3E6025004F6C97 /* TimeTableSession.swift */,
+				4E9C8CE81D40B652003AAB70 /* Badge.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -177,6 +187,8 @@
 		4ED004471D115115007AAD57 /* res */ = {
 			isa = PBXGroup;
 			children = (
+				4E9C8CEA1D410433003AAB70 /* pdf.pdf */,
+				4E9C8CE61D40B0A5003AAB70 /* dummy_badge.svg */,
 				4E9C8CE21D3F9B61003AAB70 /* no_events-1.jpg */,
 				4EBB4FD31D252BD800BF5699 /* exit_sign-32.png */,
 				4EBB4FD41D252BD800BF5699 /* exit-32.png */,
@@ -269,11 +281,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E9C8CEB1D410433003AAB70 /* pdf.pdf in Resources */,
 				4EBB4FD61D252BD800BF5699 /* exit_sign-32.png in Resources */,
 				4ED004461D115110007AAD57 /* logo.png in Resources */,
 				4ED0043C1D114D60007AAD57 /* LaunchScreen.storyboard in Resources */,
 				4EBB4FCE1D25274A00BF5699 /* timetableIcon60.png in Resources */,
 				4EBB4FD71D252BD800BF5699 /* exit-32.png in Resources */,
+				4E9C8CE71D40B0A5003AAB70 /* dummy_badge.svg in Resources */,
 				4E9C8CE31D3F9B61003AAB70 /* no_events-1.jpg in Resources */,
 				4EBB4FD21D252A1200BF5699 /* exam-32.png in Resources */,
 				4EBB4FCA1D25259E00BF5699 /* timetableIcon.png in Resources */,
@@ -344,7 +358,9 @@
 				4ED004311D114D60007AAD57 /* ViewController.swift in Sources */,
 				4E22B8821D2504A200A9D5AB /* NotificationsTableViewController.swift in Sources */,
 				4E3696E51D1B9DC80024197A /* DashboardViewController.swift in Sources */,
+				4E9C8CE51D40A5A8003AAB70 /* BadgeCell.swift in Sources */,
 				4ED0042F1D114D60007AAD57 /* AppDelegate.swift in Sources */,
+				4E9C8CE91D40B652003AAB70 /* Badge.swift in Sources */,
 				4E4FE4441D3E6025004F6C97 /* END_TIME.swift in Sources */,
 				4E4FE4451D3E6025004F6C97 /* START_TIME.swift in Sources */,
 				4ED004371D114D60007AAD57 /* UCLanTimetable.xcdatamodeld in Sources */,

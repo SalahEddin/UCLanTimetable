@@ -10,8 +10,10 @@ import UIKit
 import Alamofire
 
 class ExamTableViewController: UITableViewController {
-    
+    let offlineExamStorageKey = "exams"
     var CalendarEvents:[TimeTableSession] = []
+    var OfflineCalendarEvents:[TimeTableSession]? = nil
+    var dataSavedAvailable = false
     var pullToRefreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
@@ -32,18 +34,85 @@ class ExamTableViewController: UITableViewController {
         pullToRefreshControl.addTarget(self, action: #selector(self.refresh(_:)), forControlEvents: .ValueChanged)
         self.tableView.addSubview(pullToRefreshControl)
         
-        // load data
-        Misc.loadTimetableSessions("2015-01-01", endDate: "2017-01-01", type: Misc.SESSION_TYPE.EXAM, callback: callback)
-        //loadTimetableExams("2015-01-01",endDate: "2017-01-01")
+        reloadExams()
     }
     func callback(sess: [TimeTableSession]) -> Void {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.CalendarEvents = sess
-            self.pullToRefreshControl.endRefreshing()
-            self.tableView.reloadData()
-            print(self.CalendarEvents.count)
-        })
+        self.CalendarEvents = sess
+        self.pullToRefreshControl.endRefreshing()
+        self.tableView.reloadData()
+        
+        var sessDict : [NSDictionary] = []
+        
+        for item in sess {
+            sessDict += [item.dictionaryRepresentation()]
+        }
+        
+        // store data for offline use
+        let examsData = NSKeyedArchiver.archivedDataWithRootObject(sessDict)
+        NSUserDefaults.standardUserDefaults().setObject(examsData, forKey: offlineExamStorageKey)
     }
+    
+    
+    func reloadExams(){
+        // Code to refresh table view
+        if(Reachability.isConnectedToNetwork()){
+            print("connected")
+            Misc.loadTimetableSessions("2015-01-01", endDate: "2017-01-01", type: Misc.SESSION_TYPE.EXAM, callback: callback)
+        }
+        else{
+            // offline mode
+            print("disconnected")
+            
+            //clear dataset
+            CalendarEvents.removeAll()
+            
+            // load saved sessions once
+            if(OfflineCalendarEvents == nil){
+                let timetableDataDict = NSUserDefaults.standardUserDefaults().objectForKey(offlineExamStorageKey) as? NSData
+                
+                if timetableDataDict != nil{
+                    dataSavedAvailable = true
+                    let timetableDataDict = NSKeyedUnarchiver.unarchiveObjectWithData(timetableDataDict!) as? [NSDictionary]
+                    OfflineCalendarEvents = []
+                    for item in timetableDataDict! {
+                        OfflineCalendarEvents! += [TimeTableSession(dictionary: item)!]
+                    }
+                }
+            }
+            
+            if(dataSavedAvailable){
+                CalendarEvents = OfflineCalendarEvents!
+            }
+            else{
+                // No previous data found
+                
+                //notify user to connect online
+                let alert = UIAlertController(title: "Offline Mode", message: "couldn't load your exams, please make sure you're connected to the Internet", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                let settingsAction = UIAlertAction(title: "Go to Network Settings", style: .Default) { (_) -> Void in
+                    UIApplication.sharedApplication().openURL(NSURL(string:"prefs:root=WIFI")!)
+                }
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                alert.addAction(settingsAction)
+                alert.addAction(cancelAction)
+                
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            
+            // stop refreshing if it is.
+            if(pullToRefreshControl.refreshing){
+                pullToRefreshControl.endRefreshing()
+            }
+            tableView.reloadData()
+        }
+    }
+    
+    
+    
+    
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -85,34 +154,7 @@ class ExamTableViewController: UITableViewController {
     
     func refresh(sender:AnyObject) {
         // Code to refresh table view
-        loadTimetableExams("2015-01-01",endDate: "2017-01-01")
-    }
-    
-    func loadTimetableExams(startDate: String, endDate: String) -> Void {
-        //clear array
-        self.CalendarEvents.removeAll()
-        
-        let params = [
-            "securityToken": "e84e281d4c9b46f8a30e4a2fd9aa7058",
-            "STUDENT_ID": 622,
-            "START_DATE_TIME":startDate,
-            "END_DATE_TIME":endDate]
-        
-        Alamofire.request(.GET, "https://cyprustimetable.uclan.ac.uk/TimetableAPI/TimetableWebService.asmx/getTimetableByStudent", parameters: (params as! [String : AnyObject]))
-            .responseJSON { response in
-                
-                print(response.result)   // result of response serialization
-                
-                if let JSON = response.result.value as? [[String: AnyObject]] {
-                    for item in JSON{
-                        if(item["SESSION_DESCRIPTION"]!.isEqual("Examination")){
-                            self.CalendarEvents += [TimeTableSession(dictionary: item)!]
-                        }
-                    }
-                    self.pullToRefreshControl.endRefreshing()
-                    self.tableView.reloadData()
-                }
-        }
+        reloadExams()
     }
     
     /*

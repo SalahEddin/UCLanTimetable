@@ -9,10 +9,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 import Foundation
- 
-/* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class START_TIME {
+public class START_TIME:  NSObject {
 	public var ticks : Int?
 	public var days : Int?
 	public var hours : Int?
