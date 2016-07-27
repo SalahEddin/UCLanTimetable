@@ -41,8 +41,7 @@ class LogoutViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "Yes", style: .Default) { _ in
             // remove credentials
-            Keychain.delete("pass")
-            Keychain.delete("username")
+            Keychain.delete(KEYS.user)
             self.performSegueWithIdentifier("logout", sender: nil)
             })
         

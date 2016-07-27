@@ -17,6 +17,20 @@ class IndexViewController: UIViewController {
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calView: CVCalendarView!
     @IBOutlet weak var eventsTableView: UITableView!
+    @IBOutlet weak var calSegmentedControl: UISegmentedControl!
+    
+    @IBAction func calendarViewOtpion_Changed(sender: UISegmentedControl) {
+        switch calSegmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            calView.changeMode(.WeekView)
+        case 1:
+            calView.changeMode(.MonthView)
+        default:
+            break; 
+        }
+    }
+    // modify the view
     
     var pullToRefreshControl: UIRefreshControl!
     var selectedDate = NSDate()
@@ -32,7 +46,7 @@ class IndexViewController: UIViewController {
         self.edgesForExtendedLayout = UIRectEdge.All
         self.eventsTableView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: tabBarHeight!, right: 0.0)
         
-        // Do view setup here.
+        // Do pull to refresh setup here.
         pullToRefreshControl = UIRefreshControl()
         pullToRefreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
         pullToRefreshControl.addTarget(self, action: #selector(self.refresh(_:)), forControlEvents: .ValueChanged)
@@ -63,8 +77,8 @@ class IndexViewController: UIViewController {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let DateInFormat = dateFormatter.stringFromDate(selectedDate)
-            
-            Misc.loadTimetableSessions(DateInFormat, endDate: DateInFormat, type: Misc.SESSION_TYPE.ALL, callback: callback)
+            let id = String(Misc.loadUser()!.aCCOUNT_ID!)
+            Misc.loadTimetableSessions(id, startDate: DateInFormat, endDate: DateInFormat, type: Misc.SESSION_TYPE.ALL, by: Misc.USER_TYPE.STUDENT, callback: callback)
         }
         else{
             // offline mode
@@ -144,7 +158,8 @@ class IndexViewController: UIViewController {
         
         if timetableDataDict == nil {
             // dynamic date
-            Misc.loadTimetableSessions("2016-05-05", endDate: "2017-01-01", type: Misc.SESSION_TYPE.ALL, callback: offlineSaveCallback)
+            let id = String(Misc.loadUser()?.aCCOUNT_ID!)
+            Misc.loadTimetableSessions(id, startDate: "2016-05-05", endDate: "2017-01-01", type: Misc.SESSION_TYPE.ALL, callback: offlineSaveCallback)
         }
     }
     
@@ -211,6 +226,13 @@ extension IndexViewController: UITableViewDelegate, UITableViewDataSource {
             cell.EventTime.textColor = UIColor.grayColor()
             cell.EventTime.font = UIFont(name:"HelveticaNeue", size: (cell.EventTime?.font.pointSize)!)
             cell.EventDetails.textColor = UIColor.grayColor()
+        }
+        else{
+            //todo color and bold
+            cell.ModuleName.textColor = UIColor.redColor()
+            cell.EventTime.textColor = UIColor.blackColor()
+            cell.EventTime.font = UIFont(name:"HelveticaNeue Bold", size: (cell.EventTime?.font.pointSize)!)
+            cell.EventDetails.textColor = UIColor.darkGrayColor()
         }
         
         return cell

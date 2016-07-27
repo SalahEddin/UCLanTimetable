@@ -27,15 +27,20 @@ class ViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         
         // check if user is already logged in
-        if Keychain.load("pass") != nil && Keychain.load("username") != nil {
-            // todo verify before proceeding
+        
+        if Misc.loadUser() != nil  {
             self.performSegueWithIdentifier("login", sender: nil)
-            return
+        }
+            //fill username and pass
+        else if Keychain.load(KEYS.pass) != nil && Keychain.load(KEYS.username) != nil {
+            // todo verify before proceeding
+            emailTextBox.text = Keychain.load(KEYS.username)
+            passTextBox.text = Keychain.load(KEYS.pass)
         }
         else{
             // delete
-            Keychain.delete("pass")
-            Keychain.delete("username")
+            Keychain.delete(KEYS.pass)
+            Keychain.delete(KEYS.username)
         }
         
     }
@@ -55,50 +60,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func loginButton_Clicked(sender: AnyObject) {
-        
-        let hasLoginKey = NSUserDefaults.standardUserDefaults().boolForKey("hasLoginKey")
-        if hasLoginKey == false {
-            NSUserDefaults.standardUserDefaults().setValue(self.emailTextBox.text, forKey: "username")
+        if IsLoginFormValid() {
+            Misc.getUserLogin(emailTextBox.text!, pass: passTextBox.text!, callback: loginCallback)
         }
-
-        let data = Keychain.load("pass")
-        print(data)
-        
-        let alertView = UIAlertController(title: "Login Problem",
-                                          message: "" as String, preferredStyle:.Alert)
-        let okAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
-        
-        alertView.addAction(okAction)
-        //self.presentViewController(alertView, animated: true, completion: nil)
-        
-        
-        if let _ = emailTextBox.text where emailTextBox.text!.isEmpty {
-            alertView.title = "please enter an email"
-            alertView.message = "email field cannot be empty"
-        }
-        else if !isValidEmail(emailTextBox.text!){
-            alertView.title = "Invalid e-mail"
-            alertView.message = "Please enter a valid email"
-        }
-        else if let _ = passTextBox.text where passTextBox.text!.isEmpty {
-            alertView.title = "please enter a password"
-            alertView.message = "Password field cannot be empty"
-        }else if(!checkLogin(emailTextBox.text!, pass: passTextBox.text!)){
-            alertView.title = "Login failed"
-            alertView.message = "Either Username or Password are incorrect"
-        }
-        else{
-            // successful login
-            if(rememberUserSwitch.on){
-                Keychain.save(emailTextBox.text!, forKey: "username")
-                Keychain.save(passTextBox.text!, forKey: "pass")
-            }
-            self.performSegueWithIdentifier("login", sender: nil)
-        }
-        
-        
-        self.presentViewController(alertView, animated: true, completion: nil)
-        
     }
     
     func isValidEmail(testStr:String) -> Bool {
@@ -108,16 +72,10 @@ class ViewController: UIViewController {
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluateWithObject(testStr)
     }
-    
-    func checkLogin(user: String, pass: String)-> Bool{
-        if user == "user@mail.com" && pass == "pass" {
-            return true
-        }
-        return false
-    }
 }
 
 extension ViewController: UITextFieldDelegate {
+    // FOR HIDING/SHOWING THE KEYBOAD
     func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method
         if textField == self.emailTextBox {
             passTextBox.becomeFirstResponder()
@@ -126,5 +84,71 @@ extension ViewController: UITextFieldDelegate {
             textField.resignFirstResponder()
         }
         return true
+    }
+    
+    func IsLoginFormValid() -> Bool {
+        
+        var isFormValid: Bool = true
+        // alert view for informing user
+        let alertView = UIAlertController(title: "Login Problem",
+                                          message: "" as String, preferredStyle:.Alert)
+        let okAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+        alertView.addAction(okAction)
+        
+        if let _ = emailTextBox.text where emailTextBox.text!.isEmpty {
+            alertView.title = "email missing"
+            alertView.message = "please enter an email in the field"
+            isFormValid = false
+        }
+        else if !isValidEmail(emailTextBox.text!){
+            alertView.title = "Invalid e-mail"
+            alertView.message = "Please enter a valid email"
+            isFormValid = false
+        }
+        else if let _ = passTextBox.text where passTextBox.text!.isEmpty {
+            alertView.title = "please enter a password"
+            alertView.message = "Password field cannot be empty"
+            isFormValid = false
+        }
+        
+        if !isFormValid {
+            self.presentViewController(alertView, animated: true, completion: nil)
+        }
+        
+        return isFormValid
+    }
+    
+    func loginCallback(user: AuthenticatedUser?) -> Void {
+        if(user == nil){
+            // login failed
+            let alertView = UIAlertController(title: "Login Problem",
+                                              message: "" as String, preferredStyle:.Alert)
+            let okAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+            alertView.addAction(okAction)
+            alertView.title = "Login failed"
+            alertView.message = "Either Username or Password are incorrect"
+            self.presentViewController(alertView, animated: true, completion: nil)
+        }
+        else{
+            // successful login
+            if(rememberUserSwitch.on){
+                Keychain.save(emailTextBox.text!, forKey: KEYS.username)
+                Keychain.save(passTextBox.text!, forKey: KEYS.pass)
+            }
+            if !Misc.saveUser(user){
+                // todo show error that user wasn't saved
+            }
+            
+            // depending on user, hide elements
+            if(user?.aCCOUNT_TYPE_ID == 5){
+                // hide room
+            }
+            else{
+                // hide exams and attendance
+            }
+            
+            self.performSegueWithIdentifier("login", sender: nil)
+
+        }
     }
 }
