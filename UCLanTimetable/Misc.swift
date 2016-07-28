@@ -18,6 +18,7 @@ public class APIs{
     public static let login = "app_login"
     public static let getTimetableByStudent = "app_getTimetableByStudent"
     public static let getTimetableByRoom = "app_getTimetableByRoom"
+    public static let getNotifications = "app_getNotificationsByUser"
 }
 
 public class KEYS{
@@ -35,6 +36,46 @@ public class Misc {
         case STUDENT
         case ROOM}
     
+    // MARK: Notifications
+    
+    static func markAsRead(){}
+    static func markAsUnread(){}
+    static func markAsArchived(){}
+    static func markAsDeleted(){}
+    
+    static func isNotificationRead(status: Int) -> Bool {
+        return false
+    }
+    
+    static func isNotificationDeleted(status: Int) -> Bool {
+        return false
+    }
+    
+    static func isNotificationArchived(status: Int) -> Bool {
+        return false
+    }
+    
+    static func loadNotifications(userId: String,callback: (([Notification])->Void )){
+        var notifs: [Notification] = []
+        let params: [String : AnyObject] = ["securityToken": APIs.SecurityToken,"USER_ID": userId]
+        let APICall = APIs.ENDPOINT + APIs.getNotifications
+        
+        Alamofire.request(.GET, APICall, parameters: params)
+            .responseJSON{  response in
+                print(response.result)   // result of response serialization
+                if let JSON = response.result.value as? [[String: AnyObject]] {
+                    for item in JSON{
+                        notifs += [Notification(dictionary: item)!]
+                    }
+                }
+                //print("got \(sessions.count)")
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    callback(notifs)
+                })
+        }
+    }
+    
+    // MARK: IO
     static func loadUser() -> AuthenticatedUser? {
         var user: AuthenticatedUser? = nil
         let storedUserString = Keychain.load(KEYS.user)
@@ -73,7 +114,7 @@ public class Misc {
         }
         return success
     }
-    
+    // MARK: API
     static func hasDatePassed(session: TimeTableSession) -> Bool {
         // current date time
         let today = NSDate()
@@ -203,5 +244,19 @@ public class Reachability {
         let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
         let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
         return (isReachable && !needsConnection)
+    }
+}
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(netHex:Int) {
+        self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
     }
 }

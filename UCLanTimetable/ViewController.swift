@@ -21,7 +21,9 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.emailTextBox.delegate = self
         self.passTextBox.delegate = self
-        //todo: check if internet is available
+        
+        self.navigationController?.navigationBarHidden = true
+        self.tabBarController?.tabBar.hidden = true
     }
     
     override func viewDidAppear(animated: Bool) {

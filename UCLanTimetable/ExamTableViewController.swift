@@ -16,6 +16,8 @@ class ExamTableViewController: UITableViewController {
     var dataSavedAvailable = false
     var pullToRefreshControl: UIRefreshControl!
     
+    var today = NSDate()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

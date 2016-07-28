@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import MGSwipeTableCell
 
-class NotificationTableViewCell: UITableViewCell {
-
+class NotificationTableViewCell: MGSwipeTableCell  {
+    // UI Binding
+    @IBOutlet weak var NotiTitleLabel: UILabel!
     @IBOutlet weak var NotiTypeLabel: UILabel!
     @IBOutlet weak var NotiDateLabel: UILabel!
     @IBOutlet weak var NotiDetailsLabel: UILabel!

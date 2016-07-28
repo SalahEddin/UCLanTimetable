@@ -17,6 +17,7 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var roomPicker: UIPickerView!
     @IBOutlet weak var calSegmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var selectedDateLabel: UILabel!
     @IBAction func calendarViewOtpion_Changed(sender: UISegmentedControl) {
         switch calSegmentedControl.selectedSegmentIndex
         {
@@ -55,6 +56,9 @@ class RoomViewController: UIViewController {
             Misc.listRooms(listRoomsCallback)
         }
         
+        let df = NSDateFormatter()
+        df.dateFormat = "dd MMMM, yyyy"
+        selectedDateLabel.text = df.stringFromDate(NSDate())
         //intial view
         reloadDayViewSession()
         
@@ -112,6 +116,9 @@ extension RoomViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate
         print("\(dayView.date.commonDescription) is selected!")
         // update local var selectedDate
         selectedDate = dayView.date.convertedDate()!
+        let df = NSDateFormatter()
+        df.dateFormat = "dd MMMM, yyyy"
+        selectedDateLabel.text = df.stringFromDate(selectedDate)
         reloadDayViewSession()
     }
     

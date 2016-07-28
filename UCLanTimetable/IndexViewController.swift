@@ -18,6 +18,7 @@ class IndexViewController: UIViewController {
     @IBOutlet weak var calView: CVCalendarView!
     @IBOutlet weak var eventsTableView: UITableView!
     @IBOutlet weak var calSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var selectedDateLabel: UILabel!
     
     @IBAction func calendarViewOtpion_Changed(sender: UISegmentedControl) {
         switch calSegmentedControl.selectedSegmentIndex
@@ -27,7 +28,7 @@ class IndexViewController: UIViewController {
         case 1:
             calView.changeMode(.MonthView)
         default:
-            break; 
+            break;
         }
     }
     // modify the view
@@ -59,8 +60,11 @@ class IndexViewController: UIViewController {
             let alert = UIAlertController(title: "Offline Mode", message: "You're not connected to a network, connect to access latest updates and changes", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Continue in Offline Mode", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
-            
         }
+        
+        let df = NSDateFormatter()
+        df.dateFormat = "dd MMMM, yyyy"
+        selectedDateLabel.text = df.stringFromDate(NSDate())
         
         reloadDayViewSession()
     }
@@ -182,7 +186,7 @@ extension IndexViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegat
     
     /// Required method to implement!
     func presentationMode() -> CalendarMode {
-        return .WeekView
+        return .MonthView
     }
     
     /// Required method to implement!
@@ -203,6 +207,11 @@ extension IndexViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegat
         print("\(dayView.date.commonDescription) is selected!")
         // update local var selectedDate
         selectedDate = dayView.date.convertedDate()!
+        
+        let df = NSDateFormatter()
+        df.dateFormat = "dd MMMM, yyyy"
+        selectedDateLabel.text = df.stringFromDate(selectedDate)
+        
         reloadDayViewSession()
     }
     
