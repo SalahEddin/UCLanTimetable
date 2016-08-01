@@ -34,12 +34,18 @@
 		4E4809431D49516600799BD9 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4809421D49516600799BD9 /* Notification.swift */; };
 		4E4809451D49BF3900799BD9 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4809441D49BF3900799BD9 /* TabBarViewController.swift */; };
 		4E4809471D49C45F00799BD9 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4809461D49C45F00799BD9 /* ContactTableViewController.swift */; };
-		4E48094A1D49DE8C00799BD9 /* Delete-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4809481D49DE8C00799BD9 /* Delete-100.png */; };
 		4E48094B1D49DE8C00799BD9 /* Archive-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4809491D49DE8C00799BD9 /* Archive-100.png */; };
+		4E48094D1D4A323900799BD9 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E48094C1D4A323900799BD9 /* NotificationAPI.swift */; };
+		4E48094F1D4A332700799BD9 /* EventAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E48094E1D4A332700799BD9 /* EventAPI.swift */; };
+		4E4809511D4A40B900799BD9 /* advertising.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4809501D4A40B900799BD9 /* advertising.png */; };
+		4E4809531D4A6B5D00799BD9 /* delete_filled.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E4809521D4A6B5D00799BD9 /* delete_filled.png */; };
 		4E4FE4441D3E6025004F6C97 /* END_TIME.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4FE4411D3E6025004F6C97 /* END_TIME.swift */; };
 		4E4FE4451D3E6025004F6C97 /* START_TIME.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4FE4421D3E6025004F6C97 /* START_TIME.swift */; };
 		4E4FE4461D3E6025004F6C97 /* TimeTableSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4FE4431D3E6025004F6C97 /* TimeTableSession.swift */; };
 		4E5920CC1D3F90C60029DDE6 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5920CB1D3F90C60029DDE6 /* Misc.swift */; };
+		4E7993831D4F5F710006D3F0 /* DetailedNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7993821D4F5F710006D3F0 /* DetailedNotificationViewController.swift */; };
+		4E7993861D4F64FE0006D3F0 /* iNSPIRE with light_Final-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E7993841D4F64FE0006D3F0 /* iNSPIRE with light_Final-01.png */; };
+		4E7993871D4F64FE0006D3F0 /* uclan_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E7993851D4F64FE0006D3F0 /* uclan_logo.png */; };
 		4E9C8CE51D40A5A8003AAB70 /* BadgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9C8CE41D40A5A8003AAB70 /* BadgeCell.swift */; };
 		4E9C8CE71D40B0A5003AAB70 /* dummy_badge.svg in Resources */ = {isa = PBXBuildFile; fileRef = 4E9C8CE61D40B0A5003AAB70 /* dummy_badge.svg */; };
 		4E9C8CE91D40B652003AAB70 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9C8CE81D40B652003AAB70 /* Badge.swift */; };
@@ -55,6 +61,9 @@
 		4ED0043C1D114D60007AAD57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ED0043A1D114D60007AAD57 /* LaunchScreen.storyboard */; };
 		4ED004461D115110007AAD57 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED004451D115110007AAD57 /* logo.png */; };
 		4ED004491D11871C007AAD57 /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED004481D11871C007AAD57 /* IndexViewController.swift */; };
+		4ED393761D4A7BDD004ABBFD /* UCLanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED393751D4A7BDD004ABBFD /* UCLanAPI.swift */; };
+		4ED393781D4A94FD004ABBFD /* SingleNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED393771D4A94FD004ABBFD /* SingleNotificationViewController.swift */; };
+		4ED3937A1D4B1418004ABBFD /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED393791D4B1418004ABBFD /* DateUtils.swift */; };
 		7C989DC21C322B168BFB2DB5 /* Pods_UCLanTimetable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C7C02EBDF2563D53ED5993 /* Pods_UCLanTimetable.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,12 +96,18 @@
 		4E4809421D49516600799BD9 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		4E4809441D49BF3900799BD9 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		4E4809461D49C45F00799BD9 /* ContactTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
-		4E4809481D49DE8C00799BD9 /* Delete-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete-100.png"; sourceTree = "<group>"; };
 		4E4809491D49DE8C00799BD9 /* Archive-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Archive-100.png"; sourceTree = "<group>"; };
+		4E48094C1D4A323900799BD9 /* NotificationAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
+		4E48094E1D4A332700799BD9 /* EventAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventAPI.swift; sourceTree = "<group>"; };
+		4E4809501D4A40B900799BD9 /* advertising.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = advertising.png; sourceTree = "<group>"; };
+		4E4809521D4A6B5D00799BD9 /* delete_filled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_filled.png; sourceTree = "<group>"; };
 		4E4FE4411D3E6025004F6C97 /* END_TIME.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = END_TIME.swift; sourceTree = "<group>"; };
 		4E4FE4421D3E6025004F6C97 /* START_TIME.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = START_TIME.swift; sourceTree = "<group>"; };
 		4E4FE4431D3E6025004F6C97 /* TimeTableSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableSession.swift; sourceTree = "<group>"; };
 		4E5920CB1D3F90C60029DDE6 /* Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
+		4E7993821D4F5F710006D3F0 /* DetailedNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedNotificationViewController.swift; sourceTree = "<group>"; };
+		4E7993841D4F64FE0006D3F0 /* iNSPIRE with light_Final-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iNSPIRE with light_Final-01.png"; sourceTree = "<group>"; };
+		4E7993851D4F64FE0006D3F0 /* uclan_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uclan_logo.png; sourceTree = "<group>"; };
 		4E9C8CE41D40A5A8003AAB70 /* BadgeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeCell.swift; sourceTree = "<group>"; };
 		4E9C8CE61D40B0A5003AAB70 /* dummy_badge.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dummy_badge.svg; sourceTree = "<group>"; };
 		4E9C8CE81D40B652003AAB70 /* Badge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
@@ -111,6 +126,9 @@
 		4ED0043D1D114D60007AAD57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4ED004451D115110007AAD57 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		4ED004481D11871C007AAD57 /* IndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
+		4ED393751D4A7BDD004ABBFD /* UCLanAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCLanAPI.swift; sourceTree = "<group>"; };
+		4ED393771D4A94FD004ABBFD /* SingleNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleNotificationViewController.swift; sourceTree = "<group>"; };
+		4ED393791D4B1418004ABBFD /* DateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		5DB178B9217185C1375DA5BD /* Pods-UCLanTimetable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UCLanTimetable.release.xcconfig"; path = "Pods/Target Support Files/Pods-UCLanTimetable/Pods-UCLanTimetable.release.xcconfig"; sourceTree = "<group>"; };
 		D6C7C02EBDF2563D53ED5993 /* Pods_UCLanTimetable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UCLanTimetable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -156,6 +174,10 @@
 			isa = PBXGroup;
 			children = (
 				4E5920CB1D3F90C60029DDE6 /* Misc.swift */,
+				4E48094C1D4A323900799BD9 /* NotificationAPI.swift */,
+				4E48094E1D4A332700799BD9 /* EventAPI.swift */,
+				4ED393751D4A7BDD004ABBFD /* UCLanAPI.swift */,
+				4ED393791D4B1418004ABBFD /* DateUtils.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -165,6 +187,7 @@
 			children = (
 				4E48092E1D48EE5300799BD9 /* AboutViewController.swift */,
 				4E3696E61D1B9FAE0024197A /* AttendanceViewController.swift */,
+				4E4809461D49C45F00799BD9 /* ContactTableViewController.swift */,
 				4E22B87C1D24F69300A9D5AB /* ExamTableViewController.swift */,
 				4ED004481D11871C007AAD57 /* IndexViewController.swift */,
 				4EBB4FDA1D2545F300BF5699 /* LogoutViewController.swift */,
@@ -173,7 +196,8 @@
 				4E4809441D49BF3900799BD9 /* TabBarViewController.swift */,
 				4ED004301D114D60007AAD57 /* ViewController.swift */,
 				4E22B87E1D24F69F00A9D5AB /* TableCells */,
-				4E4809461D49C45F00799BD9 /* ContactTableViewController.swift */,
+				4ED393771D4A94FD004ABBFD /* SingleNotificationViewController.swift */,
+				4E7993821D4F5F710006D3F0 /* DetailedNotificationViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -225,7 +249,10 @@
 		4ED004471D115115007AAD57 /* res */ = {
 			isa = PBXGroup;
 			children = (
-				4E4809481D49DE8C00799BD9 /* Delete-100.png */,
+				4E7993841D4F64FE0006D3F0 /* iNSPIRE with light_Final-01.png */,
+				4E7993851D4F64FE0006D3F0 /* uclan_logo.png */,
+				4E4809521D4A6B5D00799BD9 /* delete_filled.png */,
+				4E4809501D4A40B900799BD9 /* advertising.png */,
 				4E4809491D49DE8C00799BD9 /* Archive-100.png */,
 				4E4809401D4945DC00799BD9 /* Forward-100.png */,
 				4E4809361D4943F000799BD9 /* Twitter Filled-100.png */,
@@ -332,11 +359,12 @@
 				4ED004461D115110007AAD57 /* logo.png in Resources */,
 				4E48093D1D4943F000799BD9 /* Facebook Filled-100.png in Resources */,
 				4E4809231D48D78D00799BD9 /* Advertising-40.png in Resources */,
+				4E4809511D4A40B900799BD9 /* advertising.png in Resources */,
 				4ED0043C1D114D60007AAD57 /* LaunchScreen.storyboard in Resources */,
+				4E7993861D4F64FE0006D3F0 /* iNSPIRE with light_Final-01.png in Resources */,
 				4E48092B1D48D8C000799BD9 /* About-40.png in Resources */,
 				4E4809211D48D78D00799BD9 /* Calendar-40.png in Resources */,
 				4E48093E1D4943F000799BD9 /* Email-100.png in Resources */,
-				4E48094A1D49DE8C00799BD9 /* Delete-100.png in Resources */,
 				4E4809271D48D78D00799BD9 /* Exam-40.png in Resources */,
 				4E9C8CE71D40B0A5003AAB70 /* dummy_badge.svg in Resources */,
 				4E48094B1D49DE8C00799BD9 /* Archive-100.png in Resources */,
@@ -347,12 +375,14 @@
 				4E48092A1D48D8C000799BD9 /* About-35.png in Resources */,
 				4E4809241D48D78D00799BD9 /* Contact Card-40.png in Resources */,
 				4E48093B1D4943F000799BD9 /* Twitter Filled-100.png in Resources */,
+				4E4809531D4A6B5D00799BD9 /* delete_filled.png in Resources */,
 				4ED004391D114D60007AAD57 /* Assets.xcassets in Resources */,
 				4E48092D1D48E7A300799BD9 /* inspire_logo.png in Resources */,
 				4E48093F1D4943F000799BD9 /* Phone Filled-100.png in Resources */,
 				4E48093C1D4943F000799BD9 /* Instagram Filled-100.png in Resources */,
 				4E4809261D48D78D00799BD9 /* Classroom Filled-40.png in Resources */,
 				4ED004341D114D60007AAD57 /* Main.storyboard in Resources */,
+				4E7993871D4F64FE0006D3F0 /* uclan_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,8 +442,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E22B87D1D24F69300A9D5AB /* ExamTableViewController.swift in Sources */,
+				4ED393781D4A94FD004ABBFD /* SingleNotificationViewController.swift in Sources */,
+				4E48094F1D4A332700799BD9 /* EventAPI.swift in Sources */,
 				4E5920CC1D3F90C60029DDE6 /* Misc.swift in Sources */,
 				4E48092F1D48EE5300799BD9 /* AboutViewController.swift in Sources */,
+				4ED393761D4A7BDD004ABBFD /* UCLanAPI.swift in Sources */,
 				4EB71DD81D47F72600B0B6E7 /* Room.swift in Sources */,
 				4ED004311D114D60007AAD57 /* ViewController.swift in Sources */,
 				4E22B8821D2504A200A9D5AB /* NotificationsTableViewController.swift in Sources */,
@@ -430,8 +463,11 @@
 				4E22B87B1D24F36700A9D5AB /* ExamTableViewCell.swift in Sources */,
 				4EBB4FDB1D2545F300BF5699 /* LogoutViewController.swift in Sources */,
 				4E4FE4461D3E6025004F6C97 /* TimeTableSession.swift in Sources */,
+				4E48094D1D4A323900799BD9 /* NotificationAPI.swift in Sources */,
+				4E7993831D4F5F710006D3F0 /* DetailedNotificationViewController.swift in Sources */,
 				4EB71DDA1D48721100B0B6E7 /* AuthenticatedUser.swift in Sources */,
 				4E4809471D49C45F00799BD9 /* ContactTableViewController.swift in Sources */,
+				4ED3937A1D4B1418004ABBFD /* DateUtils.swift in Sources */,
 				4ED004491D11871C007AAD57 /* IndexViewController.swift in Sources */,
 				4E3696E71D1B9FAE0024197A /* AttendanceViewController.swift in Sources */,
 				4E22B8801D24FDFF00A9D5AB /* NotificationTableViewCell.swift in Sources */,

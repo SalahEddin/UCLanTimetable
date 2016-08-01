@@ -58,9 +58,10 @@ class ExamTableViewController: UITableViewController {
     func reloadExams(){
         // Code to refresh table view
         if(Reachability.isConnectedToNetwork()){
-            print("connected")
+            // load user id
             let id = String(Misc.loadUser()!.aCCOUNT_ID!)
-            Misc.loadTimetableSessions(id, startDate: "2015-01-01", endDate: "2017-01-01", type: Misc.SESSION_TYPE.EXAM, by: Misc.USER_TYPE.STUDENT, callback: callback)
+            // load events
+            EventAPI.loadTimetableSessions(id, by: Misc.USER_TYPE.EXAM, callback: callback)
         }
         else{
             // offline mode
@@ -132,16 +133,17 @@ class ExamTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("examCell", forIndexPath: indexPath) as! ExamTableViewCell
         
         // Configure the cell...
-        cell.ExamTitleLabel .text = "\(CalendarEvents[indexPath.row].mODULE_NAME!) - \(CalendarEvents[indexPath.row].mODULE_CODE!)"
-        // todo parse and format date
-        cell.ExamDateLabel.text = "\(CalendarEvents[indexPath.row].sESSION_DATE_FORMATTED!) \(CalendarEvents[indexPath.row].sTART_TIME_FORMATTED!)-\(CalendarEvents[indexPath.row].eND_TIME_FORMATTED!)"
+        cell.ExamTitleLabel .text = "\(CalendarEvents[indexPath.row].mODULE_CODE!) - \(CalendarEvents[indexPath.row].mODULE_NAME!)"
+        // parse and format date
+        let parsedDate : NSDate = DateUtils.parseFormattedDate(CalendarEvents[indexPath.row].sESSION_DATE_FORMATTED!)
+        let formattedDate = DateUtils.FormatExamCell(parsedDate)
+        cell.ExamDateLabel.text = "\(formattedDate) \(CalendarEvents[indexPath.row].sTART_TIME_FORMATTED!)-\(CalendarEvents[indexPath.row].eND_TIME_FORMATTED!)"
         cell.ExamRoomLabel.text = "Room: \(CalendarEvents[indexPath.row].rOOM_CODE!)"
         
-        if(Misc.hasDatePassed(CalendarEvents[indexPath.row])){
+        if(DateUtils.hasDatePassed(CalendarEvents[indexPath.row])){
             cell.ExamTitleLabel.textColor = UIColor.grayColor()
             cell.ExamDateLabel.textColor = UIColor.grayColor()
             cell.ExamDateLabel.font = UIFont(name:"HelveticaNeue", size: (cell.ExamDateLabel?.font.pointSize)!)

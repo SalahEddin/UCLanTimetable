@@ -47,9 +47,9 @@ class ContactTableViewController: UITableViewController {
 //            let subject = "Test email".stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
 //            let body = "Just testing ...".stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
             
-            let urlString = ("mailto:info@uclancyprus.ac.cy")
-            let url = NSURL(string:urlString)!
-            UIApplication.sharedApplication().openURL(url)
+            let email = "info@uclancyprus.ac.cy"
+            let url = NSURL(string: "mailto:\(email)")
+            UIApplication.sharedApplication().openURL(url!)
         }
         
         if indexPath.section == 1{

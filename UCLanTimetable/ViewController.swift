@@ -63,7 +63,7 @@ class ViewController: UIViewController {
     
     @IBAction func loginButton_Clicked(sender: AnyObject) {
         if IsLoginFormValid() {
-            Misc.getUserLogin(emailTextBox.text!, pass: passTextBox.text!, callback: loginCallback)
+            EventAPI.getUserLogin(emailTextBox.text!, pass: passTextBox.text!, callback: loginCallback)
         }
     }
     

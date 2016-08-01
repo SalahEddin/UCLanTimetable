@@ -11,16 +11,11 @@ import MGSwipeTableCell
 
 class NotificationTableViewCell: MGSwipeTableCell  {
     // UI Binding
+    
     @IBOutlet weak var NotiTitleLabel: UILabel!
-    @IBOutlet weak var NotiTypeLabel: UILabel!
+    @IBOutlet weak var NotiLegendView: UIView!
     @IBOutlet weak var NotiDateLabel: UILabel!
-    @IBOutlet weak var NotiDetailsLabel: UILabel!
-    
-    var moreDetailsLink: NSURL = NSURL(fileURLWithPath: "http://google.com")
-    
-    @IBAction func Link_Clicked(sender: AnyObject) {
-        UIApplication.sharedApplication().openURL(moreDetailsLink)
-    }
+    @IBOutlet weak var NotiTypeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

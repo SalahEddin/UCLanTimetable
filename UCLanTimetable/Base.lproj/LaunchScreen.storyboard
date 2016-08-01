@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -21,9 +22,6 @@
                                 <rect key="frame" x="26" y="48" width="240" height="128"/>
                                 <variation key="heightClass=regular" fixedFrame="YES">
                                     <rect key="frame" x="180" y="87" width="240" height="195"/>
-                                </variation>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="80" y="61" width="240" height="128"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="80" y="92" width="240" height="408"/>
@@ -58,9 +56,29 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pWi-CG-lzM" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="60" id="dfH-2M-Bs2"/>
+                            <constraint firstItem="pWi-CG-lzM" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="52" id="eeT-jb-VM8"/>
+                            <constraint firstItem="pWi-CG-lzM" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="qNO-gb-HgR"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="pWi-CG-lzM" secondAttribute="bottom" constant="400" id="tzl-vN-mJU"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="Wo1-V2-Fkb"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="dfH-2M-Bs2"/>
+                                <exclude reference="eeT-jb-VM8"/>
+                                <exclude reference="qNO-gb-HgR"/>
+                                <exclude reference="tzl-vN-mJU"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="dfH-2M-Bs2"/>
+                                <include reference="eeT-jb-VM8"/>
+                                <include reference="qNO-gb-HgR"/>
+                                <include reference="tzl-vN-mJU"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">

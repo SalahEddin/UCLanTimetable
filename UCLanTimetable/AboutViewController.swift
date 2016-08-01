@@ -35,7 +35,6 @@ class AboutViewController: UIViewController {
         versionLabel.userInteractionEnabled = true
         versionLabel.addGestureRecognizer(easter)
         
-        
     }
     
     func inspireClicked() {

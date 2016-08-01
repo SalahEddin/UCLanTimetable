@@ -53,12 +53,12 @@ class RoomViewController: UIViewController {
         else{
             self.roomPicker.dataSource = self;
             self.roomPicker.delegate = self;
-            Misc.listRooms(listRoomsCallback)
+            EventAPI.listRooms(listRoomsCallback)
         }
         
-        let df = NSDateFormatter()
-        df.dateFormat = "dd MMMM, yyyy"
-        selectedDateLabel.text = df.stringFromDate(NSDate())
+        // update date label
+        selectedDateLabel.text = DateUtils.FormatCalendarChoiceDate(NSDate())
+        
         //intial view
         reloadDayViewSession()
         
@@ -116,9 +116,9 @@ extension RoomViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate
         print("\(dayView.date.commonDescription) is selected!")
         // update local var selectedDate
         selectedDate = dayView.date.convertedDate()!
-        let df = NSDateFormatter()
-        df.dateFormat = "dd MMMM, yyyy"
-        selectedDateLabel.text = df.stringFromDate(selectedDate)
+        // update date label
+        selectedDateLabel.text = DateUtils.FormatCalendarChoiceDate(selectedDate)
+        
         reloadDayViewSession()
     }
     
@@ -126,11 +126,9 @@ extension RoomViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate
         // Code to refresh table view
         if(Reachability.isConnectedToNetwork()){
             print("connected")
+            let DateInFormat = DateUtils.FormatToAPIDate(selectedDate)
             
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let DateInFormat = dateFormatter.stringFromDate(selectedDate)
-            Misc.loadTimetableSessions(selectedRoom, startDate: DateInFormat, endDate: DateInFormat, type: Misc.SESSION_TYPE.ALL, by: Misc.USER_TYPE.ROOM, callback: callback)
+            EventAPI.loadTimetableSessions(selectedRoom, startDate: DateInFormat, endDate: DateInFormat, by: Misc.USER_TYPE.ROOM, callback: callback)
         }
         else{
             // offline mode
@@ -165,7 +163,7 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
         cell.EventTime.text = "\(CalendarEvents[indexPath.row].sTART_TIME_FORMATTED!)-\(CalendarEvents[indexPath.row].eND_TIME_FORMATTED!)"
         cell.EventDetails.text = "\(CalendarEvents[indexPath.row].dESCRIPTION!) - \(CalendarEvents[indexPath.row].lECTURER_NAME!)"
         
-        if(Misc.hasDatePassed(CalendarEvents[indexPath.row])){
+        if(DateUtils.hasDatePassed(CalendarEvents[indexPath.row])){
             cell.ModuleName.textColor = UIColor.grayColor()
             cell.EventTime.textColor = UIColor.grayColor()
             cell.EventTime.font = UIFont(name:"HelveticaNeue", size: (cell.EventTime?.font.pointSize)!)

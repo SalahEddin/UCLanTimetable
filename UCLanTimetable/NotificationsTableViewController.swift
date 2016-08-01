@@ -9,11 +9,16 @@
 import UIKit
 import MGSwipeTableCell
 
-class NotificationsTableViewController: UITableViewController {
+class NotificationsViewController: UIViewController {
+    // UI binding
+    @IBOutlet weak var filterSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var notifsTableView: UITableView!
     
     var notifications:[Notification] = []
+    var allNotifications:[Notification] = []
     var pullToRefreshControl: UIRefreshControl!
-    
+    // passed
+    var notificationParam: Notification? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,10 +30,10 @@ class NotificationsTableViewController: UITableViewController {
         
         pullToRefreshControl = UIRefreshControl()
         pullToRefreshControl.addTarget(self, action: #selector(self.refresh(_:)), forControlEvents: .ValueChanged)
-        self.tableView.addSubview(pullToRefreshControl)
+        self.notifsTableView.addSubview(pullToRefreshControl)
         
         let user_id = Misc.loadUser()!.uSER_ID!
-        Misc.loadNotifications(String(user_id), callback: notifsCallback)
+        NotificationAPI.loadNotifications(String(user_id), callback: notifsCallback)
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,20 +41,64 @@ class NotificationsTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Table view data source
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+    func notifsCallback(notifs :[Notification]){
+        allNotifications.removeAll()
+        allNotifications.appendContentsOf(notifs)
+        notifications.removeAll()
+        notifications.appendContentsOf(allNotifications)
+        self.notifsTableView.reloadData()
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return notifications.count
+    func refresh(sender:AnyObject) {
+        // Code to refresh table view
+        
+        self.notifsTableView.reloadData()
+        pullToRefreshControl.endRefreshing()
     }
     
+    @IBAction func notificationFilter_Changed(sender: AnyObject) {
+        switch filterSegmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            notifications = allNotifications
+        case 1:
+            notifications = allNotifications.filter{item in
+                return item.isRead
+            }
+        case 2:
+            notifications = allNotifications.filter{item in
+                return !item.isRead
+            }
+        case 3:
+            notifications = allNotifications.filter{item in
+                return item.isArchived
+            }
+        default:
+            break;
+        }
+        notifsTableView.reloadData()
+    }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if segue.identifier == "NotifCellSegue" {
+            let dest = segue.destinationViewController as! DetailedNotificationViewController
+            dest.notification = notificationParam
+            // Setup new view controller
+            print(notificationParam)
+        }
+    }
+}
+
+// MARK:- UITableViewDelegate & UITableViewDataSource
+extension NotificationsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        notificationParam = notifications[indexPath.row]
+        self.performSegueWithIdentifier("NotifCellSegue", sender: self)
+    }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return notifications.count//CalendarEvents.count
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let reuseIdentifier = "notificationCell"
         var cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as? NotificationTableViewCell
         
@@ -57,40 +106,82 @@ class NotificationsTableViewController: UITableViewController {
         {
             cell = NotificationTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: reuseIdentifier)
         }
-        
         // cell!.delegate = self //optional
         
+        
+        ///////////////////////////////////
+        //UI Binding
+        ////////////
+        
         // Configure the cell...
-        cell!.NotiDateLabel.text = "Time: \(notifications[indexPath.row].cREATE_DATE!)"
+        let publishDate =  DateUtils.extractTimestamp(notifications[indexPath.row].pUBLISH_DATE!)
+        // format displayed date
+        let df = NSDateFormatter(); df.dateFormat = "dd MMM"
+        
+        cell!.NotiDateLabel.text = df.stringFromDate(publishDate)
         cell!.NotiTypeLabel.text = notifications[indexPath.row].nOTIFICATION_TYPE_NAME
-        cell!.NotiDetailsLabel.text = notifications[indexPath.row].nOTIFICATION_TEXT
-        cell!.moreDetailsLink = NSURL(fileURLWithPath: notifications[indexPath.row].nOTIFICATION_URL!)
         cell!.NotiTitleLabel.text = notifications[indexPath.row].nOTIFICATION_TITLE
         
-        //configure left buttons
-        let deleteButton = MGSwipeButton(title: "Delete", icon: UIImage(named:"check.png"), backgroundColor: UIColor(netHex: 0xc0392b), callback: {
+        //configure left buttons (Delete)
+        let deleteButton = MGSwipeButton(title: "Delete", icon: UIImage(named:"delete_filled.png"), backgroundColor: UIColor(netHex: 0xc0392b), callback: {
             (sender: MGSwipeTableCell!) -> Bool in
             print("Convenience callback for swipe buttons!")
-            Misc.markAsDeleted()
+            NotificationAPI.changeStatus(self.notifications[indexPath.row].nOTIFICATION_ID!, newStatus: NotificationAPI.Status.DELETED,callback: self.statusChangedCallback)
             return true
         })
         cell!.leftButtons = [deleteButton]
         cell!.leftSwipeSettings.transition = MGSwipeTransition.Border
         
-        //configure right buttons
-        let archiveButton = MGSwipeButton(title: "Archive", backgroundColor: UIColor(netHex: 0x95a5a6), callback: {
-            (sender: MGSwipeTableCell!) -> Bool in
-            print("Convenience callback for swipe buttons!")
-            return true
-        })
+        //configure right buttons (Archive & Mark as read)
+        var rightButtons: [MGSwipeButton] = []
         
-        cell!.rightButtons =
-            [archiveButton ,MGSwipeButton(title: "Mark as Read",backgroundColor: UIColor(netHex: 0x2980b9))]
+        let isRead = notifications[indexPath.row].isRead
+        let isArchived = notifications[indexPath.row].isArchived
         
-        if(Misc.isNotificationRead(notifications[indexPath.row].nOTIFICATION_STATUS!)){
-            cell!.rightButtons[1] = MGSwipeButton(title: "Mark as Unread",backgroundColor: UIColor.lightGrayColor())
+        
+        if(isArchived){
+            let archiveButton = MGSwipeButton(title: "Unarchive", backgroundColor: UIColor(netHex: 0x95a5a6), callback: {
+                (sender: MGSwipeTableCell!) -> Bool in
+                NotificationAPI.changeStatus(self.notifications[indexPath.row].nOTIFICATION_ID!, newStatus: NotificationAPI.Status.UNREAD,callback: self.statusChangedCallback)
+                print("Convenience callback for swipe buttons!")
+                return true
+            })
+            rightButtons += [archiveButton]
+            
+        }
+        else{
+            let archiveButton = MGSwipeButton(title: "Archive", backgroundColor: UIColor(netHex: 0x95a5a6), callback: {
+                (sender: MGSwipeTableCell!) -> Bool in
+                NotificationAPI.changeStatus(self.notifications[indexPath.row].nOTIFICATION_ID!, newStatus: NotificationAPI.Status.ARCHIVED,callback: self.statusChangedCallback)
+                print("Convenience callback for swipe buttons!")
+                return true
+            })
+            rightButtons += [archiveButton]
+            // not archived, check if read
+            if(isRead){
+                let markButton = MGSwipeButton(title: "Mark as unread", backgroundColor: UIColor(netHex: 0x2980b9), callback: {
+                    (sender: MGSwipeTableCell!) -> Bool in
+                    NotificationAPI.changeStatus(self.notifications[indexPath.row].nOTIFICATION_ID!, newStatus: NotificationAPI.Status.UNREAD,callback: self.statusChangedCallback)
+                    print("Convenience callback for swipe buttons!")
+                    return true
+                })
+                rightButtons += [markButton]
+            }
+            else{
+                //not read
+                // mark as read
+                let markButton = MGSwipeButton(title: "Mark as read", backgroundColor: UIColor(netHex: 0x2980b9), callback: {
+                    (sender: MGSwipeTableCell!) -> Bool in
+                    NotificationAPI.changeStatus(self.notifications[indexPath.row].nOTIFICATION_ID!, newStatus: NotificationAPI.Status.READ,callback: self.statusChangedCallback)
+                    print("Convenience callback for swipe buttons!")
+                    return true
+                })
+                rightButtons += [markButton]
+            }
         }
         
+        
+        cell!.rightButtons = rightButtons
         cell!.rightSwipeSettings.transition = MGSwipeTransition.Border
         
         //tableView.estimatedRowHeight = 150.0
@@ -99,62 +190,8 @@ class NotificationsTableViewController: UITableViewController {
         return cell!
     }
     
-    func notifsCallback(notifs :[Notification]){
-        notifications.removeAll()
-        notifications.appendContentsOf(notifs)
-        self.tableView.reloadData()
+    func statusChangedCallback() {
+        // reload Notifications todo
     }
-    
-    func refresh(sender:AnyObject) {
-        // Code to refresh table view
-        
-        self.tableView.reloadData()
-        pullToRefreshControl.endRefreshing()
-    }
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-     if editingStyle == .Delete {
-     // Delete the row from the data source
-     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-     } else if editingStyle == .Insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
+

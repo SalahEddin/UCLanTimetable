@@ -14,7 +14,11 @@ public class Notification {
     public var pUBLISH_DATE : String?
     public var eXPIRY_DATE : String?
     public var nOTIFICATION_STATUS : Int?
+    public var iMPORTANT : Int?
     
+    public var isRead : Bool
+    public var isDeleted : Bool
+    public var isArchived : Bool
     /**
      Returns an array of models based on given dictionary.
      
@@ -58,8 +62,20 @@ public class Notification {
         pUBLISH_DATE = dictionary["PUBLISH_DATE"] as? String
         eXPIRY_DATE = dictionary["EXPIRY_DATE"] as? String
         nOTIFICATION_STATUS = dictionary["NOTIFICATION_STATUS"] as? Int
+        iMPORTANT = dictionary["IMPORTANT"] as? Int
+        
+        let x = UInt8(nOTIFICATION_STATUS!)
+        isRead = (x & 0b00000001 == 1)
+        isDeleted = (x>>1 & 0b00000001 == 1)
+        isArchived = (x>>2 & 0b00000001 == 1)
     }
     
+    public func calculateStatus(){
+        let x = UInt8(nOTIFICATION_STATUS!)
+        isRead = (x & 0b00000001 == 1)
+        isDeleted = (x>>1 & 0b00000001 == 1)
+        isArchived = (x>>2 & 0b00000001 == 1)
+    }
     
     /**
      Returns the dictionary representation for the current instance.
@@ -81,6 +97,7 @@ public class Notification {
         dictionary.setValue(self.pUBLISH_DATE, forKey: "PUBLISH_DATE")
         dictionary.setValue(self.eXPIRY_DATE, forKey: "EXPIRY_DATE")
         dictionary.setValue(self.nOTIFICATION_STATUS, forKey: "NOTIFICATION_STATUS")
+        dictionary.setValue(self.iMPORTANT, forKey: "IMPORTANT")
         
         return dictionary
     }

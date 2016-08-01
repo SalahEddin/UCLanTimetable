@@ -61,10 +61,8 @@ class IndexViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Continue in Offline Mode", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
-        
-        let df = NSDateFormatter()
-        df.dateFormat = "dd MMMM, yyyy"
-        selectedDateLabel.text = df.stringFromDate(NSDate())
+        // set to today
+        selectedDateLabel.text = DateUtils.FormatCalendarChoiceDate(NSDate())
         
         reloadDayViewSession()
     }
@@ -76,13 +74,17 @@ class IndexViewController: UIViewController {
     func reloadDayViewSession(){
         // Code to refresh table view
         if(Reachability.isConnectedToNetwork()){
-            print("connected")
             
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let DateInFormat = dateFormatter.stringFromDate(selectedDate)
-            let id = String(Misc.loadUser()!.aCCOUNT_ID!)
-            Misc.loadTimetableSessions(id, startDate: DateInFormat, endDate: DateInFormat, type: Misc.SESSION_TYPE.ALL, by: Misc.USER_TYPE.STUDENT, callback: callback)
+            let DateInFormat = DateUtils.FormatToAPIDate(selectedDate)
+            let user = Misc.loadUser()!
+            let id = String(user.aCCOUNT_ID!)
+            
+            var userType = Misc.USER_TYPE.LECTURER
+            if(user.aCCOUNT_TYPE_ID==5){
+                userType = Misc.USER_TYPE.STUDENT
+            }
+            
+            EventAPI.loadTimetableSessions(id, startDate: DateInFormat, endDate: DateInFormat, by: userType, callback: callback)
         }
         else{
             // offline mode
@@ -108,7 +110,7 @@ class IndexViewController: UIViewController {
             if(dataSavedAvailable){
                 for item in OfflineCalendarEvents! {
                     // add sessions that match selected calendar date
-                    if Misc.isDateSame(item,CVSelected: selectedDate)   {
+                    if DateUtils.isDateSame(item,CVSelected: selectedDate)   {
                         CalendarEvents += [item]
                     }
                 }
@@ -138,10 +140,6 @@ class IndexViewController: UIViewController {
         }
     }
     
-    @IBAction func ck(sender: AnyObject) {
-        calView.changeMode(.MonthView)
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -159,12 +157,26 @@ class IndexViewController: UIViewController {
         
         // after loading the day, check if the data for this period is available offline
         let timetableDataDict = NSUserDefaults.standardUserDefaults().objectForKey(offlineTimetableStorageKey) as? NSData
-        
-        if timetableDataDict == nil {
-            // dynamic date
-            let id = String(Misc.loadUser()?.aCCOUNT_ID!)
-            Misc.loadTimetableSessions(id, startDate: "2016-05-05", endDate: "2017-01-01", type: Misc.SESSION_TYPE.ALL, callback: offlineSaveCallback)
-        }
+        // todo offline
+        //        if timetableDataDict == nil {
+        //            // dynamic date
+        //            let id = String(Misc.loadUser()?.aCCOUNT_ID!)
+        //
+        //            // today's date
+        //            let today = DateUtils.FormatToAPIDate(NSDate())
+        //            // after 3 months
+        //            let components: NSDateComponents = NSDateComponents()
+        //            components.setValue(3, forComponent: NSCalendarUnit.Month);
+        //            let endDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: NSDate(), options: NSCalendarOptions(rawValue: 0))
+        //            let endDateFormatted = DateUtils.FormatToAPIDate(endDate!)
+        //
+        //            var userType = Misc.USER_TYPE.LECTURER
+        //            if(user.aCCOUNT_TYPE_ID==5){
+        //                userType = Misc.USER_TYPE.STUDENT
+        //            }
+        //
+        //            EventAPI.loadTimetableSessions(id, startDate: today, endDate: endDateFormatted, by: , callback: offlineSaveCallback)
+        //        }
     }
     
     func offlineSaveCallback(sess: [TimeTableSession]) -> Void {
@@ -183,6 +195,11 @@ class IndexViewController: UIViewController {
 // MARK: - CVCalendarViewDelegate & CVCalendarMenuViewDelegate
 
 extension IndexViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
+    
+    func dotMarker(sizeOnDayView dayView: DayView) -> CGFloat {
+        print("yep")
+        return CGFloat(21)
+    }
     
     /// Required method to implement!
     func presentationMode() -> CalendarMode {
@@ -207,10 +224,8 @@ extension IndexViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegat
         print("\(dayView.date.commonDescription) is selected!")
         // update local var selectedDate
         selectedDate = dayView.date.convertedDate()!
-        
-        let df = NSDateFormatter()
-        df.dateFormat = "dd MMMM, yyyy"
-        selectedDateLabel.text = df.stringFromDate(selectedDate)
+        // update date label
+        selectedDateLabel.text = DateUtils.FormatCalendarChoiceDate(selectedDate)
         
         reloadDayViewSession()
     }
@@ -230,19 +245,19 @@ extension IndexViewController: UITableViewDelegate, UITableViewDataSource {
         cell.EventTime.text = "\(CalendarEvents[indexPath.row].sTART_TIME_FORMATTED!)-\(CalendarEvents[indexPath.row].eND_TIME_FORMATTED!)"
         cell.EventDetails.text = "\(CalendarEvents[indexPath.row].rOOM_CODE!) - \(CalendarEvents[indexPath.row].lECTURER_NAME!)"
         
-        if(Misc.hasDatePassed(CalendarEvents[indexPath.row])){
+        if(DateUtils.hasDatePassed(CalendarEvents[indexPath.row])){
             cell.ModuleName.textColor = UIColor.grayColor()
             cell.EventTime.textColor = UIColor.grayColor()
             cell.EventTime.font = UIFont(name:"HelveticaNeue", size: (cell.EventTime?.font.pointSize)!)
             cell.EventDetails.textColor = UIColor.grayColor()
         }
-        else{
-            //todo color and bold
-            cell.ModuleName.textColor = UIColor.redColor()
-            cell.EventTime.textColor = UIColor.blackColor()
-            cell.EventTime.font = UIFont(name:"HelveticaNeue Bold", size: (cell.EventTime?.font.pointSize)!)
-            cell.EventDetails.textColor = UIColor.darkGrayColor()
-        }
+        //        else{
+        //            //todo color and bold
+        //            cell.ModuleName.textColor = UIColor.redColor()
+        //            cell.EventTime.textColor = UIColor.blackColor()
+        //            cell.EventTime.font = UIFont(name:"HelveticaNeue Bold", size: (cell.EventTime?.font.pointSize)!)
+        //            cell.EventDetails.textColor = UIColor.darkGrayColor()
+        //        }
         
         return cell
     }

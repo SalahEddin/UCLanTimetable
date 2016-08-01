@@ -7,19 +7,10 @@
 //
 
 import Foundation
-import Alamofire
 import Keychain
 import SystemConfiguration
 
-public class APIs{
-    public static let ENDPOINT = "https://cyprustimetable.uclan.ac.uk/TimetableAPI/TimetableWebService.asmx/"
-    public static let SecurityToken = "e84e281d4c9b46f8a30e4a2fd9aa7058"
-    public static let listRooms = "app_getRooms"
-    public static let login = "app_login"
-    public static let getTimetableByStudent = "app_getTimetableByStudent"
-    public static let getTimetableByRoom = "app_getTimetableByRoom"
-    public static let getNotifications = "app_getNotificationsByUser"
-}
+
 
 public class KEYS{
     public static let user = "user"
@@ -29,51 +20,11 @@ public class KEYS{
 
 public class Misc {
     
-    public enum SESSION_TYPE {  case EXAM
-        case NOTIFICATION
-        case ALL}
-    public enum USER_TYPE {  case EXAM
+    public enum USER_TYPE {
+        case EXAM
         case STUDENT
+        case LECTURER
         case ROOM}
-    
-    // MARK: Notifications
-    
-    static func markAsRead(){}
-    static func markAsUnread(){}
-    static func markAsArchived(){}
-    static func markAsDeleted(){}
-    
-    static func isNotificationRead(status: Int) -> Bool {
-        return false
-    }
-    
-    static func isNotificationDeleted(status: Int) -> Bool {
-        return false
-    }
-    
-    static func isNotificationArchived(status: Int) -> Bool {
-        return false
-    }
-    
-    static func loadNotifications(userId: String,callback: (([Notification])->Void )){
-        var notifs: [Notification] = []
-        let params: [String : AnyObject] = ["securityToken": APIs.SecurityToken,"USER_ID": userId]
-        let APICall = APIs.ENDPOINT + APIs.getNotifications
-        
-        Alamofire.request(.GET, APICall, parameters: params)
-            .responseJSON{  response in
-                print(response.result)   // result of response serialization
-                if let JSON = response.result.value as? [[String: AnyObject]] {
-                    for item in JSON{
-                        notifs += [Notification(dictionary: item)!]
-                    }
-                }
-                //print("got \(sessions.count)")
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    callback(notifs)
-                })
-        }
-    }
     
     // MARK: IO
     static func loadUser() -> AuthenticatedUser? {
@@ -114,119 +65,8 @@ public class Misc {
         }
         return success
     }
-    // MARK: API
-    static func hasDatePassed(session: TimeTableSession) -> Bool {
-        // current date time
-        let today = NSDate()
-        // session datetime
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
-        let date = dateFormatter.dateFromString("\(session.sESSION_DATE_FORMATTED!) \(session.eND_TIME_FORMATTED!)")
-        return today.compare(date!) == NSComparisonResult.OrderedDescending // today after date
-    }
     
-    static func isDateSame(session: TimeTableSession, CVSelected: NSDate) -> Bool {
-        // current date time
-        //        let commonDateFormatter = NSDateFormatter()
-        //        commonDateFormatter.dateFormat = "yyyy-MM-dd"
-        //        let selected = commonDateFormatter.dateFromString(CVSelected)!
-        let selected = CVSelected
-        // session datetime
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        let date = dateFormatter.dateFromString("\(session.sESSION_DATE_FORMATTED!)")
-        return selected.compare(date!) == NSComparisonResult.OrderedSame // today after date
-    }
     
-    static func listRooms(callback: (([Room])->Void )){
-        var rooms: [Room] = []
-        let params: [String : AnyObject] = ["securityToken": APIs.SecurityToken]
-        let APICall = APIs.ENDPOINT + APIs.listRooms
-        Alamofire.request(.GET, APICall, parameters: params)
-            .responseJSON{  response in
-                print(response.result)   // result of response serialization
-                if let JSON = response.result.value as? [[String: AnyObject]] {
-                    for item in JSON{
-                        rooms += [Room(dictionary: item)!]
-                    }
-                }
-                //print("got \(sessions.count)")
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    callback(rooms)
-                })
-        }
-        
-    }
-    
-    static func getUserLogin(username: String, pass: String, callback: ((AuthenticatedUser?)->Void)){
-        var user: AuthenticatedUser? = nil
-        //todo hash password, conf
-        let params: [String : AnyObject] = [
-            "securityToken": APIs.SecurityToken,
-            "USERNAME": username,
-            "PASSWORD":pass]
-        let APICall = APIs.ENDPOINT + APIs.login
-        
-        Alamofire.request(.GET, APICall, parameters: params)
-            .responseJSON{  response in
-                print(response.result)   // result of response serialization
-                if let JSON = response.result.value as? [String: AnyObject] {
-                    user = AuthenticatedUser(dictionary: JSON)
-                    
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        callback(user)
-                    })
-                }
-                else{
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        callback(nil)
-                    })
-                }
-        }
-    }
-    
-    static func loadTimetableSessions(id: String, startDate: String, endDate: String, type: SESSION_TYPE = .ALL, by: USER_TYPE = .STUDENT, callback: ([TimeTableSession])->Void ){
-        //clear array
-        var sessions: [TimeTableSession] = []
-        
-        // student
-        var params: [String : AnyObject] = [
-            "securityToken": APIs.SecurityToken,
-            "STUDENT_ID": id,
-            "START_DATE_TIME":startDate,
-            "END_DATE_TIME":endDate]
-        var APICall = APIs.ENDPOINT + APIs.getTimetableByStudent
-        // if room
-        if(by == USER_TYPE.ROOM){
-            APICall = APIs.ENDPOINT + APIs.getTimetableByRoom
-            params = [
-                "securityToken": APIs.SecurityToken,
-                "ROOM_ID": id,
-                "START_DATE_TIME":startDate,
-                "END_DATE_TIME":endDate]
-        }
-        
-        
-        Alamofire.request(.GET, APICall, parameters: (params))
-            .responseJSON { response in
-                
-                print(response.result)   // result of response serialization
-                if let JSON = response.result.value as? [[String: AnyObject]] {
-                    for item in JSON{
-                        if(type == .EXAM && item["SESSION_DESCRIPTION"]!.isEqual("Examination") ){
-                            sessions += [TimeTableSession(dictionary: item)!]
-                        }
-                        else if(type == .ALL){
-                            sessions += [TimeTableSession(dictionary: item)!]
-                        }
-                    }
-                    //print("got \(sessions.count)")
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        callback(sessions)
-                    })
-                }
-        }
-    }
 }
 
 public class Reachability {
