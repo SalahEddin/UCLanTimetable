@@ -62,7 +62,6 @@
 		4ED004461D115110007AAD57 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED004451D115110007AAD57 /* logo.png */; };
 		4ED004491D11871C007AAD57 /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED004481D11871C007AAD57 /* IndexViewController.swift */; };
 		4ED393761D4A7BDD004ABBFD /* UCLanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED393751D4A7BDD004ABBFD /* UCLanAPI.swift */; };
-		4ED393781D4A94FD004ABBFD /* SingleNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED393771D4A94FD004ABBFD /* SingleNotificationViewController.swift */; };
 		4ED3937A1D4B1418004ABBFD /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED393791D4B1418004ABBFD /* DateUtils.swift */; };
 		7C989DC21C322B168BFB2DB5 /* Pods_UCLanTimetable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C7C02EBDF2563D53ED5993 /* Pods_UCLanTimetable.framework */; };
 /* End PBXBuildFile section */
@@ -127,7 +126,6 @@
 		4ED004451D115110007AAD57 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		4ED004481D11871C007AAD57 /* IndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
 		4ED393751D4A7BDD004ABBFD /* UCLanAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UCLanAPI.swift; sourceTree = "<group>"; };
-		4ED393771D4A94FD004ABBFD /* SingleNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleNotificationViewController.swift; sourceTree = "<group>"; };
 		4ED393791D4B1418004ABBFD /* DateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		5DB178B9217185C1375DA5BD /* Pods-UCLanTimetable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UCLanTimetable.release.xcconfig"; path = "Pods/Target Support Files/Pods-UCLanTimetable/Pods-UCLanTimetable.release.xcconfig"; sourceTree = "<group>"; };
 		D6C7C02EBDF2563D53ED5993 /* Pods_UCLanTimetable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UCLanTimetable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,7 +194,6 @@
 				4E4809441D49BF3900799BD9 /* TabBarViewController.swift */,
 				4ED004301D114D60007AAD57 /* ViewController.swift */,
 				4E22B87E1D24F69F00A9D5AB /* TableCells */,
-				4ED393771D4A94FD004ABBFD /* SingleNotificationViewController.swift */,
 				4E7993821D4F5F710006D3F0 /* DetailedNotificationViewController.swift */,
 			);
 			name = Views;
@@ -442,7 +439,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E22B87D1D24F69300A9D5AB /* ExamTableViewController.swift in Sources */,
-				4ED393781D4A94FD004ABBFD /* SingleNotificationViewController.swift in Sources */,
 				4E48094F1D4A332700799BD9 /* EventAPI.swift in Sources */,
 				4E5920CC1D3F90C60029DDE6 /* Misc.swift in Sources */,
 				4E48092F1D48EE5300799BD9 /* AboutViewController.swift in Sources */,

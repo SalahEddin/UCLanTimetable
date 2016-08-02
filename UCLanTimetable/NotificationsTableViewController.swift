@@ -17,6 +17,9 @@ class NotificationsViewController: UIViewController {
     var notifications:[Notification] = []
     var allNotifications:[Notification] = []
     var pullToRefreshControl: UIRefreshControl!
+    
+    let user_id = Misc.loadUser()!.uSER_ID!
+    
     // passed
     var notificationParam: Notification? = nil
     override func viewDidLoad() {
@@ -32,7 +35,10 @@ class NotificationsViewController: UIViewController {
         pullToRefreshControl.addTarget(self, action: #selector(self.refresh(_:)), forControlEvents: .ValueChanged)
         self.notifsTableView.addSubview(pullToRefreshControl)
         
-        let user_id = Misc.loadUser()!.uSER_ID!
+        reloadNotifications()
+    }
+    
+    func reloadNotifications(){
         NotificationAPI.loadNotifications(String(user_id), callback: notifsCallback)
     }
     
@@ -51,8 +57,7 @@ class NotificationsViewController: UIViewController {
     
     func refresh(sender:AnyObject) {
         // Code to refresh table view
-        
-        self.notifsTableView.reloadData()
+        reloadNotifications()
         pullToRefreshControl.endRefreshing()
     }
     
@@ -81,10 +86,8 @@ class NotificationsViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "NotifCellSegue" {
-            let dest = segue.destinationViewController as! DetailedNotificationViewController
-            dest.notification = notificationParam
-            // Setup new view controller
-            print(notificationParam)
+            let DestViewController = segue.destinationViewController as! DetailedNotificationViewController
+            DestViewController.notification = notificationParam!
         }
     }
 }
@@ -107,26 +110,26 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
             cell = NotificationTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: reuseIdentifier)
         }
         // cell!.delegate = self //optional
-        
+        let rowItem = notifications[indexPath.row]
         
         ///////////////////////////////////
         //UI Binding
         ////////////
         
         // Configure the cell...
-        let publishDate =  DateUtils.extractTimestamp(notifications[indexPath.row].pUBLISH_DATE!)
+        let publishDate =  NSDate(jsonDate: rowItem.pUBLISH_DATE!)!
         // format displayed date
-        let df = NSDateFormatter(); df.dateFormat = "dd MMM"
+        let df = NSDateFormatter(); df.dateFormat = "dd MMMM, yyyy"
         
         cell!.NotiDateLabel.text = df.stringFromDate(publishDate)
-        cell!.NotiTypeLabel.text = notifications[indexPath.row].nOTIFICATION_TYPE_NAME
-        cell!.NotiTitleLabel.text = notifications[indexPath.row].nOTIFICATION_TITLE
+        cell!.NotiTypeLabel.text = rowItem.nOTIFICATION_TYPE_NAME
+        cell!.NotiTitleLabel.text = rowItem.nOTIFICATION_TITLE
         
         //configure left buttons (Delete)
         let deleteButton = MGSwipeButton(title: "Delete", icon: UIImage(named:"delete_filled.png"), backgroundColor: UIColor(netHex: 0xc0392b), callback: {
             (sender: MGSwipeTableCell!) -> Bool in
             print("Convenience callback for swipe buttons!")
-            NotificationAPI.changeStatus(self.notifications[indexPath.row].nOTIFICATION_ID!, newStatus: NotificationAPI.Status.DELETED,callback: self.statusChangedCallback)
+            NotificationAPI.changeStatus(rowItem.nOTIFICATION_ID!, newStatus: NotificationAPI.Status.DELETED,callback: self.statusChangedCallback)
             return true
         })
         cell!.leftButtons = [deleteButton]
@@ -135,14 +138,14 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
         //configure right buttons (Archive & Mark as read)
         var rightButtons: [MGSwipeButton] = []
         
-        let isRead = notifications[indexPath.row].isRead
-        let isArchived = notifications[indexPath.row].isArchived
+        let isRead = rowItem.isRead
+        let isArchived = rowItem.isArchived
         
         
         if(isArchived){
             let archiveButton = MGSwipeButton(title: "Unarchive", backgroundColor: UIColor(netHex: 0x95a5a6), callback: {
                 (sender: MGSwipeTableCell!) -> Bool in
-                NotificationAPI.changeStatus(self.notifications[indexPath.row].nOTIFICATION_ID!, newStatus: NotificationAPI.Status.UNREAD,callback: self.statusChangedCallback)
+                NotificationAPI.changeStatus(rowItem.nOTIFICATION_ID!, newStatus: NotificationAPI.Status.UNREAD,callback: self.statusChangedCallback)
                 print("Convenience callback for swipe buttons!")
                 return true
             })
@@ -152,7 +155,7 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
         else{
             let archiveButton = MGSwipeButton(title: "Archive", backgroundColor: UIColor(netHex: 0x95a5a6), callback: {
                 (sender: MGSwipeTableCell!) -> Bool in
-                NotificationAPI.changeStatus(self.notifications[indexPath.row].nOTIFICATION_ID!, newStatus: NotificationAPI.Status.ARCHIVED,callback: self.statusChangedCallback)
+                NotificationAPI.changeStatus(rowItem.nOTIFICATION_ID!, newStatus: NotificationAPI.Status.ARCHIVED,callback: self.statusChangedCallback)
                 print("Convenience callback for swipe buttons!")
                 return true
             })
@@ -161,7 +164,7 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
             if(isRead){
                 let markButton = MGSwipeButton(title: "Mark as unread", backgroundColor: UIColor(netHex: 0x2980b9), callback: {
                     (sender: MGSwipeTableCell!) -> Bool in
-                    NotificationAPI.changeStatus(self.notifications[indexPath.row].nOTIFICATION_ID!, newStatus: NotificationAPI.Status.UNREAD,callback: self.statusChangedCallback)
+                    NotificationAPI.changeStatus(rowItem.nOTIFICATION_ID!, newStatus: NotificationAPI.Status.UNREAD,callback: self.statusChangedCallback)
                     print("Convenience callback for swipe buttons!")
                     return true
                 })
@@ -172,7 +175,7 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
                 // mark as read
                 let markButton = MGSwipeButton(title: "Mark as read", backgroundColor: UIColor(netHex: 0x2980b9), callback: {
                     (sender: MGSwipeTableCell!) -> Bool in
-                    NotificationAPI.changeStatus(self.notifications[indexPath.row].nOTIFICATION_ID!, newStatus: NotificationAPI.Status.READ,callback: self.statusChangedCallback)
+                    NotificationAPI.changeStatus(rowItem.nOTIFICATION_ID!, newStatus: NotificationAPI.Status.READ,callback: self.statusChangedCallback)
                     print("Convenience callback for swipe buttons!")
                     return true
                 })
@@ -180,6 +183,23 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
             }
         }
         
+        if rowItem.iMPORTANT! == 0 {
+            cell!.NotiLegendView.hidden = true
+        }
+        
+        rowItem.calculateStatus()
+        if rowItem.isRead || rowItem.isArchived {
+            cell!.NotiTitleLabel.font = UIFont(name:"HelveticaNeue", size: (cell!.NotiTitleLabel?.font.pointSize)!)
+            cell!.NotiDateLabel.font = UIFont(name:"HelveticaNeue", size: (cell!.NotiDateLabel?.font.pointSize)!)
+            cell!.NotiDateLabel.textColor = UIColor.lightGrayColor()
+            cell!.NotiTypeLabel.textColor = UIColor.lightGrayColor()
+        }
+        else{
+            cell!.NotiTitleLabel.font = UIFont(name:"HelveticaNeue-Bold", size: (cell!.NotiTitleLabel?.font.pointSize)!)
+            cell!.NotiDateLabel.font = UIFont(name:"HelveticaNeue-Bold", size: (cell!.NotiDateLabel?.font.pointSize)!)
+            cell!.NotiDateLabel.textColor = UIColor(netHex: 0xc0392b)
+            cell!.NotiTypeLabel.textColor = UIColor.darkGrayColor()
+        }
         
         cell!.rightButtons = rightButtons
         cell!.rightSwipeSettings.transition = MGSwipeTransition.Border
@@ -190,8 +210,11 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
         return cell!
     }
     
+    override func viewWillAppear(animated: Bool) {
+        reloadNotifications()
+    }
     func statusChangedCallback() {
-        // reload Notifications todo
+        reloadNotifications()
     }
 }
 

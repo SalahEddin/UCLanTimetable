@@ -46,11 +46,30 @@ public class NotificationAPI {
         
         Alamofire.request(.GET, APICall, parameters: params)
             .responseJSON{  response in
+                print(response.result)
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     callback()
                 })
         }
     }
+    
+    static func getNotification(id: Int, callback: (Notification)->Void){
+        let params: [String : AnyObject] = ["securityToken": UCLanAPI.SecurityToken,"NOTIFICATION_ID": id]
+        let APICall = UCLanAPI.ENDPOINT + UCLanAPI.getNotificationById
+        
+        Alamofire.request(.GET, APICall, parameters: params)
+            .responseJSON{  response in
+                print(response.result)   // result of response serialization
+                if let JSON = response.result.value as? [String: AnyObject] {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        callback(Notification(dictionary: JSON)!)
+                    })
+                    
+                }
+        }
+        
+    }
+    
     static func loadNotifications(userId: String,callback: (([Notification])->Void )){
         var notifs: [Notification] = []
         let params: [String : AnyObject] = ["securityToken": UCLanAPI.SecurityToken,"USER_ID": userId]

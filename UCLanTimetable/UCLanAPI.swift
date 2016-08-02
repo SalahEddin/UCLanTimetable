@@ -19,4 +19,5 @@ public class UCLanAPI {
     public static let getUpcomingExams = "app_getUpcomingExams"
     public static let getNotifications = "app_getNotificationsByUser"
     public static let updateNotificationsStatus = "app_updateNotificationStatus"
+    public static let getNotificationById = "app_getNotification"
 }
