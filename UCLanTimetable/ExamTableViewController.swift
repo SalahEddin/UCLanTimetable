@@ -65,7 +65,6 @@ class ExamTableViewController: UITableViewController {
         }
         else{
             // offline mode
-            print("disconnected")
             
             //clear dataset
             CalendarEvents.removeAll()

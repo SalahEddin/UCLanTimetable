@@ -12,8 +12,6 @@ import Alamofire
 
 class IndexViewController: UIViewController {
     
-    let offlineTimetableStorageKey = "timetable"
-    
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var calView: CVCalendarView!
     @IBOutlet weak var eventsTableView: UITableView!
@@ -61,6 +59,7 @@ class IndexViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Continue in Offline Mode", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
+        
         // set to today
         selectedDateLabel.text = DateUtils.FormatCalendarChoiceDate(NSDate())
         
@@ -80,7 +79,7 @@ class IndexViewController: UIViewController {
             let id = String(user.aCCOUNT_ID!)
             
             var userType = Misc.USER_TYPE.LECTURER
-            if(user.aCCOUNT_TYPE_ID==5){
+            if(user.aCCOUNT_TYPE_ID==KEYS.studentTypeId){
                 userType = Misc.USER_TYPE.STUDENT
             }
             
@@ -95,7 +94,7 @@ class IndexViewController: UIViewController {
             
             // load saved sessions once
             if(OfflineCalendarEvents == nil){
-                let timetableDataDict = NSUserDefaults.standardUserDefaults().objectForKey(offlineTimetableStorageKey) as? NSData
+                let timetableDataDict = NSUserDefaults.standardUserDefaults().objectForKey(KEYS.offlineTimetableStorageKey) as? NSData
                 
                 if timetableDataDict != nil{
                     dataSavedAvailable = true
@@ -114,8 +113,6 @@ class IndexViewController: UIViewController {
                         CalendarEvents += [item]
                     }
                 }
-                
-                
             }
             else{
                 // No previous data found
@@ -132,7 +129,7 @@ class IndexViewController: UIViewController {
                 self.presentViewController(alert, animated: true, completion: nil)
             }
             
-            // stop refreshing if it is.
+            // stop UI refreshing if it is.
             if(pullToRefreshControl.refreshing){
                 pullToRefreshControl.endRefreshing()
             }
@@ -156,27 +153,34 @@ class IndexViewController: UIViewController {
         }
         
         // after loading the day, check if the data for this period is available offline
-        let timetableDataDict = NSUserDefaults.standardUserDefaults().objectForKey(offlineTimetableStorageKey) as? NSData
-        // todo offline
-        //        if timetableDataDict == nil {
-        //            // dynamic date
-        //            let id = String(Misc.loadUser()?.aCCOUNT_ID!)
-        //
-        //            // today's date
-        //            let today = DateUtils.FormatToAPIDate(NSDate())
-        //            // after 3 months
-        //            let components: NSDateComponents = NSDateComponents()
-        //            components.setValue(3, forComponent: NSCalendarUnit.Month);
-        //            let endDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: NSDate(), options: NSCalendarOptions(rawValue: 0))
-        //            let endDateFormatted = DateUtils.FormatToAPIDate(endDate!)
-        //
-        //            var userType = Misc.USER_TYPE.LECTURER
-        //            if(user.aCCOUNT_TYPE_ID==5){
-        //                userType = Misc.USER_TYPE.STUDENT
-        //            }
-        //
-        //            EventAPI.loadTimetableSessions(id, startDate: today, endDate: endDateFormatted, by: , callback: offlineSaveCallback)
-        //        }
+        // todo check if data is very old
+        let offlineDict = NSUserDefaults.standardUserDefaults().objectForKey(KEYS.offlineTimetableStorageKey) as? NSData
+        // if not, then load it
+        if offlineDict == nil {
+           downloadForOffline()
+        }
+        
+    }
+    
+    func downloadForOffline(){
+        // today's date
+        let today = DateUtils.FormatToAPIDate(NSDate())
+        // get events till after 1 month
+        let components: NSDateComponents = NSDateComponents()
+        components.setValue(1, forComponent: NSCalendarUnit.Month);
+        let endDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: NSDate(), options: NSCalendarOptions(rawValue: 0))
+        let endDateFormatted = DateUtils.FormatToAPIDate(endDate!)
+        
+        //get user
+        let user = Misc.loadUser()!
+        let id = String(user.aCCOUNT_ID!)
+        
+        var userType = Misc.USER_TYPE.LECTURER
+        if(user.aCCOUNT_TYPE_ID==KEYS.studentTypeId){
+            userType = Misc.USER_TYPE.STUDENT
+        }
+        
+        EventAPI.loadTimetableSessions(id, startDate: today, endDate: endDateFormatted, by: userType, callback: offlineSaveCallback)
     }
     
     func offlineSaveCallback(sess: [TimeTableSession]) -> Void {
@@ -188,7 +192,7 @@ class IndexViewController: UIViewController {
         
         // store data for offline use
         let examsData = NSKeyedArchiver.archivedDataWithRootObject(sessDict)
-        NSUserDefaults.standardUserDefaults().setObject(examsData, forKey: offlineTimetableStorageKey)
+        NSUserDefaults.standardUserDefaults().setObject(examsData, forKey: KEYS.offlineTimetableStorageKey)
     }
 }
 

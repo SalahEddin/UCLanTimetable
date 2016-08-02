@@ -1165,7 +1165,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNp-hR-cpo" customClass="CVCalendarMenuView" customModule="CVCalendar">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNp-hR-cpo" customClass="CVCalendarMenuView" customModule="CVCalendar">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <connections>
                                     <outlet property="menuViewDelegate" destination="Lge-sZ-uro" id="PhB-Tg-Smi"/>
@@ -1352,6 +1352,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="a4p-ry-Srj" secondAttribute="leading" id="7ZZ-WU-PFq"/>
                             <constraint firstItem="I2H-lu-ZfW" firstAttribute="leading" secondItem="hXG-Wk-LVu" secondAttribute="leading" id="8C8-EX-RzO"/>
                             <constraint firstItem="i8R-ch-auR" firstAttribute="top" secondItem="hXG-Wk-LVu" secondAttribute="bottom" constant="8" symbolic="YES" id="Bpx-l7-wt7"/>
+                            <constraint firstItem="a4p-ry-Srj" firstAttribute="width" secondItem="YNp-hR-cpo" secondAttribute="width" id="CLS-Tx-QXv"/>
                             <constraint firstItem="I2H-lu-ZfW" firstAttribute="top" secondItem="a4p-ry-Srj" secondAttribute="bottom" id="EZn-iL-hzE">
                                 <variation key="heightClass=regular-widthClass=compact" constant="17.5"/>
                             </constraint>
@@ -1387,15 +1388,6 @@
                                 <exclude reference="hXG-Wk-LVu"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Bpx-l7-wt7"/>
-                                <exclude reference="0YS-rL-tOY"/>
-                                <exclude reference="56Q-wj-5h6"/>
-                                <exclude reference="8C8-EX-RzO"/>
-                                <exclude reference="EZn-iL-hzE"/>
-                                <exclude reference="Icj-mY-Fmq"/>
-                                <exclude reference="ZSF-Gf-diT"/>
-                                <exclude reference="fcu-ap-7cF"/>
-                                <exclude reference="jbc-hc-B68"/>
                                 <exclude reference="0RI-L7-giG"/>
                                 <exclude reference="77l-Aw-yPG"/>
                                 <exclude reference="He3-Bq-rqW"/>
@@ -1405,6 +1397,7 @@
                                 <exclude reference="Sxj-ZV-awR"/>
                                 <exclude reference="vAH-h9-beb"/>
                                 <exclude reference="7ZZ-WU-PFq"/>
+                                <exclude reference="CLS-Tx-QXv"/>
                                 <exclude reference="N5A-5c-EXb"/>
                                 <exclude reference="R3N-Kx-fjx"/>
                                 <exclude reference="Wbz-DS-Vj0"/>
@@ -1414,8 +1407,17 @@
                                 <exclude reference="ru4-Vo-Hww"/>
                                 <exclude reference="u6V-x9-gOy"/>
                                 <exclude reference="yAi-Zi-GAN"/>
+                                <exclude reference="0YS-rL-tOY"/>
+                                <exclude reference="56Q-wj-5h6"/>
+                                <exclude reference="8C8-EX-RzO"/>
+                                <exclude reference="EZn-iL-hzE"/>
+                                <exclude reference="Icj-mY-Fmq"/>
+                                <exclude reference="ZSF-Gf-diT"/>
+                                <exclude reference="fcu-ap-7cF"/>
+                                <exclude reference="jbc-hc-B68"/>
                                 <exclude reference="Xit-tb-qrL"/>
                                 <exclude reference="vHx-UZ-P4I"/>
+                                <exclude reference="Bpx-l7-wt7"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1427,15 +1429,6 @@
                                 <include reference="hXG-Wk-LVu"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Bpx-l7-wt7"/>
-                                <include reference="0YS-rL-tOY"/>
-                                <include reference="56Q-wj-5h6"/>
-                                <include reference="8C8-EX-RzO"/>
-                                <include reference="EZn-iL-hzE"/>
-                                <include reference="Icj-mY-Fmq"/>
-                                <include reference="ZSF-Gf-diT"/>
-                                <include reference="fcu-ap-7cF"/>
-                                <exclude reference="jbc-hc-B68"/>
                                 <include reference="0RI-L7-giG"/>
                                 <include reference="77l-Aw-yPG"/>
                                 <include reference="He3-Bq-rqW"/>
@@ -1445,6 +1438,7 @@
                                 <include reference="Sxj-ZV-awR"/>
                                 <include reference="vAH-h9-beb"/>
                                 <include reference="7ZZ-WU-PFq"/>
+                                <include reference="CLS-Tx-QXv"/>
                                 <include reference="N5A-5c-EXb"/>
                                 <include reference="R3N-Kx-fjx"/>
                                 <include reference="Wbz-DS-Vj0"/>
@@ -1454,8 +1448,17 @@
                                 <exclude reference="ru4-Vo-Hww"/>
                                 <include reference="u6V-x9-gOy"/>
                                 <include reference="yAi-Zi-GAN"/>
+                                <include reference="0YS-rL-tOY"/>
+                                <include reference="56Q-wj-5h6"/>
+                                <include reference="8C8-EX-RzO"/>
+                                <include reference="EZn-iL-hzE"/>
+                                <include reference="Icj-mY-Fmq"/>
+                                <include reference="ZSF-Gf-diT"/>
+                                <include reference="fcu-ap-7cF"/>
+                                <exclude reference="jbc-hc-B68"/>
                                 <include reference="Xit-tb-qrL"/>
                                 <include reference="vHx-UZ-P4I"/>
+                                <include reference="Bpx-l7-wt7"/>
                             </mask>
                         </variation>
                     </view>
@@ -2688,7 +2691,7 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="notificationCell" id="AQ5-Of-YyB" customClass="NotificationTableViewCell" customModule="UCLanTimetable" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AQ5-Of-YyB" id="pnB-nu-FGe">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="136.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="81.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Change" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HE6-tx-SoS">

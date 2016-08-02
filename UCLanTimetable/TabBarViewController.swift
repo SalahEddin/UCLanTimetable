@@ -14,39 +14,33 @@ class TabBarViewController: UITabBarController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        let user = Misc.loadUser()
-        if user?.aCCOUNT_TYPE_ID == 5{
-            if var tabBarController = self.viewControllers {
-                let indexToRemove = 1
-                if indexToRemove < tabBarController.count {
-                    tabBarController.removeAtIndex(indexToRemove)
-                    self.setViewControllers(tabBarController, animated: false)
-                }
-            }
-        }
-        else{
-            if var tabBarController = self.viewControllers {
-                let indexToRemove2 = 3
-                if indexToRemove2 < tabBarController.count {
-                    tabBarController.removeAtIndex(indexToRemove2)
-                    self.setViewControllers(tabBarController, animated: false)
-                }
-                let indexToRemove = 2
-                if indexToRemove < tabBarController.count {
-                    tabBarController.removeAtIndex(indexToRemove)
-                    self.setViewControllers(tabBarController, animated: false)
-                }
-            }
-        }
         
+        // todo screwing up the UI after (removes alerts)
+//        let user = Misc.loadUser()
+//        if user?.aCCOUNT_TYPE_ID == KEYS.studentTypeId{
+//            if var tabBarController = self.viewControllers {
+//                let indexToRemove = 1
+//                if indexToRemove < tabBarController.count {
+//                    tabBarController.removeAtIndex(indexToRemove)
+//                    self.setViewControllers(tabBarController, animated: false)
+//                }
+//            }
+//        }
+//        else{
+//            if var tabBarController = self.viewControllers {
+//                let indexToRemove2 = 3
+//                if indexToRemove2 < tabBarController.count {
+//                    tabBarController.removeAtIndex(indexToRemove2)
+//                    self.setViewControllers(tabBarController, animated: false)
+//                }
+//                let indexToRemove = 2
+//                if indexToRemove < tabBarController.count {
+//                    tabBarController.removeAtIndex(indexToRemove)
+//                    self.setViewControllers(tabBarController, animated: false)
+//                }
+//            }
+//        }
         
-        
-        //        if  let arrayOfTabBarItems = self.tabBar.items as! AnyObject as? NSArray,tabBarItem = arrayOfTabBarItems[1] as? UITabBarItem {
-        //            tabBarItem.enabled = false
-        //        }
-        //        let tabBarViewControllers: NSMutableArray = NSMutableArray(array: (self.tabBarController?.viewControllers)!)
-        //        tabBarViewControllers.removeObjectAtIndex(1)
-        //        tabBarController?.setViewControllers((self.tabBarController?.viewControllers)!, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

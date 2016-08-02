@@ -142,7 +142,7 @@ extension ViewController: UITextFieldDelegate {
             }
             
             // depending on user, hide elements
-            if(user?.aCCOUNT_TYPE_ID == 5){
+            if(user?.aCCOUNT_TYPE_ID == KEYS.studentTypeId){
                 // hide room
             }
             else{

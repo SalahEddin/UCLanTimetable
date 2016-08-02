@@ -16,6 +16,9 @@ public class KEYS{
     public static let user = "user"
     public static let username = "username"
     public static let pass = "pass"
+    public static let offlineTimetableStorageKey = "timetable"
+    public static let offlineExamStorageKey = "exams"
+    public static let studentTypeId = 5
 }
 
 public class Misc {
