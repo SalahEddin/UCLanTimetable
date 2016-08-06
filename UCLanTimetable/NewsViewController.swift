@@ -1,14 +1,14 @@
 //
-//  DashboardViewController.swift
+//  NewsViewController.swift
 //  UCLanTimetable
 //
-//  Created by Salah Eddin Alshaal on 23/06/16.
+//  Created by Salah Eddin Alshaal on 03/08/16.
 //  Copyright © 2016 Salah Eddin Alshaal. All rights reserved.
 //
 
 import UIKit
 
-class DashboardViewController: UIViewController {
+class NewsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

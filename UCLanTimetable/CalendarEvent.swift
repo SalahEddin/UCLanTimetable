@@ -17,8 +17,8 @@ class CalendarEvent {
     var Details: String
     var Link: NSURL
     var NotificationType: String
-    
-    internal init(mName:String, mCode:String ,room:String, lec:String, time:String){
+
+    internal init(mName: String, mCode: String, room: String, lec: String, time: String) {
         ModuleName = mName
         ModuleCode = mCode
         Lecturer  = lec
@@ -28,8 +28,8 @@ class CalendarEvent {
         NotificationType = ""
         Details = ""
     }
-    
-    internal init(mName:String, mCode:String ,room:String, lec:String, time:String, details: String, notificationType: String, link: NSURL){
+
+    internal init(mName: String, mCode: String, room: String, lec: String, time: String, details: String, notificationType: String, link: NSURL) {
         ModuleName = mName
         ModuleCode = mCode
         Lecturer  = lec
@@ -39,8 +39,8 @@ class CalendarEvent {
         NotificationType = notificationType
         Details = details
     }
-    
-    internal init(){
+
+    internal init() {
         ModuleName = ""
         ModuleCode = ""
         Lecturer  = ""

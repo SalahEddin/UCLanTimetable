@@ -25,59 +25,59 @@ class ContactTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     override func tableView(tableView: UITableView,
                             didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+
         print(indexPath.section)
         print(indexPath.row)
-        
+
         if indexPath.section == 0 && indexPath.row == 0 {
-            let phone = "telprompt://0035724694000";
-            let url:NSURL = NSURL(string:phone)!;
-            UIApplication.sharedApplication().openURL(url);
+            let phone = "telprompt://0035724694000"
+            let url: NSURL = NSURL(string:phone)!
+            UIApplication.sharedApplication().openURL(url)
         }
         if indexPath.section == 0 && indexPath.row == 1 {
-            let phone = "telprompt://0035724694026";
-            let url:NSURL = NSURL(string:phone)!;
-            UIApplication.sharedApplication().openURL(url);
+            let phone = "telprompt://0035724694026"
+            let url: NSURL = NSURL(string:phone)!
+            UIApplication.sharedApplication().openURL(url)
         }
         if indexPath.section == 0 && indexPath.row == 2 {
 //            let toEmail = "info@uclancyprus.ac.cy"
 //            let subject = "Test email".stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
 //            let body = "Just testing ...".stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
-            
+
             let email = "info@uclancyprus.ac.cy"
             let url = NSURL(string: "mailto:\(email)")
             UIApplication.sharedApplication().openURL(url!)
         }
-        
-        if indexPath.section == 1{
+
+        if indexPath.section == 1 {
             let theLatitude = 33.6952947, theLongitude = 35.0081562
-            let coordinate = CLLocationCoordinate2DMake(theLongitude,theLatitude)
+            let coordinate = CLLocationCoordinate2DMake(theLongitude, theLatitude)
             let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
             mapItem.name = "UCLan Cyprus"
             mapItem.openInMapsWithLaunchOptions([MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
         }
-        
+
         if indexPath.section == 2 && indexPath.row == 0 {
-            let phone = "http://www.facebook.com/uclancyprus";
-            let url:NSURL = NSURL(string:phone)!;
-            UIApplication.sharedApplication().openURL(url);
+            let phone = "http://www.facebook.com/uclancyprus"
+            let url: NSURL = NSURL(string:phone)!
+            UIApplication.sharedApplication().openURL(url)
         }
         if indexPath.section == 2 && indexPath.row == 2 {
-            let phone = "https://twitter.com/uclancyprus";
-            let url:NSURL = NSURL(string:phone)!;
-            UIApplication.sharedApplication().openURL(url);
+            let phone = "https://twitter.com/uclancyprus"
+            let url: NSURL = NSURL(string:phone)!
+            UIApplication.sharedApplication().openURL(url)
         }
         if indexPath.section == 2 && indexPath.row == 1 {
-            let phone = "https://www.instagram.com/uclancyprus/";
-            let url:NSURL = NSURL(string:phone)!;
-            UIApplication.sharedApplication().openURL(url);
+            let phone = "https://www.instagram.com/uclancyprus/"
+            let url: NSURL = NSURL(string:phone)!
+            UIApplication.sharedApplication().openURL(url)
         }
-        
+
     }
-    
+
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
@@ -104,7 +104,7 @@ class ContactTableViewController: UITableViewController {
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     */
 

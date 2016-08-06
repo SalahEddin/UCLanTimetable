@@ -11,69 +11,68 @@ import Alamofire
 
 class ExamTableViewController: UITableViewController {
     let offlineExamStorageKey = "exams"
-    var CalendarEvents:[TimeTableSession] = []
-    var OfflineCalendarEvents:[TimeTableSession]? = nil
+    var CalendarEvents: [TimeTableSession] = []
+    var OfflineCalendarEvents: [TimeTableSession]? = nil
     var dataSavedAvailable = false
     var pullToRefreshControl: UIRefreshControl!
-    
+
     var today = NSDate()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let tabBarHeight = self.tabBarController?.tabBar.bounds.height
         self.edgesForExtendedLayout = UIRectEdge.All
         self.tableView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: tabBarHeight!, right: 0.0)
-        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        
+
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
+
         pullToRefreshControl = UIRefreshControl()
         pullToRefreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
         pullToRefreshControl.addTarget(self, action: #selector(self.refresh(_:)), forControlEvents: .ValueChanged)
         self.tableView.addSubview(pullToRefreshControl)
-        
+
         reloadExams()
     }
     func callback(sess: [TimeTableSession]) -> Void {
         self.CalendarEvents = sess
         self.pullToRefreshControl.endRefreshing()
         self.tableView.reloadData()
-        
-        var sessDict : [NSDictionary] = []
-        
+
+        var sessDict: [NSDictionary] = []
+
         for item in sess {
             sessDict += [item.dictionaryRepresentation()]
         }
-        
+
         // store data for offline use
         let examsData = NSKeyedArchiver.archivedDataWithRootObject(sessDict)
         NSUserDefaults.standardUserDefaults().setObject(examsData, forKey: offlineExamStorageKey)
     }
-    
-    
-    func reloadExams(){
+
+
+    func reloadExams() {
         // Code to refresh table view
-        if(Reachability.isConnectedToNetwork()){
+        if Reachability.isConnectedToNetwork() {
             // load user id
             let id = String(Misc.loadUser()!.aCCOUNT_ID!)
             // load events
             EventAPI.loadTimetableSessions(id, by: Misc.USER_TYPE.EXAM, callback: callback)
-        }
-        else{
+        } else {
             // offline mode
-            
+
             //clear dataset
             CalendarEvents.removeAll()
-            
+
             // load saved sessions once
-            if(OfflineCalendarEvents == nil){
+            if OfflineCalendarEvents == nil {
                 let timetableDataDict = NSUserDefaults.standardUserDefaults().objectForKey(offlineExamStorageKey) as? NSData
-                
-                if timetableDataDict != nil{
+
+                if timetableDataDict != nil {
                     dataSavedAvailable = true
                     let timetableDataDict = NSKeyedUnarchiver.unarchiveObjectWithData(timetableDataDict!) as? [NSDictionary]
                     OfflineCalendarEvents = []
@@ -82,79 +81,78 @@ class ExamTableViewController: UITableViewController {
                     }
                 }
             }
-            
-            if(dataSavedAvailable){
+
+            if dataSavedAvailable {
                 CalendarEvents = OfflineCalendarEvents!
-            }
-            else{
+            } else {
                 // No previous data found
-                
+
                 //notify user to connect online
                 let alert = UIAlertController(title: "Offline Mode", message: "couldn't load your exams, please make sure you're connected to the Internet", preferredStyle: UIAlertControllerStyle.Alert)
-                
+
                 let settingsAction = UIAlertAction(title: "Go to Network Settings", style: .Default) { (_) -> Void in
                     UIApplication.sharedApplication().openURL(NSURL(string:"prefs:root=WIFI")!)
                 }
-                
+
                 let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
                 alert.addAction(settingsAction)
                 alert.addAction(cancelAction)
-                
+
                 self.presentViewController(alert, animated: true, completion: nil)
             }
-            
+
             // stop refreshing if it is.
-            if(pullToRefreshControl.refreshing){
+            if pullToRefreshControl.refreshing {
                 pullToRefreshControl.endRefreshing()
             }
             tableView.reloadData()
         }
     }
-    
-    
-    
+
+
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     // MARK: - Table view data source
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-    
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return CalendarEvents.count
     }
-    
-    
+
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("examCell", forIndexPath: indexPath) as! ExamTableViewCell
-        
+
         // Configure the cell...
         cell.ExamTitleLabel .text = "\(CalendarEvents[indexPath.row].mODULE_CODE!) - \(CalendarEvents[indexPath.row].mODULE_NAME!)"
         // parse and format date
-        let parsedDate : NSDate = DateUtils.parseFormattedDate(CalendarEvents[indexPath.row].sESSION_DATE_FORMATTED!)
+        let parsedDate: NSDate = DateUtils.parseFormattedDate(CalendarEvents[indexPath.row].sESSION_DATE_FORMATTED!)
         let formattedDate = DateUtils.FormatExamCell(parsedDate)
         cell.ExamDateLabel.text = "\(formattedDate) \(CalendarEvents[indexPath.row].sTART_TIME_FORMATTED!)-\(CalendarEvents[indexPath.row].eND_TIME_FORMATTED!)"
         cell.ExamRoomLabel.text = "Room: \(CalendarEvents[indexPath.row].rOOM_CODE!)"
-        
-        if(DateUtils.hasDatePassed(CalendarEvents[indexPath.row])){
+
+        if DateUtils.hasDatePassed(CalendarEvents[indexPath.row]) {
             cell.ExamTitleLabel.textColor = UIColor.grayColor()
             cell.ExamDateLabel.textColor = UIColor.grayColor()
             cell.ExamDateLabel.font = UIFont(name:"HelveticaNeue", size: (cell.ExamDateLabel?.font.pointSize)!)
             cell.ExamRoomLabel.textColor = UIColor.grayColor()
-            
+
         }
         return cell
     }
-    
-    func refresh(sender:AnyObject) {
+
+    func refresh(sender: AnyObject) {
         // Code to refresh table view
         reloadExams()
     }
-    
+
 }

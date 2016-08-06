@@ -12,7 +12,7 @@ import SystemConfiguration
 
 
 
-public class KEYS{
+public class KEYS {
     public static let user = "user"
     public static let username = "username"
     public static let pass = "pass"
@@ -22,37 +22,37 @@ public class KEYS{
 }
 
 public class Misc {
-    
+
     public enum USER_TYPE {
         case EXAM
         case STUDENT
         case LECTURER
         case ROOM}
-    
+
     // MARK: IO
     static func loadUser() -> AuthenticatedUser? {
         var user: AuthenticatedUser? = nil
         let storedUserString = Keychain.load(KEYS.user)
-        if  storedUserString != nil{
+        if  storedUserString != nil {
             do {
                 let data = storedUserString!.dataUsingEncoding(NSUTF8StringEncoding)
                 // here "decoded" is the dictionary decoded from JSON data
-                let decoded = try NSJSONSerialization.JSONObjectWithData(data! , options: []) as? [String:AnyObject]
+                let decoded = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String:AnyObject]
                 user = AuthenticatedUser(dictionary: decoded!)
-                
+
             } catch let error as NSError {
                 print(error)
             }
         }
         return user
     }
-    static func saveUser(user: AuthenticatedUser?) -> Bool{
-        
+    static func saveUser(user: AuthenticatedUser?) -> Bool {
+
         var success = false
         // serialise user as JSON, then save to keychain
         let dic = user!.dictionaryRepresentation()
         var userDatastring: String? = nil
-        
+
         do {
             // here "jsonData" is the dictionary encoded in JSON data
             let jsonData = try NSJSONSerialization.dataWithJSONObject(dic, options: NSJSONWritingOptions.PrettyPrinted)
@@ -62,14 +62,14 @@ public class Misc {
                 // if saving is successful
                 success = true
             }
-            
+
         } catch let error as NSError {
             print(error)
         }
         return success
     }
-    
-    
+
+
 }
 
 public class Reachability {
@@ -95,11 +95,11 @@ extension UIColor {
         assert(red >= 0 && red <= 255, "Invalid red component")
         assert(green >= 0 && green <= 255, "Invalid green component")
         assert(blue >= 0 && blue <= 255, "Invalid blue component")
-        
+
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
     }
-    
-    convenience init(netHex:Int) {
+
+    convenience init(netHex: Int) {
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
     }
 }

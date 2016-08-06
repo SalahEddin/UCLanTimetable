@@ -1,41 +1,39 @@
 import Foundation
 
-public final class TimeTableSession:  NSObject {
-	public var sESSION_DATE_TIME_START : String?
-	public var sESSION_DATE_TIME_END : String?
-	public var tIMETABLE_ID : Int?
-	public var iNSTANCE_ID : Int?
-	public var sESSION_ID : Int?
-	public var pERIOD_ID : Int?
-	public var pERIOD_NAME : String?
-	public var mODULE_ID : Int?
-	public var mODULE_CODE : String?
-	public var mODULE_NAME : String?
-	public var sESSION_DATE : String?
-	public var sESSION_DATE_FORMATTED : String?
-	public var dAY_OF_WEEK : String?
-	public var sTART_TIME : START_TIME?
-	public var eND_TIME : END_TIME?
-	public var sTART_TIME_FORMATTED : String?
-	public var eND_TIME_FORMATTED : String?
-	public var dURATION : Int?
-	public var lECTURER_ID : Int?
-	public var lECTURER_NAME : String?
-	public var rOOM_ID : Int?
-	public var rOOM_CODE : String?
-	public var sESSION_TYPE_ID : Int?
-	public var sESSION_DESCRIPTION : String?
-	public var gROUP_NAME : String?
-	public var dESCRIPTION : String?
-	public var eVENT_TYPE : Int?
-	public var eVENT_TYPE_NAME : String?
+public final class TimeTableSession: NSObject {
+	public var sESSION_DATE_TIME_START: String?
+	public var sESSION_DATE_TIME_END: String?
+	public var tIMETABLE_ID: Int?
+	public var iNSTANCE_ID: Int?
+	public var sESSION_ID: Int?
+	public var pERIOD_ID: Int?
+	public var pERIOD_NAME: String?
+	public var mODULE_ID: Int?
+	public var mODULE_CODE: String?
+	public var mODULE_NAME: String?
+	public var sESSION_DATE: String?
+	public var sESSION_DATE_FORMATTED: String?
+	public var dAY_OF_WEEK: String?
+	public var sTART_TIME: START_TIME?
+	public var eND_TIME: END_TIME?
+	public var sTART_TIME_FORMATTED: String?
+	public var eND_TIME_FORMATTED: String?
+	public var dURATION: Int?
+	public var lECTURER_ID: Int?
+	public var lECTURER_NAME: String?
+	public var rOOM_ID: Int?
+	public var rOOM_CODE: String?
+	public var sESSION_TYPE_ID: Int?
+	public var sESSION_DESCRIPTION: String?
+	public var gROUP_NAME: String?
+	public var dESCRIPTION: String?
+	public var eVENT_TYPE: Int?
+	public var eVENT_TYPE_NAME: String?
 
 
-    public class func modelsFromDictionaryArray(array:NSArray) -> [TimeTableSession]
-    {
-        var models:[TimeTableSession] = []
-        for item in array
-        {
+    public class func modelsFromDictionaryArray(array: NSArray) -> [TimeTableSession] {
+        var models: [TimeTableSession] = []
+        for item in array {
             models.append(TimeTableSession(dictionary: item as! NSDictionary)!)
         }
         return models
@@ -43,7 +41,7 @@ public final class TimeTableSession:  NSObject {
 
 /**
     Constructs the object based on the given dictionary.
-    
+
     Sample usage:
     let json4Swift_Base = Json4Swift_Base(someDictionaryFromJSON)
 
@@ -66,8 +64,8 @@ public final class TimeTableSession:  NSObject {
 		sESSION_DATE = dictionary["SESSION_DATE"] as? String
 		sESSION_DATE_FORMATTED = dictionary["SESSION_DATE_FORMATTED"] as? String
 		dAY_OF_WEEK = dictionary["DAY_OF_WEEK"] as? String
-		if (dictionary["START_TIME"] != nil) { sTART_TIME = START_TIME(dictionary: dictionary["START_TIME"] as! NSDictionary) }
-		if (dictionary["END_TIME"] != nil) { eND_TIME = END_TIME(dictionary: dictionary["END_TIME"] as! NSDictionary) }
+		if dictionary["START_TIME"] != nil { sTART_TIME = START_TIME(dictionary: dictionary["START_TIME"] as! NSDictionary) }
+		if dictionary["END_TIME"] != nil { eND_TIME = END_TIME(dictionary: dictionary["END_TIME"] as! NSDictionary) }
 		sTART_TIME_FORMATTED = dictionary["START_TIME_FORMATTED"] as? String
 		eND_TIME_FORMATTED = dictionary["END_TIME_FORMATTED"] as? String
 		dURATION = dictionary["DURATION"] as? Int
@@ -83,10 +81,10 @@ public final class TimeTableSession:  NSObject {
 		eVENT_TYPE_NAME = dictionary["EVENT_TYPE_NAME"] as? String
 	}
 
-		
+
 /**
     Returns the dictionary representation for the current instance.
-    
+
     - returns: NSDictionary.
 */
 	public func dictionaryRepresentation() -> NSDictionary {

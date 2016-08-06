@@ -13,7 +13,7 @@ class ExamTableViewCell: UITableViewCell {
     @IBOutlet weak var ExamTitleLabel: UILabel!
     @IBOutlet weak var ExamDateLabel: UILabel!
     @IBOutlet weak var ExamRoomLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

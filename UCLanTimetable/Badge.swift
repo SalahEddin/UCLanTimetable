@@ -12,8 +12,8 @@ public class Badge {
     var badgeLink: String? = nil
     var name: String? = nil
     var desc: String? = nil
-    
-    init(link: String, badgeName: String, badgeDesc: String){
+
+    init(link: String, badgeName: String, badgeDesc: String) {
         badgeLink = link
         name = badgeName
         desc = badgeDesc

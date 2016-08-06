@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E2267171D5229FD002AD6BD /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2267161D5229FD002AD6BD /* NewsViewController.swift */; };
 		4E22B87B1D24F36700A9D5AB /* ExamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E22B87A1D24F36700A9D5AB /* ExamTableViewCell.swift */; };
 		4E22B87D1D24F69300A9D5AB /* ExamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E22B87C1D24F69300A9D5AB /* ExamTableViewController.swift */; };
 		4E22B8801D24FDFF00A9D5AB /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E22B87F1D24FDFF00A9D5AB /* NotificationTableViewCell.swift */; };
@@ -68,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		15E1932ED85CC7F21902E9FD /* Pods-UCLanTimetable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UCLanTimetable.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UCLanTimetable/Pods-UCLanTimetable.debug.xcconfig"; sourceTree = "<group>"; };
+		4E2267161D5229FD002AD6BD /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		4E22B87A1D24F36700A9D5AB /* ExamTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamTableViewCell.swift; sourceTree = "<group>"; };
 		4E22B87C1D24F69300A9D5AB /* ExamTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamTableViewController.swift; sourceTree = "<group>"; };
 		4E22B87F1D24FDFF00A9D5AB /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				4ED004301D114D60007AAD57 /* ViewController.swift */,
 				4E22B87E1D24F69F00A9D5AB /* TableCells */,
 				4E7993821D4F5F710006D3F0 /* DetailedNotificationViewController.swift */,
+				4E2267161D5229FD002AD6BD /* NewsViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				4ED004291D114D60007AAD57 /* Resources */,
 				C60C5A38E777A51AF6E5319D /* [CP] Embed Pods Frameworks */,
 				8AC482DDFFB36BBD9625FAE6 /* [CP] Copy Pods Resources */,
+				4E2267181D568DDD002AD6BD /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -386,6 +390,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4E2267181D568DDD002AD6BD /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
 		8AC482DDFFB36BBD9625FAE6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -441,6 +459,7 @@
 				4E22B87D1D24F69300A9D5AB /* ExamTableViewController.swift in Sources */,
 				4E48094F1D4A332700799BD9 /* EventAPI.swift in Sources */,
 				4E5920CC1D3F90C60029DDE6 /* Misc.swift in Sources */,
+				4E2267171D5229FD002AD6BD /* NewsViewController.swift in Sources */,
 				4E48092F1D48EE5300799BD9 /* AboutViewController.swift in Sources */,
 				4ED393761D4A7BDD004ABBFD /* UCLanAPI.swift in Sources */,
 				4EB71DD81D47F72600B0B6E7 /* Room.swift in Sources */,

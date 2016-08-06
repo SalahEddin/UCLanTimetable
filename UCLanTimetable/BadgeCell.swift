@@ -9,12 +9,12 @@
 import UIKit
 
 class BadgeCell: UICollectionViewCell, UIWebViewDelegate {
-    
+
     // @IBOutlet weak var badgeSVGWebView: UIWebView!
-    
+
     @IBOutlet weak var badgeImage: UIImageView!
     @IBOutlet weak var badgeLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

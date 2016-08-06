@@ -9,14 +9,14 @@
 import UIKit
 import MGSwipeTableCell
 
-class NotificationTableViewCell: MGSwipeTableCell  {
+class NotificationTableViewCell: MGSwipeTableCell {
     // UI Binding
-    
+
     @IBOutlet weak var NotiTitleLabel: UILabel!
     @IBOutlet weak var NotiLegendView: UIView!
     @IBOutlet weak var NotiDateLabel: UILabel!
     @IBOutlet weak var NotiTypeLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
