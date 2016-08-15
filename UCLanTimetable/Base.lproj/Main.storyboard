@@ -86,7 +86,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qxE-of-Zv7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-237" y="-5.25"/>
+            <point key="canvasLocation" x="-1257" y="755.25"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -815,7 +815,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Attendance" image="Medal-40.png" id="JUf-Vi-n95">
+                    <tabBarItem key="tabBarItem" title="Attendance" image="Medal.png" id="JUf-Vi-n95">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" red="0.75294117647058822" green="0.22352941176470587" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
@@ -1133,7 +1133,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Rooms" image="Classroom-40.png" id="1Ce-sg-7c1">
+                    <tabBarItem key="tabBarItem" title="Rooms" image="Classroom.png" id="1Ce-sg-7c1">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" red="0.75294117647058822" green="0.22352941176470587" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
@@ -1459,7 +1459,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Timetable" image="Calendar-40.png" id="N3f-8h-GTE">
+                    <tabBarItem key="tabBarItem" title="Timetable" image="Calendar.png" id="N3f-8h-GTE">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" red="0.75294117647058822" green="0.22352941176470587" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
@@ -1621,7 +1621,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jhu-tE-Gi3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3912" y="1922.25"/>
+            <point key="canvasLocation" x="3165" y="1922.25"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="wMh-ZE-0R0">
@@ -1665,7 +1665,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Logout" image="Logout Rounded Left-40.png" id="M9B-kd-Rf9">
+                    <tabBarItem key="tabBarItem" title="Logout" image="exit.png" id="M9B-kd-Rf9">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" red="0.75294117647058822" green="0.22352941176470587" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
@@ -1678,27 +1678,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uBG-pK-kG0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1158" y="1256.25"/>
-        </scene>
-        <!--News-->
-        <scene sceneID="RmS-A3-az9">
-            <objects>
-                <viewController id="oLN-Xl-8v6" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="LMJ-wm-NuT"/>
-                        <viewControllerLayoutGuide type="bottom" id="HsD-XD-fZt"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Tgw-7z-hw6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="News" id="UeF-oR-B9z"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GQs-ja-nY0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-798" y="1932.75"/>
+            <point key="canvasLocation" x="-1281" y="1817.25"/>
         </scene>
         <!--About us-->
         <scene sceneID="m94-pr-nZc">
@@ -1869,7 +1849,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="About" image="About-35.png" id="b9X-XS-bVx"/>
+                    <tabBarItem key="tabBarItem" title="About" image="About.png" id="b9X-XS-bVx"/>
                     <navigationItem key="navigationItem" title="About us" id="zAj-gz-1rp"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -2664,7 +2644,7 @@
                             <outlet property="delegate" destination="fn7-bB-MX0" id="5kf-v3-Owh"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Contact Us" image="Contact Card-40.png" id="xre-91-ngO">
+                    <tabBarItem key="tabBarItem" title="Contact Us" image="contact_card.png" id="xre-91-ngO">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" red="0.75294117647058822" green="0.22352941176470587" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
@@ -3123,7 +3103,7 @@
         <scene sceneID="Xqe-OS-yrr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="phs-f4-Ziy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Exams" image="Exam-40.png" id="j6D-E1-WDc">
+                    <tabBarItem key="tabBarItem" title="Exams" image="Exam.png" id="j6D-E1-WDc">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" red="0.75294117647058822" green="0.22352941176470587" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
@@ -3142,7 +3122,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ENq-1A-VpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3084" y="1922.25"/>
+            <point key="canvasLocation" x="2344.5" y="1922.25"/>
         </scene>
         <!--Notifications-->
         <scene sceneID="phZ-zu-7Io">
@@ -3171,26 +3151,26 @@
         </scene>
     </scenes>
     <resources>
-        <image name="About-35.png" width="35" height="35"/>
-        <image name="Calendar-40.png" width="40" height="40"/>
-        <image name="Classroom-40.png" width="40" height="40"/>
-        <image name="Contact Card-40.png" width="40" height="40"/>
+        <image name="About.png" width="871" height="550"/>
+        <image name="Calendar.png" width="871" height="550"/>
+        <image name="Classroom.png" width="871" height="550"/>
         <image name="Email-100.png" width="100" height="100"/>
-        <image name="Exam-40.png" width="40" height="40"/>
+        <image name="Exam.png" width="871" height="550"/>
         <image name="Facebook Filled-100.png" width="100" height="100"/>
         <image name="Forward-100.png" width="100" height="100"/>
         <image name="Instagram Filled-100.png" width="100" height="100"/>
-        <image name="Logout Rounded Left-40.png" width="40" height="40"/>
-        <image name="Medal-40.png" width="40" height="40"/>
+        <image name="Medal.png" width="871" height="550"/>
         <image name="Phone Filled-100.png" width="100" height="100"/>
         <image name="Twitter Filled-100.png" width="100" height="100"/>
         <image name="advertising.png" width="32" height="32"/>
+        <image name="contact_card.png" width="32" height="32"/>
+        <image name="exit.png" width="32" height="32"/>
         <image name="iNSPIRE with light_Final-01.png" width="988" height="746"/>
         <image name="logo.png" width="871" height="550"/>
         <image name="uclan_logo.png" width="354" height="354"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="T2o-tz-drR"/>
+        <segue reference="Fih-5T-LYg"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.82745098039215681" green="0.18431372549019609" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
 </document>
