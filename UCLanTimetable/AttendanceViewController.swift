@@ -12,7 +12,7 @@ class AttendanceViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
 
-    private let reuseIdentifier = "BadgeCell"
+    fileprivate let reuseIdentifier = "BadgeCell"
     //private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
 
     var badges: [Badge] = []
@@ -22,7 +22,7 @@ class AttendanceViewController: UIViewController {
         super.viewDidLoad()
 
         let tabBarHeight = self.tabBarController?.tabBar.bounds.height
-        self.edgesForExtendedLayout = UIRectEdge.All
+        self.edgesForExtendedLayout = UIRectEdge.all
         self.scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: tabBarHeight!, right: 0.0)
 
         //badgesCollectionView.delegate = self

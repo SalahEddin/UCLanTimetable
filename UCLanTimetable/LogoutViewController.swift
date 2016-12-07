@@ -23,15 +23,15 @@ class LogoutViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func viewWillAppear(animated: Bool) {
-        let alert = UIAlertController(title: "Logout", message:"Are you sure you want to logout?", preferredStyle: .Alert)
+    override func viewWillAppear(_ animated: Bool) {
+        let alert = UIAlertController(title: "Logout", message:"Are you sure you want to logout?", preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Default) { _ in
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default) { _ in
             // move user to first tab
             let fromView = self.tabBarController?.viewControllers![3].view
             let toView = self.tabBarController?.viewControllers![0].view
 
-            UIView.transitionFromView(fromView!, toView: toView!, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, completion: { (finished: Bool) -> () in
+            UIView.transition(from: fromView!, to: toView!, duration: 0.5, options: UIViewAnimationOptions.transitionFlipFromLeft, completion: { (finished: Bool) -> () in
 
                 // completion
                 self.tabBarController?.selectedIndex = 0
@@ -39,13 +39,13 @@ class LogoutViewController: UIViewController {
             )
             })
 
-        alert.addAction(UIAlertAction(title: "Yes", style: .Default) { _ in
+        alert.addAction(UIAlertAction(title: "Yes", style: .default) { _ in
             // remove credentials
             Keychain.delete(KEYS.user)
-            self.performSegueWithIdentifier("logout", sender: nil)
+            self.performSegue(withIdentifier: "logout", sender: nil)
             })
 
-        self.presentViewController(alert, animated: true) {}
+        self.present(alert, animated: true) {}
     }
     /*
      // MARK: - Navigation

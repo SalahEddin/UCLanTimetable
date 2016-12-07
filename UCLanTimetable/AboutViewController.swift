@@ -20,34 +20,34 @@ class AboutViewController: UIViewController {
         // tap on inspire image
         let inspiresSingleTap = UITapGestureRecognizer(target: self, action:#selector(inspireClicked))
         inspiresSingleTap.numberOfTapsRequired = 1
-        inspireImageView.userInteractionEnabled = true
+        inspireImageView.isUserInteractionEnabled = true
         inspireImageView.addGestureRecognizer(inspiresSingleTap)
 
         // tap on uclan image
         let uclanSingleTap = UITapGestureRecognizer(target: self, action:#selector(uclanClicked))
         uclanSingleTap.numberOfTapsRequired = 1
-        inspireImageView.userInteractionEnabled = true
+        inspireImageView.isUserInteractionEnabled = true
         inspireImageView.addGestureRecognizer(uclanSingleTap)
 
         // tap on version 7 times (easter egg)
         let easter = UITapGestureRecognizer(target: self, action:#selector(uclanClicked))
         easter.numberOfTapsRequired = 5
-        versionLabel.userInteractionEnabled = true
+        versionLabel.isUserInteractionEnabled = true
         versionLabel.addGestureRecognizer(easter)
 
     }
 
     func inspireClicked() {
-        let url = NSURL(string: "http://inspirecenter.org/")!
-        UIApplication.sharedApplication().openURL(url)
+        let url = URL(string: "http://inspirecenter.org/")!
+        UIApplication.shared.openURL(url)
     }
     func uclanClicked() {
-        let url = NSURL(string: "http://www.uclancyprus.ac.cy/en/")!
-        UIApplication.sharedApplication().openURL(url)
+        let url = URL(string: "http://www.uclancyprus.ac.cy/en/")!
+        UIApplication.shared.openURL(url)
     }
 
     func easterClicked() {
-        let url = NSURL(string: "http://www.uclancyprus.ac.cy/en/")!
-        UIApplication.sharedApplication().openURL(url)
+        let url = URL(string: "http://www.uclancyprus.ac.cy/en/")!
+        UIApplication.shared.openURL(url)
     }
 }

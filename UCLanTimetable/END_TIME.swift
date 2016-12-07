@@ -2,18 +2,18 @@ import Foundation
 
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class END_TIME: NSObject {
-	public var ticks: Int?
-	public var days: Int?
-	public var hours: Int?
-	public var milliseconds: Int?
-	public var minutes: Int?
-	public var seconds: Int?
-	public var totalDays: Double?
-	public var totalHours: Int?
-	public var totalMilliseconds: Int?
-	public var totalMinutes: Int?
-	public var totalSeconds: Int?
+open class END_TIME: NSObject {
+	open var ticks: Int?
+	open var days: Int?
+	open var hours: Int?
+	open var milliseconds: Int?
+	open var minutes: Int?
+	open var seconds: Int?
+	open var totalDays: Double?
+	open var totalHours: Int?
+	open var totalMilliseconds: Int?
+	open var totalMinutes: Int?
+	open var totalSeconds: Int?
 
 /**
     Returns an array of models based on given dictionary.
@@ -25,7 +25,7 @@ public class END_TIME: NSObject {
 
     - returns: Array of END_TIME Instances.
 */
-    public class func modelsFromDictionaryArray(array: NSArray) -> [END_TIME] {
+    open class func modelsFromDictionaryArray(_ array: NSArray) -> [END_TIME] {
         var models: [END_TIME] = []
         for item in array {
             models.append(END_TIME(dictionary: item as! NSDictionary)!)
@@ -64,7 +64,7 @@ public class END_TIME: NSObject {
 
     - returns: NSDictionary.
 */
-	public func dictionaryRepresentation() -> NSDictionary {
+	open func dictionaryRepresentation() -> NSDictionary {
 
 		let dictionary = NSMutableDictionary()
 

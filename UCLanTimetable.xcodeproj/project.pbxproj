@@ -352,6 +352,7 @@
 					4ED0042A1D114D60007AAD57 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = R86STB8XPK;
+						LastSwiftMigration = 0810;
 					};
 				};
 			};
@@ -634,6 +635,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "UCLanTimetable/UCLanTimetable-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -648,6 +650,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uni.salah.UCLanTimetable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "UCLanTimetable/UCLanTimetable-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

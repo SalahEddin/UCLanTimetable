@@ -22,16 +22,16 @@ class ViewController: UIViewController {
         self.emailTextBox.delegate = self
         self.passTextBox.delegate = self
 
-        self.navigationController?.navigationBarHidden = true
-        self.tabBarController?.tabBar.hidden = true
+        self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
 
         // check if user is already logged in
 
         if Misc.loadUser() != nil {
-            self.performSegueWithIdentifier("login", sender: nil)
+            self.performSegue(withIdentifier: "login", sender: nil)
         }
             //fill username and pass
         else if Keychain.load(KEYS.pass) != nil && Keychain.load(KEYS.username) != nil {
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
     }
 
     //MARK: Actions
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if "login" == segue.identifier {
             // Nothing really to do here, since it won't be fired unless
             // shouldPerformSegueWithIdentifier() says it's ok. In a real app,
@@ -60,24 +60,24 @@ class ViewController: UIViewController {
         }
     }
 
-    @IBAction func loginButton_Clicked(sender: AnyObject) {
+    @IBAction func loginButton_Clicked(_ sender: AnyObject) {
         if IsLoginFormValid() {
             EventAPI.getUserLogin(emailTextBox.text!, pass: passTextBox.text!, callback: loginCallback)
         }
     }
 
-    func isValidEmail(testStr: String) -> Bool {
+    func isValidEmail(_ testStr: String) -> Bool {
         // print("validate calendar: \(testStr)")
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
 
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluateWithObject(testStr)
+        return emailTest.evaluate(with: testStr)
     }
 }
 
 extension ViewController: UITextFieldDelegate {
     // FOR HIDING/SHOWING THE KEYBOAD
-    func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
         if textField == self.emailTextBox {
             passTextBox.becomeFirstResponder()
         } else {
@@ -91,11 +91,11 @@ extension ViewController: UITextFieldDelegate {
         var isFormValid: Bool = true
         // alert view for informing user
         let alertView = UIAlertController(title: "Login Problem",
-                                          message: "" as String, preferredStyle:.Alert)
-        let okAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+                                          message: "" as String, preferredStyle:.alert)
+        let okAction = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
         alertView.addAction(okAction)
 
-        if let _ = emailTextBox.text where emailTextBox.text!.isEmpty {
+        if let _ = emailTextBox.text, emailTextBox.text!.isEmpty {
             alertView.title = "email missing"
             alertView.message = "please enter an email in the field"
             isFormValid = false
@@ -103,32 +103,32 @@ extension ViewController: UITextFieldDelegate {
             alertView.title = "Invalid e-mail"
             alertView.message = "Please enter a valid email"
             isFormValid = false
-        } else if let _ = passTextBox.text where passTextBox.text!.isEmpty {
+        } else if let _ = passTextBox.text, passTextBox.text!.isEmpty {
             alertView.title = "please enter a password"
             alertView.message = "Password field cannot be empty"
             isFormValid = false
         }
 
         if !isFormValid {
-            self.presentViewController(alertView, animated: true, completion: nil)
+            self.present(alertView, animated: true, completion: nil)
         }
 
         return isFormValid
     }
 
-    func loginCallback(user: AuthenticatedUser?) -> Void {
+    func loginCallback(_ user: AuthenticatedUser?) -> Void {
         if user == nil {
             // login failed
             let alertView = UIAlertController(title: "Login Problem",
-                                              message: "" as String, preferredStyle:.Alert)
-            let okAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+                                              message: "" as String, preferredStyle:.alert)
+            let okAction = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
             alertView.addAction(okAction)
             alertView.title = "Login failed"
             alertView.message = "Either Username or Password are incorrect"
-            self.presentViewController(alertView, animated: true, completion: nil)
+            self.present(alertView, animated: true, completion: nil)
         } else {
             // successful login
-            if rememberUserSwitch.on {
+            if rememberUserSwitch.isOn {
                 Keychain.save(emailTextBox.text!, forKey: KEYS.username)
                 Keychain.save(passTextBox.text!, forKey: KEYS.pass)
             }
@@ -143,7 +143,7 @@ extension ViewController: UITextFieldDelegate {
                 // hide exams and attendance
             }
 
-            self.performSegueWithIdentifier("login", sender: nil)
+            self.performSegue(withIdentifier: "login", sender: nil)
 
         }
     }

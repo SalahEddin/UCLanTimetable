@@ -2,23 +2,23 @@ import Foundation
 
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class Notification {
-    public var nOTIFICATION_ID: Int?
-    public var uSER_ID: Int?
-    public var nOTIFICATION_TITLE: String?
-    public var nOTIFICATION_TEXT: String?
-    public var nOTIFICATION_TYPE_ID: Int?
-    public var nOTIFICATION_TYPE_NAME: String?
-    public var nOTIFICATION_URL: String?
-    public var cREATE_DATE: String?
-    public var pUBLISH_DATE: String?
-    public var eXPIRY_DATE: String?
-    public var nOTIFICATION_STATUS: Int?
-    public var iMPORTANT: Int?
+open class Notification {
+    open var nOTIFICATION_ID: Int?
+    open var uSER_ID: Int?
+    open var nOTIFICATION_TITLE: String?
+    open var nOTIFICATION_TEXT: String?
+    open var nOTIFICATION_TYPE_ID: Int?
+    open var nOTIFICATION_TYPE_NAME: String?
+    open var nOTIFICATION_URL: String?
+    open var cREATE_DATE: String?
+    open var pUBLISH_DATE: String?
+    open var eXPIRY_DATE: String?
+    open var nOTIFICATION_STATUS: Int?
+    open var iMPORTANT: Int?
 
-    public var isRead: Bool
-    public var isDeleted: Bool
-    public var isArchived: Bool
+    open var isRead: Bool
+    open var isDeleted: Bool
+    open var isArchived: Bool
     /**
      Returns an array of models based on given dictionary.
 
@@ -29,7 +29,7 @@ public class Notification {
 
      - returns: Array of Notification Instances.
      */
-    public class func modelsFromDictionaryArray(array: NSArray) -> [Notification] {
+    open class func modelsFromDictionaryArray(_ array: NSArray) -> [Notification] {
         var models: [Notification] = []
         for item in array {
             models.append(Notification(dictionary: item as! NSDictionary)!)
@@ -68,7 +68,7 @@ public class Notification {
         isArchived = (x>>2 & 0b00000001 == 1)
     }
 
-    public func calculateStatus() {
+    open func calculateStatus() {
         let x = UInt8(nOTIFICATION_STATUS!)
         isRead = (x & 0b00000001 == 1)
         isDeleted = (x>>1 & 0b00000001 == 1)
@@ -80,7 +80,7 @@ public class Notification {
 
      - returns: NSDictionary.
      */
-    public func dictionaryRepresentation() -> NSDictionary {
+    open func dictionaryRepresentation() -> NSDictionary {
 
         let dictionary = NSMutableDictionary()
 

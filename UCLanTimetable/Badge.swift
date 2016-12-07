@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Badge {
+open class Badge {
     var badgeLink: String? = nil
     var name: String? = nil
     var desc: String? = nil

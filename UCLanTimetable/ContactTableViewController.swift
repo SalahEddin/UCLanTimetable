@@ -26,21 +26,21 @@ class ContactTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func tableView(tableView: UITableView,
-                            didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView,
+                            didSelectRowAt indexPath: IndexPath) {
 
         print(indexPath.section)
         print(indexPath.row)
 
         if indexPath.section == 0 && indexPath.row == 0 {
             let phone = "telprompt://0035724694000"
-            let url: NSURL = NSURL(string:phone)!
-            UIApplication.sharedApplication().openURL(url)
+            let url: URL = URL(string:phone)!
+            UIApplication.shared.openURL(url)
         }
         if indexPath.section == 0 && indexPath.row == 1 {
             let phone = "telprompt://0035724694026"
-            let url: NSURL = NSURL(string:phone)!
-            UIApplication.sharedApplication().openURL(url)
+            let url: URL = URL(string:phone)!
+            UIApplication.shared.openURL(url)
         }
         if indexPath.section == 0 && indexPath.row == 2 {
 //            let toEmail = "info@uclancyprus.ac.cy"
@@ -48,8 +48,8 @@ class ContactTableViewController: UITableViewController {
 //            let body = "Just testing ...".stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
 
             let email = "info@uclancyprus.ac.cy"
-            let url = NSURL(string: "mailto:\(email)")
-            UIApplication.sharedApplication().openURL(url!)
+            let url = URL(string: "mailto:\(email)")
+            UIApplication.shared.openURL(url!)
         }
 
         if indexPath.section == 1 {
@@ -57,23 +57,23 @@ class ContactTableViewController: UITableViewController {
             let coordinate = CLLocationCoordinate2DMake(theLongitude, theLatitude)
             let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
             mapItem.name = "UCLan Cyprus"
-            mapItem.openInMapsWithLaunchOptions([MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+            mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
         }
 
         if indexPath.section == 2 && indexPath.row == 0 {
             let phone = "http://www.facebook.com/uclancyprus"
-            let url: NSURL = NSURL(string:phone)!
-            UIApplication.sharedApplication().openURL(url)
+            let url: URL = URL(string:phone)!
+            UIApplication.shared.openURL(url)
         }
         if indexPath.section == 2 && indexPath.row == 2 {
             let phone = "https://twitter.com/uclancyprus"
-            let url: NSURL = NSURL(string:phone)!
-            UIApplication.sharedApplication().openURL(url)
+            let url: URL = URL(string:phone)!
+            UIApplication.shared.openURL(url)
         }
         if indexPath.section == 2 && indexPath.row == 1 {
             let phone = "https://www.instagram.com/uclancyprus/"
-            let url: NSURL = NSURL(string:phone)!
-            UIApplication.sharedApplication().openURL(url)
+            let url: URL = URL(string:phone)!
+            UIApplication.shared.openURL(url)
         }
 
     }

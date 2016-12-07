@@ -8,15 +8,15 @@
 
 import Foundation
 
-public class Room {
-    public var rOOM_ID: Int?
-    public var rOOM_CODE: String?
-    public var bARCODE: String?
-    public var cAPACITY: Int?
-    public var rOOM_TYPE_ID: Int?
-    public var rOOM_TYPE_NAME: String?
-    public var bOOKABLE: Int?
-    public var bOOKABLE_DESCRIPTION: String?
+open class Room {
+    open var rOOM_ID: Int?
+    open var rOOM_CODE: String?
+    open var bARCODE: String?
+    open var cAPACITY: Int?
+    open var rOOM_TYPE_ID: Int?
+    open var rOOM_TYPE_NAME: String?
+    open var bOOKABLE: Int?
+    open var bOOKABLE_DESCRIPTION: String?
 
     /**
      Returns an array of models based on given dictionary.
@@ -28,7 +28,7 @@ public class Room {
 
      - returns: Array of Json4Swift_Base Instances.
      */
-    public class func modelsFromDictionaryArray(array: NSArray) -> [Room] {
+    open class func modelsFromDictionaryArray(_ array: NSArray) -> [Room] {
         var models: [Room] = []
         for item in array {
             models.append(Room(dictionary: item as! NSDictionary)!)
@@ -64,7 +64,7 @@ public class Room {
 
      - returns: NSDictionary.
      */
-    public func dictionaryRepresentation() -> NSDictionary {
+    open func dictionaryRepresentation() -> NSDictionary {
 
         let dictionary = NSMutableDictionary()
 

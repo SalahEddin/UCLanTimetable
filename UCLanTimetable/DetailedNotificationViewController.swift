@@ -21,19 +21,19 @@ class DetailedNotificationViewController: UIViewController {
     @IBOutlet weak var archiveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
 
-    @IBAction func mark_Clicked(sender: AnyObject) {
+    @IBAction func mark_Clicked(_ sender: AnyObject) {
         notification!.calculateStatus()
-        changeStatus(notification!.isRead ?  NotificationAPI.Status.UNREAD : NotificationAPI.Status.READ)
+        changeStatus(notification!.isRead ?  NotificationAPI.Status.unread : NotificationAPI.Status.read)
     }
-    @IBAction func delete_Clicked(sender: AnyObject) {
+    @IBAction func delete_Clicked(_ sender: AnyObject) {
         //todo
     }
-    @IBAction func archive_Clicked(sender: AnyObject) {
+    @IBAction func archive_Clicked(_ sender: AnyObject) {
         notification!.calculateStatus()
-        changeStatus(notification!.isArchived ?  NotificationAPI.Status.UNREAD :NotificationAPI.Status.ARCHIVED)
+        changeStatus(notification!.isArchived ?  NotificationAPI.Status.unread :NotificationAPI.Status.archived)
     }
 
-    func changeStatus(status: NotificationAPI.Status) {
+    func changeStatus(_ status: NotificationAPI.Status) {
         NotificationAPI.changeStatus(notification!.nOTIFICATION_ID!, newStatus: status, callback: self.statusChangedCallback)
     }
 
@@ -45,14 +45,14 @@ class DetailedNotificationViewController: UIViewController {
         NotificationAPI.getNotification(notification!.nOTIFICATION_ID!, callback: reloadedCallback)
     }
 
-    func reloadedCallback(item: Notification) -> Void {
+    func reloadedCallback(_ item: Notification) -> Void {
         notification = item
         titleLabel.text = notification!.nOTIFICATION_TITLE!
         typeLabel.text = notification!.nOTIFICATION_TYPE_NAME!
         desc.text = notification!.nOTIFICATION_TEXT!
 
-        let publishDate = NSDate(jsonDate: notification!.pUBLISH_DATE!)!
-        let expiryDate = NSDate(jsonDate: notification!.eXPIRY_DATE!)!
+        let publishDate = Date(jsonDate: notification!.pUBLISH_DATE!)!
+        let expiryDate = Date(jsonDate: notification!.eXPIRY_DATE!)!
 
         publishLabel.text = "Publish Date: \(DateUtils.FormatCalendarChoiceDate(publishDate))"
         expiryLabel.text = "Expiry Date: \(DateUtils.FormatCalendarChoiceDate(expiryDate))"
@@ -60,15 +60,15 @@ class DetailedNotificationViewController: UIViewController {
         notification!.calculateStatus()
 
         if notification!.isRead {
-            markButton.setTitle("Mark as unread", forState: .Normal)
+            markButton.setTitle("Mark as unread", for: UIControlState())
         } else {
-            markButton.setTitle("Mark as read", forState: .Normal)
+            markButton.setTitle("Mark as read", for: UIControlState())
         }
 
         if notification!.isArchived {
-            archiveButton.setTitle("Unarchive", forState: .Normal)
+            archiveButton.setTitle("Unarchive", for: UIControlState())
         } else {
-            archiveButton.setTitle("Archive", forState: .Normal)
+            archiveButton.setTitle("Archive", for: UIControlState())
         }
 
     }
@@ -77,7 +77,7 @@ class DetailedNotificationViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        changeStatus(NotificationAPI.Status.READ)
+        changeStatus(NotificationAPI.Status.read)
     }
 
     override func didReceiveMemoryWarning() {

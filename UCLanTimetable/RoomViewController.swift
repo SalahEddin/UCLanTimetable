@@ -18,18 +18,18 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var calSegmentedControl: UISegmentedControl!
 
     @IBOutlet weak var selectedDateLabel: UILabel!
-    @IBAction func calendarViewOtpion_Changed(sender: UISegmentedControl) {
+    @IBAction func calendarViewOtpion_Changed(_ sender: UISegmentedControl) {
         switch calSegmentedControl.selectedSegmentIndex {
         case 0:
-            calendarView.changeMode(.WeekView)
+            calendarView.changeMode(.weekView)
         case 1:
-            calendarView.changeMode(.MonthView)
+            calendarView.changeMode(.monthView)
         default:
             break
         }
     }
     // data
-    var selectedDate = NSDate()
+    var selectedDate = Foundation.Date()
     var selectedRoom = "134"
     var CalendarEvents: [TimeTableSession] = []
     var roomPickerDataSoruce: [Room] = []
@@ -39,14 +39,14 @@ class RoomViewController: UIViewController {
 
         // tabbar covering table
         let tabBarHeight = self.tabBarController?.tabBar.bounds.height
-        self.edgesForExtendedLayout = UIRectEdge.All
+        self.edgesForExtendedLayout = UIRectEdge.all
         self.eventsTableView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: tabBarHeight!, right: 0.0)
 
         if !Reachability.isConnectedToNetwork() {
             //notify user to connect online
-            let alert = UIAlertController(title: "Offline Mode", message: "You're not connected to a network, connect to access latest updates and changes", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Continue in Offline Mode", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Offline Mode", message: "You're not connected to a network, connect to access latest updates and changes", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Continue in Offline Mode", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
 
         } else {
             self.roomPicker.dataSource = self
@@ -55,7 +55,7 @@ class RoomViewController: UIViewController {
         }
 
         // update date label
-        selectedDateLabel.text = DateUtils.FormatCalendarChoiceDate(NSDate())
+        selectedDateLabel.text = DateUtils.FormatCalendarChoiceDate(Foundation.Date())
 
         //intial view
         reloadDayViewSession()
@@ -69,7 +69,7 @@ class RoomViewController: UIViewController {
         calendarView.commitCalendarViewUpdate()
     }
 
-    func listRoomsCallback(rooms: [Room]) -> Void {
+    func listRoomsCallback(_ rooms: [Room]) -> Void {
         self.roomPickerDataSoruce = rooms
         self.roomPicker.reloadAllComponents()
         if rooms.count <= 0 {
@@ -77,7 +77,7 @@ class RoomViewController: UIViewController {
         }
     }
 
-    func callback(sess: [TimeTableSession]) -> Void {
+    func callback(_ sess: [TimeTableSession]) -> Void {
         self.CalendarEvents = sess
         self.eventsTableView.reloadData()
         if sess.count <= 0 {
@@ -93,27 +93,27 @@ extension RoomViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate
 
     /// Required method to implement!
     func presentationMode() -> CalendarMode {
-        return .MonthView
+        return .monthView
     }
 
     /// Required method to implement!
     func firstWeekday() -> Weekday {
-        return .Monday
+        return .monday
     }
 
     func weekdaySymbolType() -> WeekdaySymbolType {
         // Mon, Tue
-        return .Short
+        return .short
     }
 
     func shouldShowWeekdaysOut() -> Bool {
         return true
     }
 
-    func didSelectDayView(dayView: CVCalendarDayView, animationDidFinish: Bool) {
+    func didSelectDayView(_ dayView: CVCalendarDayView, animationDidFinish: Bool) {
         print("\(dayView.date.commonDescription) is selected!")
         // update local var selectedDate
-        selectedDate = dayView.date.convertedDate()!
+        selectedDate = dayView.date.convertedDate(calendar: Calendar.current)!
         // update date label
         selectedDateLabel.text = DateUtils.FormatCalendarChoiceDate(selectedDate)
 
@@ -126,20 +126,20 @@ extension RoomViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate
             print("connected")
             let DateInFormat = DateUtils.FormatToAPIDate(selectedDate)
 
-            EventAPI.loadTimetableSessions(selectedRoom, startDate: DateInFormat, endDate: DateInFormat, by: Misc.USER_TYPE.ROOM, callback: callback)
+            EventAPI.loadTimetableSessions(selectedRoom, startDate: DateInFormat, endDate: DateInFormat, by: Misc.USER_TYPE.room, callback: callback)
         } else {
             // offline mode
             print("disconnected")
             //notify user to connect online
-            let alert = UIAlertController(title: "Offline Mode", message: "couldn't load your timetable, please make sure you're connected to the Internet", preferredStyle: UIAlertControllerStyle.Alert)
-            let settingsAction = UIAlertAction(title: "Go to Network Settings", style: .Default) { (_) -> Void in
-                UIApplication.sharedApplication().openURL(NSURL(string:"prefs:root=WIFI")!)
+            let alert = UIAlertController(title: "Offline Mode", message: "couldn't load your timetable, please make sure you're connected to the Internet", preferredStyle: UIAlertControllerStyle.alert)
+            let settingsAction = UIAlertAction(title: "Go to Network Settings", style: .default) { (_) -> Void in
+                UIApplication.shared.openURL(URL(string:"prefs:root=WIFI")!)
             }
 
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
             alert.addAction(settingsAction)
             alert.addAction(cancelAction)
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
                 eventsTableView.reloadData()
     }
@@ -150,27 +150,27 @@ extension RoomViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate
 // MARK:- UITableViewDelegate & UITableViewDataSource
 extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CalendarEvents.count//CalendarEvents.count
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "cell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CalEventTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CalEventTableViewCell
         cell.ModuleName.text = "\(CalendarEvents[indexPath.row].mODULE_CODE!) - \(CalendarEvents[indexPath.row].mODULE_NAME!)"
         cell.EventTime.text = "\(CalendarEvents[indexPath.row].sTART_TIME_FORMATTED!)-\(CalendarEvents[indexPath.row].eND_TIME_FORMATTED!)"
         cell.EventDetails.text = "\(CalendarEvents[indexPath.row].dESCRIPTION!) - \(CalendarEvents[indexPath.row].lECTURER_NAME!)"
 
         if DateUtils.hasDatePassed(CalendarEvents[indexPath.row]) {
-            cell.ModuleName.textColor = UIColor.grayColor()
-            cell.EventTime.textColor = UIColor.grayColor()
+            cell.ModuleName.textColor = UIColor.gray
+            cell.EventTime.textColor = UIColor.gray
             cell.EventTime.font = UIFont(name:"HelveticaNeue", size: (cell.EventTime?.font.pointSize)!)
-            cell.EventDetails.textColor = UIColor.grayColor()
+            cell.EventDetails.textColor = UIColor.gray
         } else {
             //todo color and bold
-            cell.ModuleName.textColor = UIColor.redColor()
-            cell.EventTime.textColor = UIColor.blackColor()
+            cell.ModuleName.textColor = UIColor.red
+            cell.EventTime.textColor = UIColor.black
             cell.EventTime.font = UIFont(name:"HelveticaNeue Bold", size: (cell.EventTime?.font.pointSize)!)
-            cell.EventDetails.textColor = UIColor.darkGrayColor()
+            cell.EventDetails.textColor = UIColor.darkGray
         }
 
         return cell
@@ -178,18 +178,18 @@ extension RoomViewController: UITableViewDelegate, UITableViewDataSource {
 }
 // MARK:-  UIPickerViewDataSource & UIPickerViewDelegate
 extension RoomViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
 
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return roomPickerDataSoruce.count
     }
 
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return roomPickerDataSoruce[row].rOOM_CODE
     }
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedRoom = String(roomPickerDataSoruce[row].rOOM_ID!)
         print("fired")
         reloadDayViewSession()

@@ -21,9 +21,9 @@ class IndexViewController: UIViewController {
     @IBAction func calendarViewOtpion_Changed(sender: UISegmentedControl) {
         switch calSegmentedControl.selectedSegmentIndex {
         case 0:
-            calView.changeMode(.WeekView)
+            calView.changeMode(.weekView)
         case 1:
-            calView.changeMode(.MonthView)
+            calView.changeMode(.monthView)
         default:
             break
         }
@@ -31,7 +31,7 @@ class IndexViewController: UIViewController {
     // modify the view
 
     var pullToRefreshControl: UIRefreshControl!
-    var selectedDate = NSDate()
+    var selectedDate = Date()
     var CalendarEvents: [TimeTableSession] = []
     var OfflineCalendarEvents: [TimeTableSession]? = nil
     var dataSavedAvailable = false
@@ -41,26 +41,26 @@ class IndexViewController: UIViewController {
 
         // tabbar covering table
         let tabBarHeight = self.tabBarController?.tabBar.bounds.height
-        self.edgesForExtendedLayout = UIRectEdge.All
+        self.edgesForExtendedLayout = UIRectEdge.all
         self.eventsTableView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: tabBarHeight!, right: 0.0)
 
         // Do pull to refresh setup here.
         pullToRefreshControl = UIRefreshControl()
         pullToRefreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        pullToRefreshControl.addTarget(self, action: #selector(self.refresh(_:)), forControlEvents: .ValueChanged)
+        pullToRefreshControl.addTarget(self, action: #selector(self.refresh(sender:)), for: .valueChanged)
         self.eventsTableView.addSubview(pullToRefreshControl)
 
         CalendarEvents = [TimeTableSession]()
 
         if !Reachability.isConnectedToNetwork() {
             //notify user to connect online
-            let alert = UIAlertController(title: "Offline Mode", message: "You're not connected to a network, connect to access latest updates and changes", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Continue in Offline Mode", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Offline Mode", message: "You're not connected to a network, connect to access latest updates and changes", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Continue in Offline Mode", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
 
         // set to today
-        selectedDateLabel.text = DateUtils.FormatCalendarChoiceDate(NSDate())
+        selectedDateLabel.text = DateUtils.FormatCalendarChoiceDate(Date())
 
         reloadDayViewSession()
     }
@@ -77,9 +77,9 @@ class IndexViewController: UIViewController {
             let user = Misc.loadUser()!
             let id = String(user.aCCOUNT_ID!)
 
-            var userType = Misc.USER_TYPE.LECTURER
+            var userType = Misc.USER_TYPE.lecturer
             if user.aCCOUNT_TYPE_ID==KEYS.studentTypeId {
-                userType = Misc.USER_TYPE.STUDENT
+                userType = Misc.USER_TYPE.student
             }
 
             EventAPI.loadTimetableSessions(id, startDate: DateInFormat, endDate: DateInFormat, by: userType, callback: callback)
@@ -92,11 +92,11 @@ class IndexViewController: UIViewController {
 
             // load saved sessions once
             if OfflineCalendarEvents == nil {
-                let timetableDataDict = NSUserDefaults.standardUserDefaults().objectForKey(KEYS.offlineTimetableStorageKey) as? NSData
+                let timetableDataDict = UserDefaults.standard.object(forKey: KEYS.offlineTimetableStorageKey) as? NSData
 
                 if timetableDataDict != nil {
                     dataSavedAvailable = true
-                    let timetableDataDict = NSKeyedUnarchiver.unarchiveObjectWithData(timetableDataDict!) as? [NSDictionary]
+                    let timetableDataDict = NSKeyedUnarchiver.unarchiveObject(with: timetableDataDict! as Data) as? [NSDictionary]
                     OfflineCalendarEvents = []
                     for item in timetableDataDict! {
                         OfflineCalendarEvents! += [TimeTableSession(dictionary: item)!]
@@ -115,19 +115,19 @@ class IndexViewController: UIViewController {
                 // No previous data found
 
                 //notify user to connect online
-                let alert = UIAlertController(title: "Offline Mode", message: "couldn't load your timetable, please make sure you're connected to the Internet", preferredStyle: UIAlertControllerStyle.Alert)
-                let settingsAction = UIAlertAction(title: "Go to Network Settings", style: .Default) { (_) -> Void in
-                    UIApplication.sharedApplication().openURL(NSURL(string:"prefs:root=WIFI")!)
+                let alert = UIAlertController(title: "Offline Mode", message: "couldn't load your timetable, please make sure you're connected to the Internet", preferredStyle: UIAlertControllerStyle.alert)
+                let settingsAction = UIAlertAction(title: "Go to Network Settings", style: .default) { (_) -> Void in
+                    UIApplication.shared.openURL(NSURL(string:"prefs:root=WIFI")! as URL)
                 }
 
-                let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
                 alert.addAction(settingsAction)
                 alert.addAction(cancelAction)
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.present(alert, animated: true, completion: nil)
             }
 
             // stop UI refreshing if it is.
-            if pullToRefreshControl.refreshing {
+            if pullToRefreshControl.isRefreshing {
                 pullToRefreshControl.endRefreshing()
             }
             eventsTableView.reloadData()
@@ -151,7 +151,7 @@ class IndexViewController: UIViewController {
 
         // after loading the day, check if the data for this period is available offline
         // todo check if data is very old
-        let offlineDict = NSUserDefaults.standardUserDefaults().objectForKey(KEYS.offlineTimetableStorageKey) as? NSData
+        let offlineDict = UserDefaults.standard.object(forKey: KEYS.offlineTimetableStorageKey) as? NSData
         // if not, then load it
         if offlineDict == nil {
            downloadForOffline()
@@ -161,20 +161,19 @@ class IndexViewController: UIViewController {
 
     func downloadForOffline() {
         // today's date
-        let today = DateUtils.FormatToAPIDate(NSDate())
+        let today = DateUtils.FormatToAPIDate(Date())
         // get events till after 1 month
-        let components: NSDateComponents = NSDateComponents()
-        components.setValue(1, forComponent: NSCalendarUnit.Month)
-        let endDate = NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: NSDate(), options: NSCalendarOptions(rawValue: 0))
+        let endDate = NSCalendar.current.date(byAdding: .month, value: 1, to: Date())
+
         let endDateFormatted = DateUtils.FormatToAPIDate(endDate!)
 
         //get user
         let user = Misc.loadUser()!
         let id = String(user.aCCOUNT_ID!)
 
-        var userType = Misc.USER_TYPE.LECTURER
+        var userType = Misc.USER_TYPE.lecturer
         if user.aCCOUNT_TYPE_ID==KEYS.studentTypeId {
-            userType = Misc.USER_TYPE.STUDENT
+            userType = Misc.USER_TYPE.student
         }
 
         EventAPI.loadTimetableSessions(id, startDate: today, endDate: endDateFormatted, by: userType, callback: offlineSaveCallback)
@@ -188,8 +187,8 @@ class IndexViewController: UIViewController {
         }
 
         // store data for offline use
-        let examsData = NSKeyedArchiver.archivedDataWithRootObject(sessDict)
-        NSUserDefaults.standardUserDefaults().setObject(examsData, forKey: KEYS.offlineTimetableStorageKey)
+        let examsData = NSKeyedArchiver.archivedData(withRootObject: sessDict)
+        UserDefaults.standard.set(examsData, forKey: KEYS.offlineTimetableStorageKey)
     }
 }
 
@@ -204,17 +203,17 @@ extension IndexViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegat
 
     /// Required method to implement!
     func presentationMode() -> CalendarMode {
-        return .MonthView
+        return .monthView
     }
 
     /// Required method to implement!
     func firstWeekday() -> Weekday {
-        return .Monday
+        return .monday
     }
 
     func weekdaySymbolType() -> WeekdaySymbolType {
         // Mon, Tue
-        return .Short
+        return .short
     }
 
     func shouldShowWeekdaysOut() -> Bool {
@@ -224,7 +223,7 @@ extension IndexViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegat
     func didSelectDayView(dayView: CVCalendarDayView, animationDidFinish: Bool) {
         print("\(dayView.date.commonDescription) is selected!")
         // update local var selectedDate
-        selectedDate = dayView.date.convertedDate()!
+        selectedDate = dayView.date.convertedDate(calendar: Calendar.current)!
         // update date label
         selectedDateLabel.text = DateUtils.FormatCalendarChoiceDate(selectedDate)
 
@@ -236,21 +235,22 @@ extension IndexViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegat
 // MARK:- UITableViewDelegate & UITableViewDataSource
 extension IndexViewController: UITableViewDelegate, UITableViewDataSource {
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CalendarEvents.count//CalendarEvents.count
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "cell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CalEventTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CalEventTableViewCell
         cell.ModuleName.text = "\(CalendarEvents[indexPath.row].mODULE_CODE!) - \(CalendarEvents[indexPath.row].mODULE_NAME!)"
         cell.EventTime.text = "\(CalendarEvents[indexPath.row].sTART_TIME_FORMATTED!)-\(CalendarEvents[indexPath.row].eND_TIME_FORMATTED!)"
         cell.EventDetails.text = "\(CalendarEvents[indexPath.row].rOOM_CODE!) - \(CalendarEvents[indexPath.row].lECTURER_NAME!)"
 
         if DateUtils.hasDatePassed(CalendarEvents[indexPath.row]) {
-            cell.ModuleName.textColor = UIColor.grayColor()
-            cell.EventTime.textColor = UIColor.grayColor()
+            cell.ModuleName.textColor = UIColor.gray
+            cell.EventTime.textColor = UIColor.gray
             cell.EventTime.font = UIFont(name:"HelveticaNeue", size: (cell.EventTime?.font.pointSize)!)
-            cell.EventDetails.textColor = UIColor.grayColor()
+            cell.EventDetails.textColor = UIColor.gray
         }
         //        else{
         //            //todo color and bold

@@ -12,22 +12,22 @@ import SystemConfiguration
 
 
 
-public class KEYS {
-    public static let user = "user"
-    public static let username = "username"
-    public static let pass = "pass"
-    public static let offlineTimetableStorageKey = "timetable"
-    public static let offlineExamStorageKey = "exams"
-    public static let studentTypeId = 5
+open class KEYS {
+    open static let user = "user"
+    open static let username = "username"
+    open static let pass = "pass"
+    open static let offlineTimetableStorageKey = "timetable"
+    open static let offlineExamStorageKey = "exams"
+    open static let studentTypeId = 5
 }
 
-public class Misc {
+open class Misc {
 
     public enum USER_TYPE {
-        case EXAM
-        case STUDENT
-        case LECTURER
-        case ROOM}
+        case exam
+        case student
+        case lecturer
+        case room}
 
     // MARK: IO
     static func loadUser() -> AuthenticatedUser? {
@@ -35,10 +35,10 @@ public class Misc {
         let storedUserString = Keychain.load(KEYS.user)
         if  storedUserString != nil {
             do {
-                let data = storedUserString!.dataUsingEncoding(NSUTF8StringEncoding)
+                let data = storedUserString!.data(using: String.Encoding.utf8)
                 // here "decoded" is the dictionary decoded from JSON data
-                let decoded = try NSJSONSerialization.JSONObjectWithData(data!, options: []) as? [String:AnyObject]
-                user = AuthenticatedUser(dictionary: decoded!)
+                let decoded = try JSONSerialization.jsonObject(with: data!, options: []) as? [String:AnyObject]
+                user = AuthenticatedUser(dictionary: decoded! as NSDictionary)
 
             } catch let error as NSError {
                 print(error)
@@ -46,7 +46,7 @@ public class Misc {
         }
         return user
     }
-    static func saveUser(user: AuthenticatedUser?) -> Bool {
+    static func saveUser(_ user: AuthenticatedUser?) -> Bool {
 
         var success = false
         // serialise user as JSON, then save to keychain
@@ -55,8 +55,8 @@ public class Misc {
 
         do {
             // here "jsonData" is the dictionary encoded in JSON data
-            let jsonData = try NSJSONSerialization.dataWithJSONObject(dic, options: NSJSONWritingOptions.PrettyPrinted)
-            userDatastring = NSString(data: jsonData, encoding: NSUTF8StringEncoding)! as String
+            let jsonData = try JSONSerialization.data(withJSONObject: dic, options: JSONSerialization.WritingOptions.prettyPrinted)
+            userDatastring = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
             // save to keychain
             if Keychain.save(userDatastring!, forKey: KEYS.user) {
                 // if saving is successful
@@ -72,14 +72,18 @@ public class Misc {
 
 }
 
-public class Reachability {
+open class Reachability {
     class func isConnectedToNetwork() -> Bool {
         var zeroAddress = sockaddr_in()
-        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
         zeroAddress.sin_family = sa_family_t(AF_INET)
-        let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
-            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+        
+        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
+                SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
+            }
         }
+        
         var flags = SCNetworkReachabilityFlags()
         if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
             return false

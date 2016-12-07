@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "IndexViewController.didSelectDayView(CVCalendarDayView, animationDidFinish : Bool) -&gt; ():IndexViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "calView.presentedDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static NotificationAPI.(getNotification(Int, callback : (Notification) -&gt; ()) -&gt; ()).(closure #1).(closure #1):NotificationAPI.swift">
+      </ContextState>
+      <ContextState
+         contextName = "RoomViewController.pickerView(UIPickerView, didSelectRow : Int, inComponent : Int) -&gt; ():RoomViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "roomPickerDataSoruce">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RoomViewController.callback([TimeTableSession]) -&gt; ():RoomViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.viewWillAppear(Bool) -&gt; ():ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.viewDidLoad() -&gt; ():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Keychain.load(&quot;pass&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "Keychain.load(&quot;username&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.loginCallback(AuthenticatedUser?) -&gt; ():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tabBarController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.prepareForSegue(UIStoryboardSegue, sender : AnyObject?) -&gt; ():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "segue.identifier">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TabBarViewController.viewDidLoad() -&gt; ():TabBarViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tabBarController">
+            </PersistentString>
+            <PersistentString
+               value = "self.tabBarController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewsViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:NewsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "item.pubDate?">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AlamofireRSSParser.parser(NSXMLParser, didEndElement : String, namespaceURI : String?, qualifiedName : String?) -&gt; ():AlamofireRSSParser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentItem.itemDescription">
+            </PersistentString>
+            <PersistentString
+               value = "self.currentString">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "IndexViewController.reloadDayViewSession() -&gt; ():IndexViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "OfflineCalendarEvents">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static RssNewsAPI.(loadNews() -&gt; ()).(closure #1):RssNewsAPI.swift">
+      </ContextState>
+      <ContextState
+         contextName = "static Misc.(loadTimetableSessions(String, startDate : String, endDate : String, type : Misc.SESSION_TYPE, by : Misc.USER_TYPE, callback : ([TimeTableSession]) -&gt; ()) -&gt; ()).(closure #1):Misc.swift">
+      </ContextState>
+      <ContextState
+         contextName = "RoomViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:RoomViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "CalendarEvents[indexPath.row].mODULE_CODE!">
+            </PersistentString>
+            <PersistentString
+               value = "CalendarEvents[indexPath.row]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "IndexViewController.refresh(AnyObject) -&gt; ():IndexViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DetailedNotificationViewController.changeStatus(NotificationAPI.Status) -&gt; ():DetailedNotificationViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "notification">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NotificationsViewController.tableView(UITableView, didSelectRowAtIndexPath : NSIndexPath) -&gt; ():NotificationsTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "notificationParam">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static NotificationAPI.isNotificationArchived(Int) -&gt; Bool:NotificationAPI.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "x&gt;&gt;2 &amp; 0b00000001 == 1">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ContactTableViewController.tableView(UITableView, didSelectRowAtIndexPath : NSIndexPath) -&gt; ():ContactTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "UIApplication.sharedApplication().openURL(url)&#10;">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static Misc.(loadTimetableSessions(inout [TimeTableSession], tableView : UITableView, startDate : String, endDate : String, type : Misc.SESSION_TYPE, pullToRefreshControl : UIRefreshControl?) -&gt; ()).(closure #1):Misc.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sessions.length()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static NotificationAPI.(loadNotifications(String, callback : ([Notification]) -&gt; ()) -&gt; ()).(closure #1):NotificationAPI.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value as? [[AnyObject: AnyObject]]">
+            </PersistentString>
+            <PersistentString
+               value = "response.result.value as! [[String: AnyObject]]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static RssNewsAPI.(loadNews((items : [RSSItem]) -&gt; ()) -&gt; ()).(closure #1):RssNewsAPI.swift">
+      </ContextState>
+      <ContextState
+         contextName = "IndexViewController.(loadTimetableSessions() -&gt; ()).(closure #1):IndexViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "NewsViewController.tableView(UITableView, didSelectRowAtIndexPath : NSIndexPath) -&gt; ():NewsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedCell.url">
+            </PersistentString>
+            <PersistentString
+               value = "NSURL(string: selectedCell.url)!">
+            </PersistentString>
+            <PersistentString
+               value = "NSURL(fileURLWithPath: selectedCell.url)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static EventAPI.(loadTimetableSessions(String, startDate : String, endDate : String, by : Misc.USER_TYPE, callback : ([TimeTableSession]) -&gt; ()) -&gt; ()).(closure #1):EventAPI.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value as? [[String: AnyObject]]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static Misc.loadTimetableSessions(String, startDate : String, endDate : String, type : Misc.SESSION_TYPE, by : Misc.USER_TYPE, callback : ([TimeTableSession]) -&gt; ()) -&gt; ():Misc.swift">
+      </ContextState>
+      <ContextState
+         contextName = "NotificationsViewController.prepareForSegue(UIStoryboardSegue, sender : AnyObject!) -&gt; ():NotificationsTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "notificationParam">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DetailedNotificationViewController.mark_Clicked(AnyObject) -&gt; ():DetailedNotificationViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "notification!.isRead">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DetailedNotificationViewController.viewDidLoad() -&gt; ():DetailedNotificationViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "notification!.isArchived">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static Misc.hasDatePassed(TimeTableSession) -&gt; Bool:Misc.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "today.compare(date!) == NSComparisonResult.OrderedDescending">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Notification.init(dictionary : NSDictionary) -&gt; Notification?:Notification.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "isRead">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "IndexViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:IndexViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "&quot;\(CalendarEvents[indexPath.row].sESSION_DATE_FORMATTED!) \(CalendarEvents[indexPath.row].eND_TIME_FORMATTED!)&quot;">
+            </PersistentString>
+            <PersistentString
+               value = "dateFormatter.dateFromString(&quot;\(CalendarEvents[indexPath.row].sESSION_DATE_FORMATTED!) \(CalendarEvents[indexPath.row].eND_TIME_FORMATTED!)&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "CalendarEvents[indexPath.row]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DetailedNotificationViewController.reloadedCallback(Notification) -&gt; ():DetailedNotificationViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "notification!.nOTIFICATION_TYPE_NAME!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.loginButton_Clicked(AnyObject) -&gt; ():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "emailTextBox.text!">
+            </PersistentString>
+            <PersistentString
+               value = "passTextBox.text!">
+            </PersistentString>
+            <PersistentString
+               value = "Keychain.save(&quot;username&quot;, forKey: emailTextBox.text!)">
+            </PersistentString>
+            <PersistentString
+               value = "Keychain.load(&quot;pass&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static NotificationAPI.changeStatus(Int, newStatus : NotificationAPI.Status, callback : () -&gt; ()) -&gt; ():NotificationAPI.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "newStatus.rawValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NotificationsViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:NotificationsTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "notifications[indexPath.row]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

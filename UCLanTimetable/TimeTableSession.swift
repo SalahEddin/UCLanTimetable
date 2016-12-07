@@ -31,7 +31,7 @@ public final class TimeTableSession: NSObject {
 	public var eVENT_TYPE_NAME: String?
 
 
-    public class func modelsFromDictionaryArray(array: NSArray) -> [TimeTableSession] {
+    public class func modelsFromDictionaryArray(_ array: NSArray) -> [TimeTableSession] {
         var models: [TimeTableSession] = []
         for item in array {
             models.append(TimeTableSession(dictionary: item as! NSDictionary)!)

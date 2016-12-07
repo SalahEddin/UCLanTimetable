@@ -21,7 +21,7 @@ class BadgeCell: UICollectionViewCell, UIWebViewDelegate {
         //badgeSVGWebView.delegate = self
     }
 
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         print("webViewDidFinishLoad")
     }
 }

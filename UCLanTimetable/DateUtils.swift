@@ -8,82 +8,82 @@
 
 import Foundation
 
-public class DateUtils {
+open class DateUtils {
 
-    static func parseFormattedDate(str: String) -> NSDate {
-        let dateFormatter = NSDateFormatter()
+    static func parseFormattedDate(_ str: String) -> Date {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
-        return dateFormatter.dateFromString(str)!
+        return dateFormatter.date(from: str)!
     }
 
-    static func hasDatePassed(session: TimeTableSession) -> Bool {
+    static func hasDatePassed(_ session: TimeTableSession) -> Bool {
         // current date time
-        let today = NSDate()
+        let today = Date()
         // session datetime
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
-        let date = dateFormatter.dateFromString("\(session.sESSION_DATE_FORMATTED!) \(session.eND_TIME_FORMATTED!)")
-        return today.compare(date!) == NSComparisonResult.OrderedDescending // today after date
+        let date = dateFormatter.date(from: "\(session.sESSION_DATE_FORMATTED!) \(session.eND_TIME_FORMATTED!)")
+        return today.compare(date!) == ComparisonResult.orderedDescending // today after date
     }
 
-    static func isDateSame(session: TimeTableSession, CVSelected: NSDate) -> Bool {
+    static func isDateSame(_ session: TimeTableSession, CVSelected: Date) -> Bool {
         // current date time
         //        let commonDateFormatter = NSDateFormatter()
         //        commonDateFormatter.dateFormat = "yyyy-MM-dd"
         //        let selected = commonDateFormatter.dateFromString(CVSelected)!
         let selected = CVSelected
         // session datetime
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
-        let date = dateFormatter.dateFromString("\(session.sESSION_DATE_FORMATTED!)")
-        return selected.compare(date!) == NSComparisonResult.OrderedSame // today after date
+        let date = dateFormatter.date(from: "\(session.sESSION_DATE_FORMATTED!)")
+        return selected.compare(date!) == ComparisonResult.orderedSame // today after date
     }
-    static func FormatExamCell(date: NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
+    static func FormatExamCell(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM dd"
-        return dateFormatter.stringFromDate(date)
+        return dateFormatter.string(from: date)
     }
-    static func FormatCalendarChoiceDate(date: NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
+    static func FormatCalendarChoiceDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMMM, yyyy"
-        return dateFormatter.stringFromDate(date)
+        return dateFormatter.string(from: date)
     }
 
-    static func FormatToAPIDate(date: NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
+    static func FormatToAPIDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.stringFromDate(date)
+        return dateFormatter.string(from: date)
     }
 
 }
 
-extension NSDate {
-    convenience init?(jsonDate: String) {
+extension Date {
+    init?(jsonDate: String) {
         let prefix = "/Date("
         let suffix = ")/"
-        let scanner = NSScanner(string: jsonDate)
+        let scanner = Scanner(string: jsonDate)
 
         // Check prefix:
-        if scanner.scanString(prefix, intoString: nil) {
+        if scanner.scanString(prefix, into: nil) {
 
             // Read milliseconds part:
             var milliseconds: Int64 = 0
-            if scanner.scanLongLong(&milliseconds) {
+            if scanner.scanInt64(&milliseconds) {
                 // Milliseconds to seconds:
-                var timeStamp = NSTimeInterval(milliseconds)/1000.0
+                var timeStamp = TimeInterval(milliseconds)/1000.0
 
                 // Read optional timezone part:
                 var timeZoneOffset: Int = 0
-                if scanner.scanInteger(&timeZoneOffset) {
+                if scanner.scanInt(&timeZoneOffset) {
                     let hours = timeZoneOffset / 100
                     let minutes = timeZoneOffset % 100
                     // Adjust timestamp according to timezone:
-                    timeStamp += NSTimeInterval(3600 * hours + 60 * minutes)
+                    timeStamp += TimeInterval(3600 * hours + 60 * minutes)
                 }
 
                 // Check suffix:
-                if scanner.scanString(suffix, intoString: nil) {
-                    // Success! Create NSDate and return.
+                if scanner.scanString(suffix, into: nil) {
+                    // Success! Create Date and return.
                     self.init(timeIntervalSince1970: timeStamp)
                     return
                 }

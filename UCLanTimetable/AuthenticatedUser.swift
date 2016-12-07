@@ -8,13 +8,13 @@
 
 import Foundation
 
-public class AuthenticatedUser {
-    public var uSER_ID: Int?
-    public var eMAIL: String?
-    public var fULLNAME: String?
-    public var iS_ACTIVATED: String?
-    public var aCCOUNT_TYPE_ID: Int?
-    public var aCCOUNT_ID: Int?
+open class AuthenticatedUser {
+    open var uSER_ID: Int?
+    open var eMAIL: String?
+    open var fULLNAME: String?
+    open var iS_ACTIVATED: String?
+    open var aCCOUNT_TYPE_ID: Int?
+    open var aCCOUNT_ID: Int?
 
     /**
      Returns an array of models based on given dictionary.
@@ -26,7 +26,7 @@ public class AuthenticatedUser {
 
      - returns: Array of AuthenticatedUser_Base Instances.
      */
-    public class func modelsFromDictionaryArray(array: NSArray) -> [AuthenticatedUser] {
+    open class func modelsFromDictionaryArray(_ array: NSArray) -> [AuthenticatedUser] {
         var models: [AuthenticatedUser] = []
         for item in array {
             models.append(AuthenticatedUser(dictionary: item as! NSDictionary)!)
@@ -51,7 +51,7 @@ public class AuthenticatedUser {
 
      - returns: NSDictionary.
      */
-    public func dictionaryRepresentation() -> NSDictionary {
+    open func dictionaryRepresentation() -> NSDictionary {
 
         let dictionary = NSMutableDictionary()
 
