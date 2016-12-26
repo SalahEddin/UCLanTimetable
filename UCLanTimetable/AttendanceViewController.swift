@@ -10,72 +10,100 @@ import UIKit
 
 class AttendanceViewController: UIViewController {
 
-    @IBOutlet weak var scrollView: UIScrollView!
-
-    fileprivate let reuseIdentifier = "BadgeCell"
-    //private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+    @IBOutlet weak var attendanceLabel: UILabel!
+    @IBOutlet weak var attendanceProgress: UIProgressView!
+    @IBOutlet weak var badgeCount: UILabel!
+    @IBOutlet weak var studentName: UILabel!
+    @IBOutlet weak var colView: UICollectionView!
+    fileprivate let reuseIdentifier = "BadgeViewCell"
+    open static let offlineBadgeStorageKey = "badge"
 
     var badges: [Badge] = []
-    //[]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let tabBarHeight = self.tabBarController?.tabBar.bounds.height
-        self.edgesForExtendedLayout = UIRectEdge.all
-        self.scrollView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: tabBarHeight!, right: 0.0)
+        //let tabBarHeight = self.tabBarController?.tabBar.bounds.height
+        //self.edgesForExtendedLayout = UIRectEdge.all
+        //self.colView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: tabBarHeight!, right: 0.0)
 
-        //badgesCollectionView.delegate = self
-
-        badges += [Badge(link: "dummy_badge", badgeName: "badge name", badgeDesc: "Lerom Ipsum"),
-                   Badge(link: "dummy_badge", badgeName: "badge name 2", badgeDesc: "Lerom Ipsum"),
-                   Badge(link: "dummy_badge", badgeName: "badge name 3", badgeDesc: "Lerom Ipsum"),
-                   Badge(link: "dummy_badge", badgeName: "badge name 2", badgeDesc: "Lerom Ipsum"),
-                   Badge(link: "dummy_badge", badgeName: "badge name 4", badgeDesc: "Lerom Ipsum"),
-                   Badge(link: "dummy_badge", badgeName: "badge name 5", badgeDesc: "Lerom Ipsum")]
+        colView.delegate = self
+        reloadBadges()
+        getAttendance()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
+
+    func getAttendance() {
+        // Code to refresh table view
+        if Reachability.isConnectedToNetwork() {
+            // load user id
+            let id = String(Misc.loadUser()!.aCCOUNT_ID!)
+            // load events
+            BadgeAPI.getAvgAttendance(studentId: id, attendanceCallback)
+        } else {
+            /// offline mode
+            // todo
+        }
+    }
+
+    func reloadBadges() {
+        // Code to refresh table view
+        if Reachability.isConnectedToNetwork() {
+            // load user id
+            let id = String(Misc.loadUser()!.aCCOUNT_ID!)
+            // load events
+            BadgeAPI.listBadges(studentId: id, callback)
+        } else {
+            /// offline mode
+            // todo
+        }
+    }
+
+    func attendanceCallback(_ att: Attendance) -> Void {
+        self.attendanceLabel.text = "Attendance: " + String(describing: att.aTTENDANCE_AVERAGE!) + "%"
+        self.attendanceProgress.progress = Float(att.aTTENDANCE_AVERAGE!)/100
+        
+    }
+
+    func callback(_ sess: [Badge]) -> Void {
+        self.studentName.text = Misc.loadUser()!.fULLNAME
+        self.badgeCount.text = String(sess.count) + " Badges"
+        self.badges = sess
+        self.colView.reloadData()
+
+        var sessDict: [NSDictionary] = []
+
+        for item in sess {
+            sessDict += [item.dictionaryRepresentation()]
+        }
+
+        // store data for offline use
+        let badgesData = NSKeyedArchiver.archivedData(withRootObject: sessDict)
+        UserDefaults.standard.set(badgesData, forKey: AttendanceViewController.offlineBadgeStorageKey)
+    }
 }
 
-//extension AttendanceViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-//
-//    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return badges.count
-//    }
-//
-//    //2
-//    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-//        return 1
-//    }
-//
-//    //3
-//    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! BadgeCell
-//
-//        cell.backgroundColor = UIColor.blueColor()
-//        cell.badgeLabel.text = badges[indexPath.row].name
-//        print(indexPath)
-//        //cell.badgeImage.image = UIImage(contentsOfFile: "exit-32")
-//        //        let path: String = NSBundle.mainBundle().pathForResource("dummy_badge", ofType: "svg")!
-//        //        let url: NSURL = NSURL.fileURLWithPath(path)
-//        //        let request: NSURLRequest = NSURLRequest(URL: url)
-//        //        cell.badgeSVGWebView.loadRequest(request)
-//        // let scaleFactor = cell.badgeSVGWebView.
-//        //        cell.badgeSVGWebView.scrollView
-//        //        cell.badgeSVGWebView.scalesPageToFit = false
-//        // Configure the cell
-//        return cell
-//    }
-//}
+extension AttendanceViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-//extension AttendanceViewController: UICollectionViewDelegateFlowLayout{
-//
-//    func collectionView(collectionView: UICollectionView,
-//                        layout collectionViewLayout: UICollectionViewLayout,
-//                               insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-//        return sectionInsets
-//    }
-//}
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.reuseIdentifier, for: indexPath as IndexPath) as? BadgeViewCell
+
+        if cell != nil {
+        cell!.image.downloadedFrom(link: badges[indexPath.row].bADGE_URL!)
+        cell!.name.text = badges[indexPath.row].bADGE_NAME
+        }
+        return cell!
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return badges.count
+    }
+
+    //2
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+}

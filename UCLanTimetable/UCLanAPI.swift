@@ -20,4 +20,6 @@ open class UCLanAPI {
     open static let getNotifications = "app_getNotificationsByUser"
     open static let updateNotificationsStatus = "app_updateNotificationStatus"
     open static let getNotificationById = "app_getNotification"
+    open static let listBadges = "app_getBadgesByStudent"
+    open static let getAvgAttendance = "app_getAverageAtendanceByStudent"
 }

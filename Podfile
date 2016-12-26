@@ -4,10 +4,10 @@
 target 'UCLanTimetable' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   pod 'CVCalendar', '~> 1.4.1'
-  pod "Keychain"
+  pod 'Keychain'
   pod 'MGSwipeTableCell'
   pod 'Alamofire', '~> 4.0'
-  pod "AlamofireRSSParser"
+  pod 'AlamofireRSSParser'
   pod 'FlatUIKit'
   use_frameworks!
 

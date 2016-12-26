@@ -39,15 +39,15 @@ class AboutViewController: UIViewController {
 
     func inspireClicked() {
         let url = URL(string: "http://inspirecenter.org/")!
-        UIApplication.shared.openURL(url)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     func uclanClicked() {
         let url = URL(string: "http://www.uclancyprus.ac.cy/en/")!
-        UIApplication.shared.openURL(url)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 
     func easterClicked() {
         let url = URL(string: "http://www.uclancyprus.ac.cy/en/")!
-        UIApplication.shared.openURL(url)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }

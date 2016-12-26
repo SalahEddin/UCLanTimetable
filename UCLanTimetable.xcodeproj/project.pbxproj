@@ -51,10 +51,12 @@
 		4E4FE4451D3E6025004F6C97 /* START_TIME.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4FE4421D3E6025004F6C97 /* START_TIME.swift */; };
 		4E4FE4461D3E6025004F6C97 /* TimeTableSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4FE4431D3E6025004F6C97 /* TimeTableSession.swift */; };
 		4E5920CC1D3F90C60029DDE6 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5920CB1D3F90C60029DDE6 /* Misc.swift */; };
+		4E6E4BAC1E11C5060094A9D9 /* Attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6E4BAB1E11C5060094A9D9 /* Attendance.swift */; };
 		4E7993831D4F5F710006D3F0 /* DetailedNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7993821D4F5F710006D3F0 /* DetailedNotificationViewController.swift */; };
 		4E7993861D4F64FE0006D3F0 /* iNSPIRE with light_Final-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E7993841D4F64FE0006D3F0 /* iNSPIRE with light_Final-01.png */; };
 		4E7993871D4F64FE0006D3F0 /* uclan_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E7993851D4F64FE0006D3F0 /* uclan_logo.png */; };
-		4E9C8CE51D40A5A8003AAB70 /* BadgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9C8CE41D40A5A8003AAB70 /* BadgeCell.swift */; };
+		4E85B70E1E0D659C00880328 /* BadgeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E85B70D1E0D659C00880328 /* BadgeAPI.swift */; };
+		4E9C8CE51D40A5A8003AAB70 /* BadgeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9C8CE41D40A5A8003AAB70 /* BadgeViewCell.swift */; };
 		4E9C8CE71D40B0A5003AAB70 /* dummy_badge.svg in Resources */ = {isa = PBXBuildFile; fileRef = 4E9C8CE61D40B0A5003AAB70 /* dummy_badge.svg */; };
 		4E9C8CE91D40B652003AAB70 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9C8CE81D40B652003AAB70 /* Badge.swift */; };
 		4EAC2EFE1D17F6E300CC9A8D /* CalEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAC2EFD1D17F6E300CC9A8D /* CalEventTableViewCell.swift */; };
@@ -120,10 +122,12 @@
 		4E4FE4421D3E6025004F6C97 /* START_TIME.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = START_TIME.swift; sourceTree = "<group>"; };
 		4E4FE4431D3E6025004F6C97 /* TimeTableSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTableSession.swift; sourceTree = "<group>"; };
 		4E5920CB1D3F90C60029DDE6 /* Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
+		4E6E4BAB1E11C5060094A9D9 /* Attendance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attendance.swift; sourceTree = "<group>"; };
 		4E7993821D4F5F710006D3F0 /* DetailedNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedNotificationViewController.swift; sourceTree = "<group>"; };
 		4E7993841D4F64FE0006D3F0 /* iNSPIRE with light_Final-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iNSPIRE with light_Final-01.png"; sourceTree = "<group>"; };
 		4E7993851D4F64FE0006D3F0 /* uclan_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uclan_logo.png; sourceTree = "<group>"; };
-		4E9C8CE41D40A5A8003AAB70 /* BadgeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeCell.swift; sourceTree = "<group>"; };
+		4E85B70D1E0D659C00880328 /* BadgeAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeAPI.swift; sourceTree = "<group>"; };
+		4E9C8CE41D40A5A8003AAB70 /* BadgeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeViewCell.swift; sourceTree = "<group>"; };
 		4E9C8CE61D40B0A5003AAB70 /* dummy_badge.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dummy_badge.svg; sourceTree = "<group>"; };
 		4E9C8CE81D40B652003AAB70 /* Badge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		4EAC2EFD1D17F6E300CC9A8D /* CalEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalEventTableViewCell.swift; sourceTree = "<group>"; };
@@ -165,7 +169,7 @@
 				4E22B87A1D24F36700A9D5AB /* ExamTableViewCell.swift */,
 				4EAC2EFD1D17F6E300CC9A8D /* CalEventTableViewCell.swift */,
 				4E22B87F1D24FDFF00A9D5AB /* NotificationTableViewCell.swift */,
-				4E9C8CE41D40A5A8003AAB70 /* BadgeCell.swift */,
+				4E9C8CE41D40A5A8003AAB70 /* BadgeViewCell.swift */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -180,6 +184,7 @@
 				4EB71DD71D47F72600B0B6E7 /* Room.swift */,
 				4EB71DD91D48721100B0B6E7 /* AuthenticatedUser.swift */,
 				4E4809421D49516600799BD9 /* Notification.swift */,
+				4E6E4BAB1E11C5060094A9D9 /* Attendance.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -192,6 +197,7 @@
 				4E48094E1D4A332700799BD9 /* EventAPI.swift */,
 				4ED393751D4A7BDD004ABBFD /* UCLanAPI.swift */,
 				4ED393791D4B1418004ABBFD /* DateUtils.swift */,
+				4E85B70D1E0D659C00880328 /* BadgeAPI.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -346,7 +352,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Salah Eddin Alshaal";
 				TargetAttributes = {
 					4ED0042A1D114D60007AAD57 = {
@@ -487,14 +493,16 @@
 			files = (
 				4E22B87D1D24F69300A9D5AB /* ExamTableViewController.swift in Sources */,
 				4E48094F1D4A332700799BD9 /* EventAPI.swift in Sources */,
+				4E6E4BAC1E11C5060094A9D9 /* Attendance.swift in Sources */,
 				4E5920CC1D3F90C60029DDE6 /* Misc.swift in Sources */,
 				4E2267171D5229FD002AD6BD /* NewsViewController.swift in Sources */,
+				4E85B70E1E0D659C00880328 /* BadgeAPI.swift in Sources */,
 				4E48092F1D48EE5300799BD9 /* AboutViewController.swift in Sources */,
 				4ED393761D4A7BDD004ABBFD /* UCLanAPI.swift in Sources */,
 				4EB71DD81D47F72600B0B6E7 /* Room.swift in Sources */,
 				4ED004311D114D60007AAD57 /* ViewController.swift in Sources */,
 				4E22B8821D2504A200A9D5AB /* NotificationsTableViewController.swift in Sources */,
-				4E9C8CE51D40A5A8003AAB70 /* BadgeCell.swift in Sources */,
+				4E9C8CE51D40A5A8003AAB70 /* BadgeViewCell.swift in Sources */,
 				4ED0042F1D114D60007AAD57 /* AppDelegate.swift in Sources */,
 				4E4809431D49516600799BD9 /* Notification.swift in Sources */,
 				4E9C8CE91D40B652003AAB70 /* Badge.swift in Sources */,
@@ -554,8 +562,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -577,7 +587,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -599,8 +609,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -616,9 +628,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -627,6 +640,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15E1932ED85CC7F21902E9FD /* Pods-UCLanTimetable.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = UCLanTimetable/Info.plist;
@@ -643,6 +657,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5DB178B9217185C1375DA5BD /* Pods-UCLanTimetable.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = UCLanTimetable/Info.plist;

@@ -35,12 +35,12 @@ class ContactTableViewController: UITableViewController {
         if indexPath.section == 0 && indexPath.row == 0 {
             let phone = "telprompt://0035724694000"
             let url: URL = URL(string:phone)!
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url, options: [:],completionHandler: nil)
         }
         if indexPath.section == 0 && indexPath.row == 1 {
             let phone = "telprompt://0035724694026"
             let url: URL = URL(string:phone)!
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url, options: [:],completionHandler: nil)
         }
         if indexPath.section == 0 && indexPath.row == 2 {
 //            let toEmail = "info@uclancyprus.ac.cy"
@@ -49,7 +49,7 @@ class ContactTableViewController: UITableViewController {
 
             let email = "info@uclancyprus.ac.cy"
             let url = URL(string: "mailto:\(email)")
-            UIApplication.shared.openURL(url!)
+            UIApplication.shared.open(url!, options: [:],completionHandler: nil)
         }
 
         if indexPath.section == 1 {
@@ -63,19 +63,18 @@ class ContactTableViewController: UITableViewController {
         if indexPath.section == 2 && indexPath.row == 0 {
             let phone = "http://www.facebook.com/uclancyprus"
             let url: URL = URL(string:phone)!
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url, options: [:],completionHandler: nil)
         }
         if indexPath.section == 2 && indexPath.row == 2 {
             let phone = "https://twitter.com/uclancyprus"
             let url: URL = URL(string:phone)!
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url, options: [:],completionHandler: nil)
         }
         if indexPath.section == 2 && indexPath.row == 1 {
             let phone = "https://www.instagram.com/uclancyprus/"
             let url: URL = URL(string:phone)!
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.open(url, options: [:],completionHandler: nil)
         }
-
     }
 
     /*

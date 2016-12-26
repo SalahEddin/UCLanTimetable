@@ -117,7 +117,7 @@ class IndexViewController: UIViewController {
                 //notify user to connect online
                 let alert = UIAlertController(title: "Offline Mode", message: "couldn't load your timetable, please make sure you're connected to the Internet", preferredStyle: UIAlertControllerStyle.alert)
                 let settingsAction = UIAlertAction(title: "Go to Network Settings", style: .default) { (_) -> Void in
-                    UIApplication.shared.openURL(NSURL(string:"prefs:root=WIFI")! as URL)
+                    UIApplication.shared.open(NSURL(string:"prefs:root=WIFI")! as URL, options: [:],completionHandler: nil)
                 }
 
                 let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
@@ -220,7 +220,7 @@ extension IndexViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegat
         return true
     }
 
-    func didSelectDayView(dayView: CVCalendarDayView, animationDidFinish: Bool) {
+    func didSelectDayView(_ dayView: CVCalendarDayView, animationDidFinish: Bool) {
         print("\(dayView.date.commonDescription) is selected!")
         // update local var selectedDate
         selectedDate = dayView.date.convertedDate(calendar: Calendar.current)!
@@ -232,13 +232,13 @@ extension IndexViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegat
 
 }
 
-// MARK:- UITableViewDelegate & UITableViewDataSource
+//MARK: -UITableViewDelegate & UITableViewDataSource
 extension IndexViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CalendarEvents.count//CalendarEvents.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CalEventTableViewCell

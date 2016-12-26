@@ -133,7 +133,7 @@ extension RoomViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate
             //notify user to connect online
             let alert = UIAlertController(title: "Offline Mode", message: "couldn't load your timetable, please make sure you're connected to the Internet", preferredStyle: UIAlertControllerStyle.alert)
             let settingsAction = UIAlertAction(title: "Go to Network Settings", style: .default) { (_) -> Void in
-                UIApplication.shared.openURL(URL(string:"prefs:root=WIFI")!)
+                UIApplication.shared.open(URL(string:"prefs:root=WIFI")!, options: [:], completionHandler: nil)
             }
 
             let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)

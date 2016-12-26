@@ -64,10 +64,8 @@ open class NotificationAPI {
                     DispatchQueue.main.async(execute: { () -> Void in
                         callback(Notification(dictionary: JSON as NSDictionary)!)
                     })
-
                 }
         }
-
     }
 
     static func loadNotifications(_ userId: String, callback: @escaping (([Notification]) -> Void )) {
@@ -89,5 +87,5 @@ open class NotificationAPI {
                 })
         }
     }
-
+    
 }

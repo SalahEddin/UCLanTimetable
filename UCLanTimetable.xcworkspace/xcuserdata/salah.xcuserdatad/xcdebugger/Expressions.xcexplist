@@ -246,10 +246,10 @@
                value = "&quot;\(CalendarEvents[indexPath.row].sESSION_DATE_FORMATTED!) \(CalendarEvents[indexPath.row].eND_TIME_FORMATTED!)&quot;">
             </PersistentString>
             <PersistentString
-               value = "dateFormatter.dateFromString(&quot;\(CalendarEvents[indexPath.row].sESSION_DATE_FORMATTED!) \(CalendarEvents[indexPath.row].eND_TIME_FORMATTED!)&quot;)">
+               value = "CalendarEvents[indexPath.row]">
             </PersistentString>
             <PersistentString
-               value = "CalendarEvents[indexPath.row]">
+               value = "dateFormatter.dateFromString(&quot;\(CalendarEvents[indexPath.row].sESSION_DATE_FORMATTED!) \(CalendarEvents[indexPath.row].eND_TIME_FORMATTED!)&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -262,10 +262,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "static BadgeAPI.(getAvgAttendance(studentId : String, (Decimal) -&gt; ()) -&gt; ()).(closure #1):BadgeAPI.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ViewController.loginButton_Clicked(AnyObject) -&gt; ():ViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "emailTextBox.text!">
+               value = "Keychain.load(&quot;pass&quot;)">
             </PersistentString>
             <PersistentString
                value = "passTextBox.text!">
@@ -274,7 +282,7 @@
                value = "Keychain.save(&quot;username&quot;, forKey: emailTextBox.text!)">
             </PersistentString>
             <PersistentString
-               value = "Keychain.load(&quot;pass&quot;)">
+               value = "emailTextBox.text!">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

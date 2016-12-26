@@ -8,20 +8,12 @@
 
 import UIKit
 
-class BadgeCell: UICollectionViewCell, UIWebViewDelegate {
-
-    // @IBOutlet weak var badgeSVGWebView: UIWebView!
-
-    @IBOutlet weak var badgeImage: UIImageView!
-    @IBOutlet weak var badgeLabel: UILabel!
-
+class BadgeViewCell: UICollectionViewCell {
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var image: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         //badgeSVGWebView.delegate = self
-    }
-
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        print("webViewDidFinishLoad")
     }
 }

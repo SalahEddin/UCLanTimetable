@@ -85,13 +85,15 @@ class NotificationsViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         if segue.identifier == "NotifCellSegue" {
-            let DestViewController = segue.destination as! DetailedNotificationViewController
-            DestViewController.notification = notificationParam!
+            let DestViewController = segue.destination as? DetailedNotificationViewController
+            if DestViewController != nil {
+                DestViewController!.notification = notificationParam!
+            }
         }
     }
 }
 
-// MARK:- UITableViewDelegate & UITableViewDataSource
+//MARK: - UITableViewDelegate & UITableViewDataSource
 extension NotificationsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         notificationParam = notifications[indexPath.row]
@@ -138,7 +140,6 @@ extension NotificationsViewController: UITableViewDelegate, UITableViewDataSourc
 
         let isRead = rowItem.isRead
         let isArchived = rowItem.isArchived
-
 
         if isArchived {
             let archiveButton = MGSwipeButton(title: "Unarchive", backgroundColor: UIColor(netHex: 0x95a5a6), callback: {
